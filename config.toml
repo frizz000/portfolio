@@ -1,3 +1,87 @@
 baseURL = 'http://frizz000.github.io/portfolio/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+[Params]
+  # Note: This is for the meta description, which is different from the "description" displayed in the terminal.
+  description = "Jane Doe's Portfolio!"
+  [Params.Terminal]
+  # Note: color schema
+  # Note: You can choose between
+  # Note: ["monokai", "powershell", "gruvbox_light", "gruvbox_dark", "solarized_light", "solarized_dark", "ubuntu", "retro"]
+  # Note: If you want to use the Goph theme, set it to "goph" (See README.md)
+  schema = "solarized_dark"
+
+  # Note: in terminal
+  # [userName]@[pcName]:~/$ cd [workDir]
+  # [userName]@[pcName]:~/[workDir]$ cat [profile]
+  #
+  # [description]
+  #
+  # Note: if you set Params.Tree > use = true
+  # [userName]@[pcName]:~/[workDir]$ tree ./[folderName]/
+  # ./[folderName]/
+  # ...
+  # Note: result of the tree command
+  userName = "piotr_jalocha"
+  pcName = "laptop"
+  workDir = "my_bio"
+  profile = "profile.txt"
+
+  # Note: speed at which text is displayed on the terminal
+  # Note: if set to 0, typing animation will be disabled
+  # Note:
+  # Note: if you want to enable Mathjax, you need to set it to 0
+  # Note: and set "math: true" at front matter in your Markdown file
+  ps1Delay = 0 # prompt speed : [userName]@[pcName]:~/$ , [userName]@[pcName]:~/[workDir]$
+  stdoutDelay = 0 # stdout speed : [description] , files in Params.Tree
+  commandDelay = 50 # command speed : cd [workDir] , cat [profile] , tree ./[folderName]/
+
+  # terminalDelay = 20 : deprecated
+
+  # Note: speed at which text is displayed on the activity pages
+  # Note: if set to 0, typing animation will be disabled
+  # Note: 
+  # Note: if you want to enable Mathjax, you need to set it to 0
+  # Note: and set "math: true" at front matter in your Markdown file
+  titleDelay = 0 # title speed : "title" in front matter
+  contentDelay = 0 # content speed : content in .md file
+
+  # activityDelay = 5 : deprecated
+
+  description = """
+  Hi, I’m Piotrek
+
+  I'm a student of Computer Science at <a href="https://www.pja.edu.pl/en">Polish-Japanese Academy of Information Technology</a>.
+
+  Few words about Me:
+
+  - I’m interested in downhill (cycling), ethical hacking, music, tennis, web dev and new technology.
+
+  - I run my own shop with clothes for cyclists <a href="https://conebike.pl/" target="_blank">Conebike.pl</a>
+
+  - I’m currently learning HTML, CSS, Python, Kali Linux, Java, HUGO, Unity and C++.
+
+  - I’m a bicycle and tennis instructor at <a href="https://www.totalbikes.pl/" target="_blank">Totalbikes.pl</a>
+
+  - You can get my cv <a href="https://github.com/frizz000/Me/blob/20013c77ab0ed25945f1adb4b4d3c74200905f32/CV%20Piotr%20Ja%C5%82ocha.docx">here</a>
+
+  - How to reach me: <a href=mailto:piotr.jalocha2001@gmail.com>piotr.jalocha2001@gmail.com</a>
+
+  """
+
+  # Note: If you want to use a Markdown file, you can use the following
+  # description = "/description.md"
+  # Note: and put the description.md in /content/description.md
+
+  [Params.Tree]
+  use = true
+  folderName = "my_website_projects"
+  # Note: ["ACTIVITY", "URL or PATH TO YOUR MARKDOWN FILE"]
+  files = [ 
+    ["Skatehead.studio", "https://skatehead.studio/"],
+    ["Conebike.pl", "https://conebike.pl/"],
+    ["Tripul.pl", "https://tripul.pl/"],
+    ["avocadocatering.pl", "https://avocadocatering.pl/"],
+    ["klubprogress.pl", "https://klubprogress.pl/"],
+    ["Loam.pl", "https://loam.pl/"],
+  ]
+
