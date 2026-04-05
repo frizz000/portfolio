@@ -437,13 +437,13 @@ h2 .accent { color: var(--green); }
 }
 
 .skill-group-label {
-    font-family: var(--mono);
+    font-family: 'Space Mono', monospace;
     font-size: 0.6rem;
-    color: var(--text-muted);
+    color: var(--text-muted, #426647);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     padding-right: 0.7rem;
-    border-right: 1px solid var(--border);
+    border-right: 1px solid var(--border, rgba(0,230,118,0.16));
     margin-right: 0.15rem;
     white-space: nowrap;
     min-width: 68px;
