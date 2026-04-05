@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="dark" data-lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piotr Jałocha — Developer & Smart Home Expert</title>
+    <meta name="description" content="Informatyk, instruktor programowania, ekspert smart home. Korepetycje z informatyki, konfiguracja Home Assistant, Proxmox, sieci domowe.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="#hero" class="nav-logo">pj<span>.dev</span></a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#about" class="pl">O mnie</a><a href="#about" class="en">About</a></li>
+        <li><a href="#services" class="pl">Usługi</a><a href="#services" class="en">Services</a></li>
+        <li><a href="#homelab" class="pl">Homelab</a><a href="#homelab" class="en">Homelab</a></li>
+        <li><a href="#contact" class="pl">Kontakt</a><a href="#contact" class="en">Contact</a></li>
+    </ul>
+    <div class="nav-controls">
+        <button class="btn-icon" id="themeToggle" title="Toggle theme">☀</button>
+        <button class="btn-icon" id="langToggle">EN</button>
+        <button class="nav-burger" id="burger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="hero-inner">
+        <div>
+            <div class="hero-tag">
+                <span class="pl">Dostępny do współpracy</span>
+                <span class="en">Available for work</span>
+            </div>
+            <h1>
+                Piotr<br>
+                Jałocha<br>
+                <span class="accent pl">— developer.</span>
+                <span class="accent en">— developer.</span>
+            </h1>
+            <p class="hero-desc pl">Inżynier informatyki (PJATK), instruktor programowania i ekspert smart home. Pomagam zarówno uczniom, jak i firmom — od korepetycji z Pythona po instalację inteligentnego domu.</p>
+            <p class="hero-desc en">Computer science engineer (PJATK), programming instructor and smart home expert. I help students and businesses alike — from Python tutoring to full smart home installations.</p>
+            <div class="hero-ctas">
+                <a href="#contact" class="btn-primary pl">Napisz do mnie →</a>
+                <a href="#contact" class="btn-primary en">Get in touch →</a>
+                <a href="#services" class="btn-secondary pl">Zobacz usługi</a>
+                <a href="#services" class="btn-secondary en">View services</a>
+            </div>
+        </div>
+
+        <div class="hero-terminal">
+            <div class="terminal-header">
+                <div class="dot dot-red"></div>
+                <div class="dot dot-yellow"></div>
+                <div class="dot dot-green"></div>
+                <span class="terminal-title">piotr@homelab ~ $</span>
+            </div>
+            <div class="terminal-body">
+                <div class="t-line">
+                    <span class="t-prompt">→</span>
+                    <span class="t-cmd">cat about.json</span>
+                </div>
+                <div class="t-line"><span class="t-out">{</span></div>
+                <div class="t-line"><span class="t-out">&nbsp;&nbsp;"name": <span class="green">"Piotr Jałocha"</span>,</span></div>
+                <div class="t-line"><span class="t-out">&nbsp;&nbsp;"role": <span class="green">"Developer & Instructor"</span>,</span></div>
+                <div class="t-line"><span class="t-out">&nbsp;&nbsp;"edu": <span class="green">"PJATK MSc"</span>,</span></div>
+                <div class="t-line"><span class="t-out">&nbsp;&nbsp;"skills": [</span></div>
+                <div class="t-line"><span class="t-out">&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">"Python"</span>, <span class="green">"C#"</span>, <span class="green">"Java"</span>,</span></div>
+                <div class="t-line"><span class="t-out">&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">"Home Assistant"</span>, <span class="green">"Proxmox"</span></span></div>
+                <div class="t-line"><span class="t-out">&nbsp;&nbsp;]</span></div>
+                <div class="t-line"><span class="t-out">}</span></div>
+                <div class="t-line">
+                    <span class="t-prompt">→</span>
+                    <span class="t-cmd">uptime homelab</span>
+                </div>
+                <div class="t-line"><span class="t-out green">✓ All services operational</span></div>
+                <div class="t-line"><span class="t-out dim">  Proxmox 8.4 · HA 17.0 · 3 LXC</span></div>
+                <div class="t-line">
+                    <span class="t-prompt">→</span>
+                    <span class="t-cmd"><span class="t-cursor"></span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section-pad">
+    <div class="container">
+        <div class="about-grid fade-up">
+            <div>
+                <div class="section-label pl">O mnie</div>
+                <div class="section-label en">About me</div>
+                <h2 class="pl">Pasja do <span class="accent">technologii</span></h2>
+                <h2 class="en">Passion for <span class="accent">technology</span></h2>
+                <p class="section-sub pl">Kończę studia magisterskie na PJATK. Na co dzień pracuję jako instruktor programowania, a po godzinach rozwijam własny homelab — bo najlepiej uczymy się przez praktykę.</p>
+                <p class="section-sub en">Finishing my master's degree at PJATK. I work as a programming instructor and in my free time I run and develop my own homelab — because the best way to learn is by doing.</p>
+                <div class="skills-list">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">C#</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">Home Assistant</span>
+                    <span class="skill-tag">Proxmox</span>
+                    <span class="skill-tag">Zigbee2MQTT</span>
+                    <span class="skill-tag">Cloudflare</span>
+                    <span class="skill-tag">Tailscale</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Linux</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">Git</span>
+                </div>
+            </div>
+            <div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <div class="stat-num">3+</div>
+                        <div class="stat-label pl">lata doświadczenia w nauczaniu</div>
+                        <div class="stat-label en">years teaching experience</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">PJATK</div>
+                        <div class="stat-label pl">Inżynieria + Magister</div>
+                        <div class="stat-label en">BSc + MSc in progress</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">24/7</div>
+                        <div class="stat-label pl">homelab online</div>
+                        <div class="stat-label en">homelab uptime</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num">∞</div>
+                        <div class="stat-label pl">pasja do automatyzacji</div>
+                        <div class="stat-label en">passion for automation</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="section-pad">
+    <div class="container">
+        <div class="fade-up">
+            <div class="section-label pl">Usługi</div>
+            <div class="section-label en">Services</div>
+            <h2 class="pl">Czym mogę <span class="accent">pomóc?</span></h2>
+            <h2 class="en">How can I <span class="accent">help?</span></h2>
+            <p class="section-sub pl">Oferuję zarówno korepetycje z informatyki dla uczniów, jak i usługi IT dla osób i firm szukających praktycznych rozwiązań technologicznych.</p>
+            <p class="section-sub en">I offer both IT tutoring for students, and IT services for individuals and businesses looking for practical tech solutions.</p>
+        </div>
+
+        <div class="services-grid">
+
+            <div class="service-card fade-up">
+                <div class="service-icon">📚</div>
+                <div class="service-title pl">Korepetycje z Informatyki</div>
+                <div class="service-title en">IT Tutoring</div>
+                <p class="service-desc pl">Przystępne zajęcia dla uczniów szkół podstawowych, licealistów i maturzystów. Online lub stacjonarnie w Otwocku.</p>
+                <p class="service-desc en">Clear lessons for primary and secondary school students. Online or in-person in Otwock.</p>
+                <ul class="service-items">
+                    <li class="pl">Nadrabianie zaległości, zadania domowe</li>
+                    <li class="en">Catching up, homework help</li>
+                    <li class="pl">Przygotowanie do matury (algorytmika, Excel, bazy danych)</li>
+                    <li class="en">Matura exam prep (algorithms, Excel, databases)</li>
+                    <li class="pl">Programowanie: Python, C#, Java</li>
+                    <li class="en">Programming: Python, C#, Java</li>
+                    <li class="pl">Luźna atmosfera, zero wykładów</li>
+                    <li class="en">Relaxed atmosphere, practical focus</li>
+                </ul>
+                <div class="service-price pl">Online · Otwock · Ustalana indywidualnie</div>
+                <div class="service-price en">Online · Otwock · Price on request</div>
+            </div>
+
+            <div class="service-card fade-up">
+                <div class="service-icon">🏠</div>
+                <div class="service-title pl">Inteligentny Dom</div>
+                <div class="service-title en">Smart Home</div>
+                <p class="service-desc pl">Kompleksowa instalacja i konfiguracja Home Assistant z automatyzacjami dopasowanymi do Twoich potrzeb.</p>
+                <p class="service-desc en">Full Home Assistant installation and configuration with automations tailored to your needs.</p>
+                <ul class="service-items">
+                    <li class="pl">Instalacja i konfiguracja Home Assistant</li>
+                    <li class="en">Home Assistant installation & config</li>
+                    <li class="pl">Integracja urządzeń Zigbee, Matter, WiFi</li>
+                    <li class="en">Zigbee, Matter, WiFi device integration</li>
+                    <li class="pl">Automatyzacje oświetlenia, ogrzewania, rolet</li>
+                    <li class="en">Lighting, heating, blinds automation</li>
+                    <li class="pl">Bezpieczny zdalny dostęp (Cloudflare/Tailscale)</li>
+                    <li class="en">Secure remote access (Cloudflare/Tailscale)</li>
+                </ul>
+                <div class="service-price pl">Wycena indywidualna · Okolice Otwocka</div>
+                <div class="service-price en">Custom quote · Otwock area</div>
+            </div>
+
+            <div class="service-card fade-up">
+                <div class="service-icon">🖥️</div>
+                <div class="service-title pl">Usługi IT</div>
+                <div class="service-title en">IT Services</div>
+                <p class="service-desc pl">Pomoc techniczna, konfiguracja serwerów, sieci domowych i rozwiązań backupowych.</p>
+                <p class="service-desc en">Tech support, server setup, home networking and backup solutions.</p>
+                <ul class="service-items">
+                    <li class="pl">Konfiguracja Proxmox / VPS / serwera domowego</li>
+                    <li class="en">Proxmox / VPS / home server setup</li>
+                    <li class="pl">Sieci domowe (Cloudflare, VPN, DNS)</li>
+                    <li class="en">Home networking (Cloudflare, VPN, DNS)</li>
+                    <li class="pl">Backup i bezpieczeństwo danych</li>
+                    <li class="en">Backup & data security</li>
+                    <li class="pl">Ogólna pomoc techniczna</li>
+                    <li class="en">General tech support</li>
+                </ul>
+                <div class="service-price pl">Zdalne lub stacjonarnie · Wycena indywidualna</div>
+                <div class="service-price en">Remote or on-site · Custom quote</div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- HOMELAB -->
+<section id="homelab" class="section-pad">
+    <div class="container">
+        <div class="fade-up">
+            <div class="section-label">Homelab</div>
+            <h2 class="pl">Mój <span class="accent">system</span></h2>
+            <h2 class="en">My <span class="accent">setup</span></h2>
+            <p class="section-sub pl">Własna infrastruktura, którą buduję i utrzymuję — od serwera Proxmox po automatyzacje smart home. Wszystko bezpieczne, monitorowane i dostępne zdalnie.</p>
+            <p class="section-sub en">My own infrastructure that I build and maintain — from the Proxmox server to smart home automations. Secure, monitored, and remotely accessible.</p>
+        </div>
+
+        <div class="homelab-grid">
+
+            <div class="homelab-diagram fade-up">
+                <div class="diagram-title">Live Architecture</div>
+
+                <div class="diagram-layer">
+                    <div class="diagram-layer-label">Internet → Cloudflare</div>
+                    <div class="diagram-nodes">
+                        <span class="diagram-node node-orange">CF Tunnels</span>
+                        <span class="diagram-node node-orange">CF Workers</span>
+                        <span class="diagram-node node-orange">CF Access</span>
+                    </div>
+                </div>
+
+                <div class="diagram-arrow">↓ HTTPS tunnel</div>
+
+                <div class="diagram-layer">
+                    <div class="diagram-layer-label">Proxmox 8.4 — home-server</div>
+                    <div class="diagram-nodes">
+                        <span class="diagram-node node-green">HAOS 17.0</span>
+                        <span class="diagram-node node-blue">NAS-pliki</span>
+                        <span class="diagram-node node-blue">monitoring-dns</span>
+                    </div>
+                </div>
+
+                <div class="diagram-arrow">↕ Tailscale VPN</div>
+
+                <div class="diagram-layer">
+                    <div class="diagram-layer-label">Sieć prywatna</div>
+                    <div class="diagram-nodes">
+                        <span class="diagram-node node-gray">Desktop</span>
+                        <span class="diagram-node node-gray">Laptop</span>
+                        <span class="diagram-node node-gray">VPS</span>
+                    </div>
+                </div>
+
+                <div class="diagram-arrow">↓ Zigbee2MQTT / Matter</div>
+
+                <div class="diagram-layer">
+                    <div class="diagram-layer-label">Smart Home Devices</div>
+                    <div class="diagram-nodes">
+                        <span class="diagram-node node-green">Światła</span>
+                        <span class="diagram-node node-green">Rolety</span>
+                        <span class="diagram-node node-green">Sensory</span>
+                        <span class="diagram-node node-green">TV</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="homelab-features fade-up">
+
+                <div class="feature-row">
+                    <div class="feature-icon">🖥️</div>
+                    <div>
+                        <div class="feature-title">Proxmox VE 8.4</div>
+                        <p class="feature-desc pl">Serwer domowy z trzema kontenerami LXC: Home Assistant OS, NAS i monitoring DNS. Wszystko na jednym fizycznym hoście.</p>
+                        <p class="feature-desc en">Home server with three LXC containers: Home Assistant OS, NAS, and DNS monitoring. Everything on one physical host.</p>
+                    </div>
+                </div>
+
+                <div class="feature-row">
+                    <div class="feature-icon">🏠</div>
+                    <div>
+                        <div class="feature-title">Home Assistant 17.0</div>
+                        <p class="feature-desc pl">Pełna automatyzacja domu: salon, sypialnia, kuchnia, toaleta, przedpokój. Zigbee2MQTT, rolety, czujniki, termostat.</p>
+                        <p class="feature-desc en">Full home automation: living room, bedroom, kitchen, bathroom, hallway. Zigbee2MQTT, blinds, sensors, thermostat.</p>
+                    </div>
+                </div>
+
+                <div class="feature-row">
+                    <div class="feature-icon">🔒</div>
+                    <div>
+                        <div class="feature-title pl">Bezpieczny dostęp zdalny</div>
+                        <div class="feature-title en">Secure remote access</div>
+                        <p class="feature-desc pl">Cloudflare Tunnels + Cloudflare Access na piotrjalocha.dev bez otwartych portów. Tailscale VPN dla urządzeń prywatnych.</p>
+                        <p class="feature-desc en">Cloudflare Tunnels + Access on piotrjalocha.dev — no open ports. Tailscale VPN for private devices.</p>
+                    </div>
+                </div>
+
+                <div class="feature-row">
+                    <div class="feature-icon">📡</div>
+                    <div>
+                        <div class="feature-title">AdGuard + monitoring DNS</div>
+                        <p class="feature-desc pl">Blokowanie reklam na poziomie sieci, własny resolver DNS, monitoring uptime wszystkich usług.</p>
+                        <p class="feature-desc en">Network-level ad blocking, custom DNS resolver, uptime monitoring for all services.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section-pad">
+    <div class="container">
+        <div class="fade-up">
+            <div class="section-label pl">Kontakt</div>
+            <div class="section-label en">Contact</div>
+            <h2 class="pl">Porozmawiajmy <span class="accent">:)</span></h2>
+            <h2 class="en">Let's <span class="accent">talk</span></h2>
+            <p class="section-sub pl">Masz pytania o korepetycje, inteligentny dom lub usługi IT? Napisz — odpiszę najszybciej jak mogę.</p>
+            <p class="section-sub en">Questions about tutoring, smart home, or IT services? Write to me — I'll reply as fast as I can.</p>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-info fade-up">
+
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <div class="contact-label pl">Lokalizacja</div>
+                        <div class="contact-label en">Location</div>
+                        <div class="contact-value">Otwock, Mazowieckie</div>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">💻</div>
+                    <div>
+                        <div class="contact-label">GitHub</div>
+                        <div class="contact-value"><a href="https://github.com/frizz000" target="_blank">github.com/frizz000</a></div>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">🌐</div>
+                    <div>
+                        <div class="contact-label">OLX</div>
+                        <div class="contact-value">
+                            <a href="#" class="pl">Ogłoszenie korepetycje →</a>
+                            <a href="#" class="en">Tutoring listing →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">🕐</div>
+                    <div>
+                        <div class="contact-label pl">Czas odpowiedzi</div>
+                        <div class="contact-label en">Response time</div>
+                        <div class="contact-value pl">Zazwyczaj tego samego dnia</div>
+                        <div class="contact-value en">Usually same day</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <form class="contact-form fade-up" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fname" class="pl">Imię *</label>
+                        <label for="fname" class="en">Name *</label>
+                        <input type="text" id="fname" name="name" required placeholder="Jan Kowalski">
+                    </div>
+                    <div class="form-group">
+                        <label for="femail" class="pl">Email *</label>
+                        <label for="femail" class="en">Email *</label>
+                        <input type="email" id="femail" name="email" required placeholder="jan@example.com">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fsubject" class="pl">Temat</label>
+                    <label for="fsubject" class="en">Subject</label>
+                    <select id="fsubject" name="subject">
+                        <option value="" class="pl">Wybierz temat...</option>
+                        <option value="" class="en">Select topic...</option>
+                        <option value="korepetycje" class="pl">Korepetycje z informatyki</option>
+                        <option value="tutoring" class="en">IT Tutoring</option>
+                        <option value="smarthome" class="pl">Inteligentny dom</option>
+                        <option value="smarthome-en" class="en">Smart Home setup</option>
+                        <option value="it" class="pl">Usługi IT / serwer</option>
+                        <option value="it-en" class="en">IT services / server</option>
+                        <option value="inne" class="pl">Inne</option>
+                        <option value="other" class="en">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fmsg" class="pl">Wiadomość *</label>
+                    <label for="fmsg" class="en">Message *</label>
+                    <textarea id="fmsg" name="message" required placeholder="Opisz czego potrzebujesz..."></textarea>
+                </div>
+                <div id="formStatus" class="form-status"></div>
+                <button type="submit" class="btn-primary">
+                    <span class="pl">Wyślij wiadomość →</span>
+                    <span class="en">Send message →</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>
+        <span class="pl">© 2026 Piotr Jałocha · Zbudowane z ☕ i </span>
+        <span class="en">© 2026 Piotr Jałocha · Built with ☕ and </span>
+        <a href="https://github.com/frizz000" target="_blank">GitHub</a>
+        · <span style="color: var(--green);">piotrjalocha.dev</span>
+    </p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
