@@ -18,8 +18,8 @@
     <ul class="nav-links" id="navLinks">
         <li><a href="#about" class="pl">O mnie</a><a href="#about" class="en">About</a></li>
         <li><a href="#services" class="pl">Usługi</a><a href="#services" class="en">Services</a></li>
-        <li><a href="#homelab" class="pl">Homelab</a><a href="#homelab" class="en">Homelab</a></li>
         <li><a href="#contact" class="pl">Kontakt</a><a href="#contact" class="en">Contact</a></li>
+        <li><a href="#homelab" class="pl">Homelab</a><a href="#homelab" class="en">Homelab</a></li>
     </ul>
     <div class="nav-controls">
         <button class="btn-icon" id="themeToggle" title="Toggle theme">☀</button>
@@ -102,18 +102,30 @@
                 <p class="section-sub pl">Kończę studia magisterskie na PJATK. Na co dzień zajmuję się marketingiem sportowym, wcześniej pracowałem jako instruktor programowania. Po godzinach rozwijam własny homelab i pomagam przy smart home.</p>
                 <p class="section-sub en">Finishing my master's at PJATK. Currently working in sports marketing, used to be a programming instructor. After hours I run my own homelab and help people with smart home setups.</p>
                 <div class="skills-list">
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">C#</span>
-                    <span class="skill-tag">Java</span>
-                    <span class="skill-tag">Home Assistant</span>
-                    <span class="skill-tag">Proxmox</span>
-                    <span class="skill-tag">Zigbee2MQTT</span>
-                    <span class="skill-tag">Cloudflare</span>
-                    <span class="skill-tag">Tailscale</span>
-                    <span class="skill-tag">Docker</span>
-                    <span class="skill-tag">Linux</span>
-                    <span class="skill-tag">SQL</span>
-                    <span class="skill-tag">Git</span>
+                    <div class="skill-group">
+                        <span class="skill-group-label">Dev</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C#</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Git</span>
+                    </div>
+                    <div class="skill-group">
+                        <span class="skill-group-label">Infra</span>
+                        <span class="skill-tag">Proxmox</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Linux</span>
+                    </div>
+                    <div class="skill-group">
+                        <span class="skill-group-label">Smart Home</span>
+                        <span class="skill-tag">Home Assistant</span>
+                        <span class="skill-tag">Zigbee2MQTT</span>
+                    </div>
+                    <div class="skill-group">
+                        <span class="skill-group-label">Network</span>
+                        <span class="skill-tag">Cloudflare</span>
+                        <span class="skill-tag">Tailscale</span>
+                    </div>
                 </div>
             </div>
             <div>
@@ -150,7 +162,7 @@
         <div class="fade-up">
             <div class="section-label pl">Usługi</div>
             <div class="section-label en">Services</div>
-            <h2 class="pl">Czym mogę <span class="accent">pomóc?</span></h2>
+            <h2 class="pl">W czym mogę <span class="accent">pomóc?</span></h2>
             <h2 class="en">How can I <span class="accent">help?</span></h2>
             <p class="section-sub pl">Oferuję zarówno korepetycje z informatyki dla uczniów, jak i usługi IT dla osób i firm szukających praktycznych rozwiązań technologicznych.</p>
             <p class="section-sub en">I offer both IT tutoring for students, and IT services for individuals and businesses looking for practical tech solutions.</p>
@@ -220,6 +232,133 @@
                 <div class="service-price en">Remote or on-site · Custom quote</div>
             </div>
 
+        </div>
+    </div>
+</section>
+
+<!-- CTA STRIP -->
+<section id="cta-strip">
+    <div class="cta-inner fade-up">
+        <div class="cta-text">
+            <h3 class="pl">Brzmi <span class="accent">interesująco?</span></h3>
+            <h3 class="en">Sounds <span class="accent">interesting?</span></h3>
+            <p class="pl">Najszybciej odpisuję na WhatsAppie. Możesz też wypełnić formularz poniżej.</p>
+            <p class="en">I reply fastest on WhatsApp. You can also fill in the form below.</p>
+        </div>
+        <div class="cta-buttons">
+            <a href="https://wa.me/qr/XUXUIKKPRFLRD1" target="_blank" class="btn-wa">
+                <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                <span class="pl">WhatsApp</span>
+                <span class="en">WhatsApp</span>
+            </a>
+            <a href="#contact" class="btn-secondary pl">Formularz kontaktowy</a>
+            <a href="#contact" class="btn-secondary en">Contact form</a>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section-pad">
+    <div class="container">
+        <div class="fade-up">
+            <div class="section-label pl">Kontakt</div>
+            <div class="section-label en">Contact</div>
+            <h2 class="pl">Porozmawiajmy <span class="accent">:)</span></h2>
+            <h2 class="en">Let's <span class="accent">talk</span></h2>
+            <p class="section-sub pl">Masz pytania o korepetycje, inteligentny dom lub usługi IT? Napisz - odpiszę najszybciej jak mogę.</p>
+            <p class="section-sub en">Questions about tutoring, smart home, or IT services? Write to me - I'll reply as fast as I can.</p>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-info fade-up">
+
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <div class="contact-label pl">Lokalizacja</div>
+                        <div class="contact-label en">Location</div>
+                        <div class="contact-value">Otwock, Mazowieckie</div>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">💬</div>
+                    <div>
+                        <div class="contact-label">WhatsApp</div>
+                        <div class="contact-value"><a href="https://wa.me/qr/XUXUIKKPRFLRD1" target="_blank">Napisz na WhatsApp →</a></div>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">💻</div>
+                    <div>
+                        <div class="contact-label">GitHub</div>
+                        <div class="contact-value"><a href="https://github.com/frizz000" target="_blank">github.com/frizz000</a></div>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">💼</div>
+                    <div>
+                        <div class="contact-label">LinkedIn</div>
+                        <div class="contact-value"><a href="https://www.linkedin.com/in/piotr-ja%C5%82ocha" target="_blank">linkedin.com/in/piotr-jałocha</a></div>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">🕐</div>
+                    <div>
+                        <div class="contact-label pl">Czas odpowiedzi</div>
+                        <div class="contact-label en">Response time</div>
+                        <div class="contact-value pl">Zazwyczaj tego samego dnia</div>
+                        <div class="contact-value en">Usually same day</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <form class="contact-form fade-up" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fname" class="pl">Imię *</label>
+                        <label for="fname" class="en">Name *</label>
+                        <input type="text" id="fname" name="name" required placeholder="Jan Kowalski">
+                    </div>
+                    <div class="form-group">
+                        <label for="femail" class="pl">Email *</label>
+                        <label for="femail" class="en">Email *</label>
+                        <input type="email" id="femail" name="email" required placeholder="jan@example.com">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fsubject" class="pl">Temat</label>
+                    <label for="fsubject" class="en">Subject</label>
+                    <select id="fsubject" name="subject">
+                        <option value="" class="pl">Wybierz temat...</option>
+                        <option value="" class="en">Select topic...</option>
+                        <option value="korepetycje" class="pl">Korepetycje z informatyki</option>
+                        <option value="tutoring" class="en">IT Tutoring</option>
+                        <option value="smarthome" class="pl">Inteligentny dom</option>
+                        <option value="smarthome-en" class="en">Smart Home setup</option>
+                        <option value="it" class="pl">Usługi IT / serwer</option>
+                        <option value="it-en" class="en">IT services / server</option>
+                        <option value="strona" class="pl">Strona internetowa</option>
+                        <option value="website" class="en">Website development</option>
+                        <option value="inne" class="pl">Inne</option>
+                        <option value="other" class="en">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fmsg" class="pl">Wiadomość *</label>
+                    <label for="fmsg" class="en">Message *</label>
+                    <textarea id="fmsg" name="message" required placeholder="Opisz czego potrzebujesz..."></textarea>
+                </div>
+                <div id="formStatus" class="form-status"></div>
+                <button type="submit" class="btn-primary">
+                    <span class="pl">Wyślij wiadomość →</span>
+                    <span class="en">Send message →</span>
+                </button>
+            </form>
         </div>
     </div>
 </section>
@@ -324,104 +463,6 @@
                 </div>
 
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="section-pad">
-    <div class="container">
-        <div class="fade-up">
-            <div class="section-label pl">Kontakt</div>
-            <div class="section-label en">Contact</div>
-            <h2 class="pl">Porozmawiajmy <span class="accent">:)</span></h2>
-            <h2 class="en">Let's <span class="accent">talk</span></h2>
-            <p class="section-sub pl">Masz pytania o korepetycje, inteligentny dom lub usługi IT? Napisz - odpiszę najszybciej jak mogę.</p>
-            <p class="section-sub en">Questions about tutoring, smart home, or IT services? Write to me - I'll reply as fast as I can.</p>
-        </div>
-
-        <div class="contact-grid">
-            <div class="contact-info fade-up">
-
-                <div class="contact-item">
-                    <div class="contact-icon">📍</div>
-                    <div>
-                        <div class="contact-label pl">Lokalizacja</div>
-                        <div class="contact-label en">Location</div>
-                        <div class="contact-value">Otwock, Mazowieckie</div>
-                    </div>
-                </div>
-
-                <div class="contact-item">
-                    <div class="contact-icon">💻</div>
-                    <div>
-                        <div class="contact-label">GitHub</div>
-                        <div class="contact-value"><a href="https://github.com/frizz000" target="_blank">github.com/frizz000</a></div>
-                    </div>
-                </div>
-
-                <div class="contact-item">
-                    <div class="contact-icon">💼</div>
-                    <div>
-                        <div class="contact-label">LinkedIn</div>
-                        <div class="contact-value"><a href="https://www.linkedin.com/in/piotr-ja%C5%82ocha" target="_blank">linkedin.com/in/piotr-jałocha</a></div>
-                    </div>
-                </div>
-
-                <div class="contact-item">
-                    <div class="contact-icon">🕐</div>
-                    <div>
-                        <div class="contact-label pl">Czas odpowiedzi</div>
-                        <div class="contact-label en">Response time</div>
-                        <div class="contact-value pl">Zazwyczaj tego samego dnia</div>
-                        <div class="contact-value en">Usually same day</div>
-                    </div>
-                </div>
-
-            </div>
-
-            <form class="contact-form fade-up" id="contactForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="fname" class="pl">Imię *</label>
-                        <label for="fname" class="en">Name *</label>
-                        <input type="text" id="fname" name="name" required placeholder="Jan Kowalski">
-                    </div>
-                    <div class="form-group">
-                        <label for="femail" class="pl">Email *</label>
-                        <label for="femail" class="en">Email *</label>
-                        <input type="email" id="femail" name="email" required placeholder="jan@example.com">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="fsubject" class="pl">Temat</label>
-                    <label for="fsubject" class="en">Subject</label>
-                    <select id="fsubject" name="subject">
-                        <option value="" class="pl">Wybierz temat...</option>
-                        <option value="" class="en">Select topic...</option>
-                        <option value="korepetycje" class="pl">Korepetycje z informatyki</option>
-                        <option value="tutoring" class="en">IT Tutoring</option>
-                        <option value="smarthome" class="pl">Inteligentny dom</option>
-                        <option value="smarthome-en" class="en">Smart Home setup</option>
-                        <option value="it" class="pl">Usługi IT / serwer</option>
-                        <option value="it-en" class="en">IT services / server</option>
-                        <option value="strona" class="pl">Strona internetowa</option>
-                        <option value="website" class="en">Website development</option>
-                        <option value="inne" class="pl">Inne</option>
-                        <option value="other" class="en">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="fmsg" class="pl">Wiadomość *</label>
-                    <label for="fmsg" class="en">Message *</label>
-                    <textarea id="fmsg" name="message" required placeholder="Opisz czego potrzebujesz..."></textarea>
-                </div>
-                <div id="formStatus" class="form-status"></div>
-                <button type="submit" class="btn-primary">
-                    <span class="pl">Wyślij wiadomość →</span>
-                    <span class="en">Send message →</span>
-                </button>
-            </form>
         </div>
     </div>
 </section>
