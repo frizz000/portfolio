@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMax slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1958b0"/>
+      <stop offset="40%" stop-color="#3f86dd"/>
+      <stop offset="72%" stop-color="#9fd0f5"/>
+      <stop offset="100%" stop-color="#dff1fb"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hillBack" x1="0" y1="0" x2="1" y2="0.15">
+      <stop offset="0%" stop-color="#2f7a1d"/>
+      <stop offset="55%" stop-color="#256515"/>
+      <stop offset="100%" stop-color="#1c4e10"/>
+    </linearGradient>
+    <linearGradient id="hillFront" x1="0" y1="0" x2="1" y2="0.1">
+      <stop offset="0%" stop-color="#9be24f"/>
+      <stop offset="45%" stop-color="#6dc22f"/>
+      <stop offset="100%" stop-color="#438a1f"/>
+    </linearGradient>
+    <filter id="cloudBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="1920" height="1080" fill="url(#sky)"/>
+  <ellipse cx="300" cy="190" rx="560" ry="420" fill="url(#sunGlow)"/>
+
+  <g filter="url(#cloudBlur)" opacity="0.9" fill="#ffffff">
+    <ellipse cx="520" cy="200" rx="150" ry="42"/>
+    <ellipse cx="610" cy="180" rx="110" ry="34"/>
+    <ellipse cx="1420" cy="160" rx="170" ry="46"/>
+    <ellipse cx="1330" cy="185" rx="110" ry="32"/>
+    <ellipse cx="1650" cy="260" rx="120" ry="34"/>
+    <ellipse cx="150" cy="330" rx="130" ry="34"/>
+  </g>
+
+  <path d="M0,760 C280,650 620,830 960,700 C1300,590 1620,760 1920,660 L1920,1080 L0,1080 Z" fill="url(#hillBack)"/>
+  <path d="M0,900 C260,800 520,970 900,860 C1260,770 1560,950 1920,850 L1920,1080 L0,1080 Z" fill="url(#hillFront)"/>
+</svg>

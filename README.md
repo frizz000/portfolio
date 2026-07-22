@@ -7,7 +7,7 @@ Live: **[piotrjalocha.dev](https://piotrjalocha.dev)**
 ## Stack
 
 - Vanilla HTML, CSS, JS
-- Google Fonts (Space Mono + DM Sans)
+- [XP.css](https://botoxparty.github.io/XP.css/) (via CDN) — Windows XP "Luna" retro UI theme
 - [Formspree](https://formspree.io) — contact form
 - Hosted on homelab (Proxmox) behind Cloudflare Tunnel
 
@@ -24,9 +24,9 @@ portfolio/
 
 ## Features
 
-- Dark / light theme (persisted in localStorage)
+- Windows XP Luna-themed UI: project cards rendered as XP windows (title bar, min/max/close controls, window-body)
+- Blue / silver desktop theme toggle (persisted in localStorage)
 - PL / EN language switcher (persisted in localStorage)
-- Scroll animations (IntersectionObserver)
 - Contact form via Formspree
 - Responsive (mobile nav burger menu)
 - Favicon as inline SVG data URI

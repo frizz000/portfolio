@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="pl" data-theme="dark" data-lang="pl">
+<html lang="pl" data-theme="blue" data-lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piotr Jałocha | Developer & Smart Home Expert</title>
     <meta name="description" content="Inżynier informatyki (PJATK), marketing sportowy, ekspert smart home. Tworzenie stron, konfiguracja Home Assistant, Proxmox, sieci domowe.">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0f0d'/><text x='50' y='68' font-family='monospace' font-size='52' font-weight='bold' fill='%2322c55e' text-anchor='middle'>pj</text></svg>">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='8' fill='%230a58f7'/><text x='50' y='68' font-family='Tahoma,Arial,sans-serif' font-size='48' font-weight='bold' fill='white' text-anchor='middle'>pj</text></svg>">
+    <link rel="stylesheet" href="https://unpkg.com/xp.css/dist/XP.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -20,8 +19,8 @@
         <li><a href="#contact" class="pl">Kontakt</a><a href="#contact" class="en">Contact</a></li>
     </ul>
     <div class="nav-controls">
-        <button class="btn-icon" id="themeToggle" title="Toggle theme">☀</button>
-        <button class="btn-icon" id="langToggle">EN</button>
+        <button class="btn-xp" id="themeToggle" title="Zmień schemat kolorów"><span class="theme-swatch" id="themeSwatch"></span></button>
+        <button class="btn-xp" id="langToggle">EN</button>
         <button class="nav-burger" id="burger" aria-label="Menu">
             <span></span><span></span><span></span>
         </button>
@@ -30,38 +29,41 @@
 
 <section id="hero">
     <div class="hero-inner">
-        <div>
+        <div class="hero-text">
             <div class="hero-tag">
                 <span class="pl">Dostępny do współpracy</span>
                 <span class="en">Available for work</span>
             </div>
             <h1>
                 Piotr<br>
-                Jałocha<br>
-                <span class="accent pl">— developer.</span>
-                <span class="accent en">— developer.</span>
+                Jałocha
             </h1>
+            <p class="hero-role pl">Programista i ekspert smart home</p>
+            <p class="hero-role en">Developer &amp; smart home expert</p>
             <p class="hero-desc pl">Inżynier informatyki (PJATK), aktualnie pracuję w marketingu sportowym. Wcześniej instruktor programowania, teraz zajmuję się też smart home, tworzeniem stron i usługami IT.</p>
             <p class="hero-desc en">Computer science engineer (PJATK), currently working in sports marketing. Former programming instructor, also doing smart home setups, web development and IT services.</p>
             <div class="hero-ctas">
-                <a href="#contact" class="btn-primary pl">Napisz do mnie →</a>
-                <a href="#contact" class="btn-primary en">Get in touch →</a>
-                <a href="#projects" class="btn-secondary pl">Zobacz projekty</a>
-                <a href="#projects" class="btn-secondary en">View projects</a>
+                <a href="#contact" class="btn-xp btn-xp-primary pl">Napisz do mnie →</a>
+                <a href="#contact" class="btn-xp btn-xp-primary en">Get in touch →</a>
+                <a href="#projects" class="btn-xp pl">Zobacz projekty</a>
+                <a href="#projects" class="btn-xp en">View projects</a>
             </div>
         </div>
 
-        <div class="hero-terminal">
-            <div class="terminal-header">
-                <div class="dot dot-red"></div>
-                <div class="dot dot-yellow"></div>
-                <div class="dot dot-green"></div>
-                <span class="terminal-title">piotr@homelab ~ $</span>
+        <div class="window terminal-window">
+            <div class="title-bar">
+                <div class="title-bar-text pl">Wiersz polecenia: piotr@homelab</div>
+                <div class="title-bar-text en">Command Prompt: piotr@homelab</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Minimize" tabindex="-1" aria-hidden="true"></button>
+                    <button aria-label="Maximize" tabindex="-1" aria-hidden="true"></button>
+                    <button aria-label="Close" tabindex="-1" aria-hidden="true"></button>
+                </div>
             </div>
-            <div class="terminal-body">
+            <div class="window-body terminal-body">
                 <div class="t-line">
-                    <span class="t-prompt">→</span>
-                    <span class="t-cmd">cat about.json</span>
+                    <span class="t-prompt">C:\home\piotr&gt;</span>
+                    <span class="t-cmd">type about.json</span>
                 </div>
                 <div class="t-line"><span class="t-out">{</span></div>
                 <div class="t-line"><span class="t-out">&nbsp;&nbsp;"name": <span class="green">"Piotr Jałocha"</span>,</span></div>
@@ -73,13 +75,13 @@
                 <div class="t-line"><span class="t-out">&nbsp;&nbsp;]</span></div>
                 <div class="t-line"><span class="t-out">}</span></div>
                 <div class="t-line">
-                    <span class="t-prompt">→</span>
+                    <span class="t-prompt">C:\home\piotr&gt;</span>
                     <span class="t-cmd">uptime homelab</span>
                 </div>
                 <div class="t-line"><span class="t-out green">✓ All services operational</span></div>
                 <div class="t-line"><span class="t-out dim">  Proxmox 8.4 · HA 17.0 · 4 LXC</span></div>
                 <div class="t-line">
-                    <span class="t-prompt">→</span>
+                    <span class="t-prompt">C:\home\piotr&gt;</span>
                     <span class="t-cmd"><span class="t-cursor"></span></span>
                 </div>
             </div>
@@ -89,65 +91,94 @@
 
 <section id="about" class="section-pad">
     <div class="container">
-        <div class="about-grid fade-up">
-            <div>
-                <div class="section-label pl">O mnie</div>
-                <div class="section-label en">About me</div>
-                <h2 class="pl">Pasja do <span class="accent">technologii</span></h2>
-                <h2 class="en">Passion for <span class="accent">technology</span></h2>
-                <p class="section-sub pl">Kończę studia magisterskie na PJATK. Na co dzień zajmuję się marketingiem sportowym, wcześniej pracowałem jako instruktor programowania. Po godzinach rozwijam własny homelab i pomagam przy smart home.</p>
-                <p class="section-sub en">Finishing my master's at PJATK. Currently working in sports marketing, used to be a programming instructor. After hours I run my own homelab and help people with smart home setups.</p>
-                <div class="skills-list">
-                    <div class="skill-group">
-                        <span class="skill-group-label">Dev</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">JS</span>
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">Node.js</span>
-                        <span class="skill-tag">SQL</span>
+        <div class="section-label pl">O mnie</div>
+        <div class="section-label en">About me</div>
+        <h2 class="pl">Pasja do <span class="accent">technologii</span></h2>
+        <h2 class="en">Passion for <span class="accent">technology</span></h2>
+
+        <div class="window">
+            <div class="title-bar">
+                <div class="title-bar-text">Właściwości: Piotr Jałocha</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Minimize" tabindex="-1" aria-hidden="true"></button>
+                    <button aria-label="Maximize" tabindex="-1" aria-hidden="true"></button>
+                    <button aria-label="Close" tabindex="-1" aria-hidden="true"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="about-grid">
+                    <div>
+                        <p class="section-sub pl">Kończę studia magisterskie na PJATK. Na co dzień zajmuję się marketingiem sportowym, wcześniej pracowałem jako instruktor programowania. Po godzinach rozwijam własny homelab i pomagam przy smart home.</p>
+                        <p class="section-sub en">Finishing my master's at PJATK. Currently working in sports marketing, used to be a programming instructor. After hours I run my own homelab and help people with smart home setups.</p>
+
+                        <fieldset>
+                            <legend>Dev</legend>
+                            <div class="skill-group">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">JS</span>
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">Node.js</span>
+                                <span class="skill-tag">SQL</span>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Infra</legend>
+                            <div class="skill-group">
+                                <span class="skill-tag">Proxmox</span>
+                                <span class="skill-tag">Docker</span>
+                                <span class="skill-tag">Linux</span>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Smart Home</legend>
+                            <div class="skill-group">
+                                <span class="skill-tag">Home Assistant</span>
+                                <span class="skill-tag">Zigbee2MQTT</span>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Network</legend>
+                            <div class="skill-group">
+                                <span class="skill-tag">Cloudflare</span>
+                                <span class="skill-tag">Tailscale</span>
+                            </div>
+                        </fieldset>
                     </div>
-                    <div class="skill-group">
-                        <span class="skill-group-label">Infra</span>
-                        <span class="skill-tag">Proxmox</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Linux</span>
-                    </div>
-                    <div class="skill-group">
-                        <span class="skill-group-label">Smart Home</span>
-                        <span class="skill-tag">Home Assistant</span>
-                        <span class="skill-tag">Zigbee2MQTT</span>
-                    </div>
-                    <div class="skill-group">
-                        <span class="skill-group-label">Network</span>
-                        <span class="skill-tag">Cloudflare</span>
-                        <span class="skill-tag">Tailscale</span>
+                    <div>
+                        <fieldset>
+                            <legend class="pl">Statystyki</legend>
+                            <legend class="en">Statistics</legend>
+                            <div class="about-stats">
+                                <div class="stat-card">
+                                    <div class="stat-num">3+</div>
+                                    <div class="stat-label pl">lata doświadczenia w nauczaniu</div>
+                                    <div class="stat-label en">years teaching experience</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-num">PJATK</div>
+                                    <div class="stat-label pl">Inżynieria + Magister</div>
+                                    <div class="stat-label en">BSc + MSc in progress</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-num">24/7</div>
+                                    <div class="stat-label pl">homelab online</div>
+                                    <div class="stat-label en">homelab uptime</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-num">∞</div>
+                                    <div class="stat-label pl">pasja do automatyzacji</div>
+                                    <div class="stat-label en">passion for automation</div>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
                 </div>
             </div>
-            <div>
-                <div class="about-stats">
-                    <div class="stat-card">
-                        <div class="stat-num">3+</div>
-                        <div class="stat-label pl">lata doświadczenia w nauczaniu</div>
-                        <div class="stat-label en">years teaching experience</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-num">PJATK</div>
-                        <div class="stat-label pl">Inżynieria + Magister</div>
-                        <div class="stat-label en">BSc + MSc in progress</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-num">24/7</div>
-                        <div class="stat-label pl">homelab online</div>
-                        <div class="stat-label en">homelab uptime</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-num">∞</div>
-                        <div class="stat-label pl">pasja do automatyzacji</div>
-                        <div class="stat-label en">passion for automation</div>
-                    </div>
-                </div>
+            <div class="status-bar">
+                <p class="status-bar-field pl">Gotowy</p>
+                <p class="status-bar-field en">Ready</p>
+                <p class="status-bar-field">PJATK · Otwock, PL</p>
             </div>
         </div>
     </div>
@@ -155,70 +186,89 @@
 
 <section id="projects" class="section-pad">
     <div class="container">
-        <div class="fade-up">
-            <div class="section-label pl">Portfolio</div>
-            <div class="section-label en">Portfolio</div>
-            <h2 class="pl">Moje projekty & <span class="accent">Home Lab</span></h2>
-            <h2 class="en">My Projects & <span class="accent">Home Lab</span></h2>
-            <p class="section-sub pl">Wybrane realizacje łączące automatykę budynkową, inżynierię oprogramowania i infrastrukturę self-hosted. Kliknij kartę, aby zobaczyć szczegóły.</p>
-            <p class="section-sub en">Selected work combining building automation, software engineering and self-hosted infrastructure. Click a card to see details.</p>
-        </div>
+        <div class="section-label pl">Portfolio</div>
+        <div class="section-label en">Portfolio</div>
+        <h2 class="pl">Moje projekty & <span class="accent">Home Lab</span></h2>
+        <h2 class="en">My Projects & <span class="accent">Home Lab</span></h2>
+        <p class="section-sub pl">Wybrane realizacje łączące automatykę budynkową, inżynierię oprogramowania i infrastrukturę self-hosted. Kliknij okno, aby zobaczyć szczegóły.</p>
+        <p class="section-sub en">Selected work combining building automation, software engineering and self-hosted infrastructure. Click a window to see details.</p>
 
         <div class="projects-grid">
 
-            <article class="project-card fade-up" data-project="homelab" tabindex="0" role="button" aria-haspopup="dialog">
-                <div class="project-icon">🏠</div>
-                <h3 class="project-title pl">Zaawansowany Home Lab i Automatyka Budynkowa</h3>
-                <h3 class="project-title en">Advanced Home Lab & Building Automation</h3>
-                <p class="project-desc pl">Kompletna infrastruktura oparta na Proxmox VE i Home Assistant, sterująca fizycznymi instalacjami domowymi.</p>
-                <p class="project-desc en">A complete infrastructure built on Proxmox VE and Home Assistant, controlling real physical home installations.</p>
-                <div class="project-tags">
-                    <span class="tech-tag">Proxmox</span>
-                    <span class="tech-tag">Home Assistant</span>
-                    <span class="tech-tag">Docker</span>
-                    <span class="tech-tag">Sieci LAN</span>
-                    <span class="tech-tag">IoT</span>
+            <article class="window project-card" data-project="homelab" tabindex="0" role="button" aria-haspopup="dialog">
+                <div class="title-bar">
+                    <div class="title-bar-text">🏠 <span class="pl">Home Lab & Automatyka</span><span class="en">Home Lab & Automation</span></div>
+                    <div class="title-bar-controls">
+                        <button aria-label="Minimize" tabindex="-1" aria-hidden="true"></button>
+                        <button aria-label="Maximize" tabindex="-1" aria-hidden="true"></button>
+                        <button aria-label="Close" tabindex="-1" aria-hidden="true"></button>
+                    </div>
                 </div>
-                <button class="project-btn" type="button" data-open-modal="homelab">
-                    <span class="pl">Zobacz szczegóły →</span>
-                    <span class="en">View details →</span>
-                </button>
+                <div class="window-body">
+                    <p class="project-desc pl">Kompletna infrastruktura oparta na Proxmox VE i Home Assistant, sterująca fizycznymi instalacjami domowymi.</p>
+                    <p class="project-desc en">A complete infrastructure built on Proxmox VE and Home Assistant, controlling real physical home installations.</p>
+                    <div class="project-tags">
+                        <span class="tech-tag">Proxmox</span>
+                        <span class="tech-tag">Home Assistant</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Sieci LAN</span>
+                        <span class="tech-tag">IoT</span>
+                    </div>
+                    <button class="btn-xp" type="button" data-open-modal="homelab">
+                        <span class="pl">Zobacz szczegóły →</span>
+                        <span class="en">View details →</span>
+                    </button>
+                </div>
             </article>
 
-            <article class="project-card fade-up" data-project="talenttrop" tabindex="0" role="button" aria-haspopup="dialog">
-                <div class="project-icon">🎯</div>
-                <h3 class="project-title pl">Talent Trop - Skauting AI</h3>
-                <h3 class="project-title en">Talent Trop - AI Scouting</h3>
-                <p class="project-desc pl">Platforma do skautingu sportowego z analizą danych opartą na modelach językowych (LLM).</p>
-                <p class="project-desc en">A sports scouting platform with data analysis powered by large language models (LLM).</p>
-                <div class="project-tags">
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">Vercel</span>
-                    <span class="tech-tag">Supabase</span>
-                    <span class="tech-tag">LLM (ChatGPT/Claude)</span>
+            <article class="window project-card" data-project="talenttrop" tabindex="0" role="button" aria-haspopup="dialog">
+                <div class="title-bar">
+                    <div class="title-bar-text">🎯 <span class="pl">Talent Trop - Skauting AI</span><span class="en">Talent Trop - AI Scouting</span></div>
+                    <div class="title-bar-controls">
+                        <button aria-label="Minimize" tabindex="-1" aria-hidden="true"></button>
+                        <button aria-label="Maximize" tabindex="-1" aria-hidden="true"></button>
+                        <button aria-label="Close" tabindex="-1" aria-hidden="true"></button>
+                    </div>
                 </div>
-                <button class="project-btn" type="button" data-open-modal="talenttrop">
-                    <span class="pl">Zobacz szczegóły →</span>
-                    <span class="en">View details →</span>
-                </button>
+                <div class="window-body">
+                    <p class="project-desc pl">Platforma do skautingu sportowego z analizą danych opartą na modelach językowych (LLM).</p>
+                    <p class="project-desc en">A sports scouting platform with data analysis powered by large language models (LLM).</p>
+                    <div class="project-tags">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Vercel</span>
+                        <span class="tech-tag">Supabase</span>
+                        <span class="tech-tag">LLM (ChatGPT/Claude)</span>
+                    </div>
+                    <button class="btn-xp" type="button" data-open-modal="talenttrop">
+                        <span class="pl">Zobacz szczegóły →</span>
+                        <span class="en">View details →</span>
+                    </button>
+                </div>
             </article>
 
-            <article class="project-card fade-up" data-project="calltime" tabindex="0" role="button" aria-haspopup="dialog">
-                <div class="project-icon">📅</div>
-                <h3 class="project-title pl">Calltime - Event Management PWA</h3>
-                <h3 class="project-title en">Calltime - Event Management PWA</h3>
-                <p class="project-desc pl">Aplikacja wielodostępna (PWA) optymalizująca logistykę masowych wydarzeń.</p>
-                <p class="project-desc en">A multi-tenant PWA app streamlining logistics for large-scale events.</p>
-                <div class="project-tags">
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">Supabase</span>
-                    <span class="tech-tag">Vercel</span>
+            <article class="window project-card" data-project="calltime" tabindex="0" role="button" aria-haspopup="dialog">
+                <div class="title-bar">
+                    <div class="title-bar-text">📅 Calltime - Event Management PWA</div>
+                    <div class="title-bar-controls">
+                        <button aria-label="Minimize" tabindex="-1" aria-hidden="true"></button>
+                        <button aria-label="Maximize" tabindex="-1" aria-hidden="true"></button>
+                        <button aria-label="Close" tabindex="-1" aria-hidden="true"></button>
+                    </div>
                 </div>
-                <button class="project-btn" type="button" data-open-modal="calltime">
-                    <span class="pl">Zobacz szczegóły →</span>
-                    <span class="en">View details →</span>
-                </button>
+                <div class="window-body">
+                    <p class="project-desc pl">Aplikacja wielodostępna (PWA) optymalizująca logistykę masowych wydarzeń.</p>
+                    <p class="project-desc en">A multi-tenant PWA app streamlining logistics for large-scale events.</p>
+                    <div class="project-tags">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Supabase</span>
+                        <span class="tech-tag">Vercel</span>
+                    </div>
+                    <button class="btn-xp" type="button" data-open-modal="calltime">
+                        <span class="pl">Zobacz szczegóły →</span>
+                        <span class="en">View details →</span>
+                    </button>
+                </div>
             </article>
 
         </div>
@@ -226,123 +276,143 @@
 </section>
 
 <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal" id="modalBox">
-        <button class="modal-close" id="modalClose" type="button" aria-label="Close">✕</button>
-        <div id="modalBody"></div>
+    <div class="window modal-window" id="modalBox">
+        <div class="title-bar">
+            <div class="title-bar-text pl">Właściwości projektu</div>
+            <div class="title-bar-text en">Project Properties</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize" tabindex="-1" aria-hidden="true"></button>
+                <button aria-label="Maximize" tabindex="-1" aria-hidden="true"></button>
+                <button aria-label="Close" id="modalClose"></button>
+            </div>
+        </div>
+        <div class="window-body" id="modalBody"></div>
     </div>
 </div>
 
 <section id="contact" class="section-pad">
     <div class="container">
-        <div class="fade-up">
-            <div class="section-label pl">Kontakt</div>
-            <div class="section-label en">Contact</div>
-            <h2 class="pl">Porozmawiajmy <span class="accent">:)</span></h2>
-            <h2 class="en">Let's <span class="accent">talk</span></h2>
-            <p class="section-sub pl">Masz pytania o korepetycje, inteligentny dom lub usługi IT? Napisz - odpiszę najszybciej jak mogę.</p>
-            <p class="section-sub en">Questions about tutoring, smart home, or IT services? Write to me - I'll reply as fast as I can.</p>
-        </div>
+        <div class="section-label pl">Kontakt</div>
+        <div class="section-label en">Contact</div>
+        <h2 class="pl">Porozmawiajmy <span class="accent">:)</span></h2>
+        <h2 class="en">Let's <span class="accent">talk</span></h2>
 
-        <div class="contact-grid">
-            <div class="contact-info fade-up">
-
-                <div class="contact-item">
-                    <div class="contact-icon">📍</div>
-                    <div>
-                        <div class="contact-label pl">Lokalizacja</div>
-                        <div class="contact-label en">Location</div>
-                        <div class="contact-value">Otwock, Mazowieckie</div>
-                    </div>
+        <div class="window">
+            <div class="title-bar">
+                <div class="title-bar-text pl">Nowa wiadomość</div>
+                <div class="title-bar-text en">New message</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Minimize" tabindex="-1" aria-hidden="true"></button>
+                    <button aria-label="Maximize" tabindex="-1" aria-hidden="true"></button>
+                    <button aria-label="Close" tabindex="-1" aria-hidden="true"></button>
                 </div>
-
-                <div class="contact-item">
-                    <div class="contact-icon">💬</div>
-                    <div>
-                        <div class="contact-label">WhatsApp</div>
-                        <div class="contact-value"><a href="https://wa.me/qr/XUXUIKKPRFLRD1" target="_blank">Napisz na WhatsApp →</a></div>
-                    </div>
-                </div>
-
-                <div class="contact-item">
-                    <div class="contact-icon">💻</div>
-                    <div>
-                        <div class="contact-label">GitHub</div>
-                        <div class="contact-value"><a href="https://github.com/frizz000" target="_blank">github.com/frizz000</a></div>
-                    </div>
-                </div>
-
-                <div class="contact-item">
-                    <div class="contact-icon">💼</div>
-                    <div>
-                        <div class="contact-label">LinkedIn</div>
-                        <div class="contact-value"><a href="https://www.linkedin.com/in/piotr-ja%C5%82ocha" target="_blank">linkedin.com/in/piotr-jałocha</a></div>
-                    </div>
-                </div>
-
-                <div class="contact-item">
-                    <div class="contact-icon">🕐</div>
-                    <div>
-                        <div class="contact-label pl">Czas odpowiedzi</div>
-                        <div class="contact-label en">Response time</div>
-                        <div class="contact-value pl">Zazwyczaj tego samego dnia</div>
-                        <div class="contact-value en">Usually same day</div>
-                    </div>
-                </div>
-
             </div>
+            <div class="window-body">
+                <p class="section-sub pl">Masz pytania o korepetycje, inteligentny dom lub usługi IT? Napisz - odpiszę najszybciej jak mogę.</p>
+                <p class="section-sub en">Questions about tutoring, smart home, or IT services? Write to me - I'll reply as fast as I can.</p>
 
-            <form class="contact-form fade-up" id="contactForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="fname" class="pl">Imię *</label>
-                        <label for="fname" class="en">Name *</label>
-                        <input type="text" id="fname" name="name" required placeholder="Jan Kowalski">
+                <div class="contact-grid">
+                    <div class="contact-info">
+
+                        <div class="contact-item">
+                            <span class="contact-icon">📍</span>
+                            <div>
+                                <div class="contact-label pl">Lokalizacja</div>
+                                <div class="contact-label en">Location</div>
+                                <div class="contact-value">Otwock, Mazowieckie</div>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <span class="contact-icon">💬</span>
+                            <div>
+                                <div class="contact-label">WhatsApp</div>
+                                <div class="contact-value"><a href="https://wa.me/qr/XUXUIKKPRFLRD1" target="_blank">Napisz na WhatsApp →</a></div>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <span class="contact-icon">💻</span>
+                            <div>
+                                <div class="contact-label">GitHub</div>
+                                <div class="contact-value"><a href="https://github.com/frizz000" target="_blank">github.com/frizz000</a></div>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <span class="contact-icon">💼</span>
+                            <div>
+                                <div class="contact-label">LinkedIn</div>
+                                <div class="contact-value"><a href="https://www.linkedin.com/in/piotr-ja%C5%82ocha" target="_blank">linkedin.com/in/piotr-jałocha</a></div>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <span class="contact-icon">🕐</span>
+                            <div>
+                                <div class="contact-label pl">Czas odpowiedzi</div>
+                                <div class="contact-label en">Response time</div>
+                                <div class="contact-value pl">Zazwyczaj tego samego dnia</div>
+                                <div class="contact-value en">Usually same day</div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="form-group">
-                        <label for="femail" class="pl">Email *</label>
-                        <label for="femail" class="en">Email *</label>
-                        <input type="email" id="femail" name="email" required placeholder="jan@example.com">
-                    </div>
+
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="field-row-stacked">
+                                <label for="fname" class="pl">Imię *</label>
+                                <label for="fname" class="en">Name *</label>
+                                <input type="text" id="fname" name="name" required placeholder="Jan Kowalski">
+                            </div>
+                            <div class="field-row-stacked">
+                                <label for="femail" class="pl">Email *</label>
+                                <label for="femail" class="en">Email *</label>
+                                <input type="email" id="femail" name="email" required placeholder="jan@example.com">
+                            </div>
+                        </div>
+                        <div class="field-row-stacked">
+                            <label for="fsubject" class="pl">Temat</label>
+                            <label for="fsubject" class="en">Subject</label>
+                            <select id="fsubject" name="subject">
+                                <option value="" class="pl">Wybierz temat...</option>
+                                <option value="" class="en">Select topic...</option>
+                                <option value="korepetycje" class="pl">Korepetycje z informatyki</option>
+                                <option value="tutoring" class="en">IT Tutoring</option>
+                                <option value="smarthome" class="pl">Inteligentny dom</option>
+                                <option value="smarthome-en" class="en">Smart Home setup</option>
+                                <option value="it" class="pl">Usługi IT / serwer</option>
+                                <option value="it-en" class="en">IT services / server</option>
+                                <option value="strona" class="pl">Strona internetowa</option>
+                                <option value="website" class="en">Website development</option>
+                                <option value="inne" class="pl">Inne</option>
+                                <option value="other" class="en">Other</option>
+                            </select>
+                        </div>
+                        <div class="field-row-stacked">
+                            <label for="fmsg" class="pl">Wiadomość *</label>
+                            <label for="fmsg" class="en">Message *</label>
+                            <textarea id="fmsg" name="message" required placeholder="Opisz czego potrzebujesz..."></textarea>
+                        </div>
+                        <div id="formStatus" class="form-status"></div>
+                        <button type="submit" class="btn-xp btn-xp-primary">
+                            <span class="pl">Wyślij wiadomość →</span>
+                            <span class="en">Send message →</span>
+                        </button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="fsubject" class="pl">Temat</label>
-                    <label for="fsubject" class="en">Subject</label>
-                    <select id="fsubject" name="subject">
-                        <option value="" class="pl">Wybierz temat...</option>
-                        <option value="" class="en">Select topic...</option>
-                        <option value="korepetycje" class="pl">Korepetycje z informatyki</option>
-                        <option value="tutoring" class="en">IT Tutoring</option>
-                        <option value="smarthome" class="pl">Inteligentny dom</option>
-                        <option value="smarthome-en" class="en">Smart Home setup</option>
-                        <option value="it" class="pl">Usługi IT / serwer</option>
-                        <option value="it-en" class="en">IT services / server</option>
-                        <option value="strona" class="pl">Strona internetowa</option>
-                        <option value="website" class="en">Website development</option>
-                        <option value="inne" class="pl">Inne</option>
-                        <option value="other" class="en">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="fmsg" class="pl">Wiadomość *</label>
-                    <label for="fmsg" class="en">Message *</label>
-                    <textarea id="fmsg" name="message" required placeholder="Opisz czego potrzebujesz..."></textarea>
-                </div>
-                <div id="formStatus" class="form-status"></div>
-                <button type="submit" class="btn-primary">
-                    <span class="pl">Wyślij wiadomość →</span>
-                    <span class="en">Send message →</span>
-                </button>
-            </form>
+            </div>
         </div>
     </div>
 </section>
-<footer>
-    <p>
+<footer class="status-bar">
+    <p class="status-bar-field">
         <span class="pl">© 2026 Piotr Jałocha · Zbudowane z ☕ i </span>
         <span class="en">© 2026 Piotr Jałocha · Built with ☕ and </span>
         <a href="https://github.com/frizz000" target="_blank">GitHub</a>
-        · <span style="color: var(--green);">piotrjalocha.dev</span>
     </p>
+    <p class="status-bar-field">piotrjalocha.dev</p>
 </footer>
 
 <script src="js/main.js"></script>

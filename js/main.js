@@ -1,15 +1,28 @@
-// ─── THEME ───
+// ─── THEME (the three real XP Luna color schemes) ───
 const html = document.documentElement;
 const themeBtn = document.getElementById('themeToggle');
-const savedTheme = localStorage.getItem('theme') || 'dark';
+const themeOrder = ['blue', 'olive', 'silver'];
+const themeLabels = {
+    blue: { pl: 'Niebieski', en: 'Blue' },
+    olive: { pl: 'Oliwkowy', en: 'Olive Green' },
+    silver: { pl: 'Srebrny', en: 'Silver' }
+};
+
+function updateThemeTooltip() {
+    const theme = html.getAttribute('data-theme');
+    const lang = html.getAttribute('data-lang');
+    const label = themeLabels[theme][lang];
+    themeBtn.title = lang === 'pl' ? `Schemat kolorów: ${label} (kliknij, aby zmienić)` : `Color scheme: ${label} (click to change)`;
+}
+
+const savedTheme = themeOrder.includes(localStorage.getItem('theme')) ? localStorage.getItem('theme') : 'blue';
 html.setAttribute('data-theme', savedTheme);
-themeBtn.textContent = savedTheme === 'dark' ? '☀' : '☾';
 
 themeBtn.addEventListener('click', () => {
     const curr = html.getAttribute('data-theme');
-    const next = curr === 'dark' ? 'light' : 'dark';
+    const next = themeOrder[(themeOrder.indexOf(curr) + 1) % themeOrder.length];
     html.setAttribute('data-theme', next);
-    themeBtn.textContent = next === 'dark' ? '☀' : '☾';
+    updateThemeTooltip();
     localStorage.setItem('theme', next);
 });
 
@@ -18,6 +31,7 @@ const langBtn = document.getElementById('langToggle');
 const savedLang = localStorage.getItem('lang') || 'pl';
 html.setAttribute('data-lang', savedLang);
 langBtn.textContent = savedLang === 'pl' ? 'EN' : 'PL';
+updateThemeTooltip();
 
 langBtn.addEventListener('click', () => {
     const curr = html.getAttribute('data-lang');
@@ -25,6 +39,7 @@ langBtn.addEventListener('click', () => {
     html.setAttribute('data-lang', next);
     langBtn.textContent = next === 'pl' ? 'EN' : 'PL';
     localStorage.setItem('lang', next);
+    updateThemeTooltip();
 });
 
 // ─── MOBILE BURGER ───
@@ -36,17 +51,6 @@ burger.addEventListener('click', () => {
 navLinks.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => navLinks.classList.remove('open'));
 });
-
-// ─── SCROLL ANIMATIONS ───
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
 // ─── PROJECT MODALS ───
 const projectsData = {
@@ -83,8 +87,8 @@ const projectsData = {
         },
         tech: ['React', 'JavaScript', 'Supabase', 'Vercel'],
         note: {
-            pl: 'Repozytorium jest obecnie prywatne — projekt stanowi część mojej pracy magisterskiej.',
-            en: 'The repository is currently private — this project is part of my master\'s thesis.'
+            pl: 'Repozytorium jest obecnie prywatne, ponieważ projekt stanowi część mojej pracy magisterskiej.',
+            en: 'The repository is currently private, since this project is part of my master\'s thesis.'
         },
         links: [
             { label: { pl: 'Zobacz stronę →', en: 'View website →' }, url: 'https://calltime.pl' }
@@ -104,7 +108,7 @@ function renderModal(id) {
 
     const tagsHtml = p.tech.map(t => `<span class="tech-tag">${t}</span>`).join('');
     const linksHtml = p.links.map(l =>
-        `<a href="${l.url}" target="_blank" rel="noopener" class="btn-primary">
+        `<a href="${l.url}" target="_blank" rel="noopener" class="btn-xp btn-xp-primary">
             <span class="pl">${l.label.pl}</span>
             <span class="en">${l.label.en}</span>
         </a>`
