@@ -12,14 +12,12 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
     <a href="#hero" class="nav-logo">pj<span>.dev</span></a>
     <ul class="nav-links" id="navLinks">
         <li><a href="#about" class="pl">O mnie</a><a href="#about" class="en">About</a></li>
-        <li><a href="#services" class="pl">Usługi</a><a href="#services" class="en">Services</a></li>
+        <li><a href="#projects" class="pl">Projekty</a><a href="#projects" class="en">Projects</a></li>
         <li><a href="#contact" class="pl">Kontakt</a><a href="#contact" class="en">Contact</a></li>
-<!--        <li><a href="#homelab" class="pl">Homelab</a><a href="#homelab" class="en">Homelab</a></li>-->
     </ul>
     <div class="nav-controls">
         <button class="btn-icon" id="themeToggle" title="Toggle theme">☀</button>
@@ -30,7 +28,6 @@
     </div>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
     <div class="hero-inner">
         <div>
@@ -49,8 +46,8 @@
             <div class="hero-ctas">
                 <a href="#contact" class="btn-primary pl">Napisz do mnie →</a>
                 <a href="#contact" class="btn-primary en">Get in touch →</a>
-                <a href="#services" class="btn-secondary pl">Zobacz usługi</a>
-                <a href="#services" class="btn-secondary en">View services</a>
+                <a href="#projects" class="btn-secondary pl">Zobacz projekty</a>
+                <a href="#projects" class="btn-secondary en">View projects</a>
             </div>
         </div>
 
@@ -90,7 +87,6 @@
     </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about" class="section-pad">
     <div class="container">
         <div class="about-grid fade-up">
@@ -157,108 +153,85 @@
     </div>
 </section>
 
-<!-- SERVICES -->
-<section id="services" class="section-pad">
+<section id="projects" class="section-pad">
     <div class="container">
         <div class="fade-up">
-            <div class="section-label pl">Usługi</div>
-            <div class="section-label en">Services</div>
-            <h2 class="pl">W czym mogę <span class="accent">pomóc?</span></h2>
-            <h2 class="en">How can I <span class="accent">help?</span></h2>
-            <p class="section-sub pl">Oferuję zarówno korepetycje z informatyki dla uczniów, jak i usługi IT dla osób i firm szukających praktycznych rozwiązań technologicznych.</p>
-            <p class="section-sub en">I offer both IT tutoring for students, and IT services for individuals and businesses looking for practical tech solutions.</p>
+            <div class="section-label pl">Portfolio</div>
+            <div class="section-label en">Portfolio</div>
+            <h2 class="pl">Moje projekty & <span class="accent">Home Lab</span></h2>
+            <h2 class="en">My Projects & <span class="accent">Home Lab</span></h2>
+            <p class="section-sub pl">Wybrane realizacje łączące automatykę budynkową, inżynierię oprogramowania i infrastrukturę self-hosted. Kliknij kartę, aby zobaczyć szczegóły.</p>
+            <p class="section-sub en">Selected work combining building automation, software engineering and self-hosted infrastructure. Click a card to see details.</p>
         </div>
 
-        <div class="services-grid">
+        <div class="projects-grid">
 
-            <div class="service-card fade-up">
-                <div class="service-icon">📚</div>
-                <div class="service-title pl">Korepetycje z Informatyki</div>
-                <div class="service-title en">IT Tutoring</div>
-                <p class="service-desc pl">Przystępne zajęcia dla uczniów szkół podstawowych, licealistów i maturzystów. Online lub stacjonarnie w Otwocku.</p>
-                <p class="service-desc en">Clear lessons for primary and secondary school students. Online or in-person in Otwock.</p>
-                <ul class="service-items">
-                    <li class="pl">Nadrabianie zaległości, zadania domowe</li>
-                    <li class="en">Catching up, homework help</li>
-                    <li class="pl">Przygotowanie do matury (algorytmika, Excel, bazy danych)</li>
-                    <li class="en">Matura exam prep (algorithms, Excel, databases)</li>
-                    <li class="pl">Programowanie: Python, C#, Java</li>
-                    <li class="en">Programming: Python, C#, Java</li>
-                    <li class="pl">Luźna atmosfera, zero wykładów</li>
-                    <li class="en">Relaxed atmosphere, practical focus</li>
-                </ul>
-                <div class="service-price pl">Online · Otwock · Ustalana indywidualnie</div>
-                <div class="service-price en">Online · Otwock · Price on request</div>
-            </div>
+            <article class="project-card fade-up" data-project="homelab" tabindex="0" role="button" aria-haspopup="dialog">
+                <div class="project-icon">🏠</div>
+                <h3 class="project-title pl">Zaawansowany Home Lab i Automatyka Budynkowa</h3>
+                <h3 class="project-title en">Advanced Home Lab & Building Automation</h3>
+                <p class="project-desc pl">Kompletna infrastruktura oparta na Proxmox VE i Home Assistant, sterująca fizycznymi instalacjami domowymi.</p>
+                <p class="project-desc en">A complete infrastructure built on Proxmox VE and Home Assistant, controlling real physical home installations.</p>
+                <div class="project-tags">
+                    <span class="tech-tag">Proxmox</span>
+                    <span class="tech-tag">Home Assistant</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Sieci LAN</span>
+                    <span class="tech-tag">IoT</span>
+                </div>
+                <button class="project-btn" type="button" data-open-modal="homelab">
+                    <span class="pl">Zobacz szczegóły →</span>
+                    <span class="en">View details →</span>
+                </button>
+            </article>
 
-            <div class="service-card fade-up">
-                <div class="service-icon">🏠</div>
-                <div class="service-title pl">Inteligentny Dom</div>
-                <div class="service-title en">Smart Home</div>
-                <p class="service-desc pl">Kompleksowa instalacja i konfiguracja Home Assistant z automatyzacjami dopasowanymi do Twoich potrzeb.</p>
-                <p class="service-desc en">Full Home Assistant installation and configuration with automations tailored to your needs.</p>
-                <ul class="service-items">
-                    <li class="pl">Instalacja i konfiguracja Home Assistant</li>
-                    <li class="en">Home Assistant installation & config</li>
-                    <li class="pl">Integracja urządzeń Zigbee i WiFi</li>
-                    <li class="en">Zigbee and WiFi device integration</li>
-                    <li class="pl">Automatyzacje oświetlenia, ogrzewania, rolet</li>
-                    <li class="en">Lighting, heating, blinds automation</li>
-                    <li class="pl">Bezpieczny zdalny dostęp (Cloudflare/Tailscale)</li>
-                    <li class="en">Secure remote access (Cloudflare/Tailscale)</li>
-                </ul>
-                <div class="service-price pl">Wycena indywidualna · Okolice Otwocka</div>
-                <div class="service-price en">Custom quote · Otwock area</div>
-            </div>
+            <article class="project-card fade-up" data-project="talenttrop" tabindex="0" role="button" aria-haspopup="dialog">
+                <div class="project-icon">🎯</div>
+                <h3 class="project-title pl">Talent Trop - Skauting AI</h3>
+                <h3 class="project-title en">Talent Trop - AI Scouting</h3>
+                <p class="project-desc pl">Platforma do skautingu sportowego z analizą danych opartą na modelach językowych (LLM).</p>
+                <p class="project-desc en">A sports scouting platform with data analysis powered by large language models (LLM).</p>
+                <div class="project-tags">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Vercel</span>
+                    <span class="tech-tag">Supabase</span>
+                    <span class="tech-tag">LLM (ChatGPT/Claude)</span>
+                </div>
+                <button class="project-btn" type="button" data-open-modal="talenttrop">
+                    <span class="pl">Zobacz szczegóły →</span>
+                    <span class="en">View details →</span>
+                </button>
+            </article>
 
-            <div class="service-card fade-up">
-                <div class="service-icon">🖥️</div>
-                <div class="service-title pl">Usługi IT</div>
-                <div class="service-title en">IT Services</div>
-                <p class="service-desc pl">Pomoc techniczna, konfiguracja serwerów, sieci domowych, tworzenie stron internetowych i rozwiązania backupowe.</p>
-                <p class="service-desc en">Tech support, server setup, home networking, website development and backup solutions.</p>
-                <ul class="service-items">
-                    <li class="pl">Tworzenie stron internetowych</li>
-                    <li class="en">Website development</li>
-                    <li class="pl">Konfiguracja Proxmox / VPS / serwera domowego</li>
-                    <li class="en">Proxmox / VPS / home server setup</li>
-                    <li class="pl">Sieci domowe (Cloudflare, VPN, DNS)</li>
-                    <li class="en">Home networking (Cloudflare, VPN, DNS)</li>
-                    <li class="pl">Backup i bezpieczeństwo danych</li>
-                    <li class="en">Backup & data security</li>
-                    <li class="pl">Ogólna pomoc techniczna</li>
-                    <li class="en">General tech support</li>
-                </ul>
-                <div class="service-price pl">Zdalne lub stacjonarnie · Wycena indywidualna</div>
-                <div class="service-price en">Remote or on-site · Custom quote</div>
-            </div>
+            <article class="project-card fade-up" data-project="calltime" tabindex="0" role="button" aria-haspopup="dialog">
+                <div class="project-icon">📅</div>
+                <h3 class="project-title pl">Calltime - Event Management PWA</h3>
+                <h3 class="project-title en">Calltime - Event Management PWA</h3>
+                <p class="project-desc pl">Aplikacja wielodostępna (PWA) optymalizująca logistykę masowych wydarzeń.</p>
+                <p class="project-desc en">A multi-tenant PWA app streamlining logistics for large-scale events.</p>
+                <div class="project-tags">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Supabase</span>
+                    <span class="tech-tag">Vercel</span>
+                </div>
+                <button class="project-btn" type="button" data-open-modal="calltime">
+                    <span class="pl">Zobacz szczegóły →</span>
+                    <span class="en">View details →</span>
+                </button>
+            </article>
 
         </div>
     </div>
 </section>
 
-<!-- CTA STRIP -->
-<section id="cta-strip">
-    <div class="cta-inner fade-up">
-        <div class="cta-text">
-            <h3 class="pl">Brzmi <span class="accent">interesująco?</span></h3>
-            <h3 class="en">Sounds <span class="accent">interesting?</span></h3>
-            <p class="pl">Najszybciej odpisuję na WhatsAppie. Możesz też wypełnić formularz poniżej.</p>
-            <p class="en">I reply fastest on WhatsApp. You can also fill in the form below.</p>
-        </div>
-        <div class="cta-buttons">
-            <a href="https://wa.me/qr/XUXUIKKPRFLRD1" target="_blank" class="btn-wa">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                <span class="pl">WhatsApp</span>
-                <span class="en">WhatsApp</span>
-            </a>
-            <a href="#contact" class="btn-secondary pl">Formularz kontaktowy</a>
-            <a href="#contact" class="btn-secondary en">Contact form</a>
-        </div>
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" id="modalBox">
+        <button class="modal-close" id="modalClose" type="button" aria-label="Close">✕</button>
+        <div id="modalBody"></div>
     </div>
-</section>
+</div>
 
-<!-- CONTACT -->
 <section id="contact" class="section-pad">
     <div class="container">
         <div class="fade-up">
@@ -363,112 +336,6 @@
         </div>
     </div>
 </section>
-
-<!--&lt;!&ndash; HOMELAB &ndash;&gt;-->
-<!--<section id="homelab" class="section-pad">-->
-<!--    <div class="container">-->
-<!--        <div class="fade-up">-->
-<!--            <div class="section-label">Homelab</div>-->
-<!--            <h2 class="pl">Mój <span class="accent">system</span></h2>-->
-<!--            <h2 class="en">My <span class="accent">setup</span></h2>-->
-<!--            <p class="section-sub pl">Własna infrastruktura, którą buduję i utrzymuję - od serwera Proxmox po automatyzacje smart home. Wszystko bezpieczne, monitorowane i dostępne zdalnie.</p>-->
-<!--            <p class="section-sub en">My own infrastructure that I build and maintain - from the Proxmox server to smart home automations. Secure, monitored, and remotely accessible.</p>-->
-<!--        </div>-->
-
-<!--        <div class="homelab-grid">-->
-
-<!--            <div class="homelab-diagram fade-up">-->
-<!--                <div class="diagram-title">Live Architecture</div>-->
-
-<!--                <div class="diagram-layer">-->
-<!--                    <div class="diagram-layer-label">Internet → Cloudflare</div>-->
-<!--                    <div class="diagram-nodes">-->
-<!--                        <span class="diagram-node node-orange">CF Tunnels</span>-->
-<!--                        <span class="diagram-node node-orange">CF Workers</span>-->
-<!--                        <span class="diagram-node node-orange">CF Access</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="diagram-arrow">↓ HTTPS tunnel</div>-->
-
-<!--                <div class="diagram-layer">-->
-<!--                    <div class="diagram-layer-label">Proxmox 8.4 — home-server</div>-->
-<!--                    <div class="diagram-nodes">-->
-<!--                        <span class="diagram-node node-green">HAOS 17.0</span>-->
-<!--                        <span class="diagram-node node-blue">NAS-pliki</span>-->
-<!--                        <span class="diagram-node node-blue">monitoring-dns</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="diagram-arrow">↕ Tailscale VPN</div>-->
-
-<!--                <div class="diagram-layer">-->
-<!--                    <div class="diagram-layer-label">Sieć prywatna</div>-->
-<!--                    <div class="diagram-nodes">-->
-<!--                        <span class="diagram-node node-gray">Desktop</span>-->
-<!--                        <span class="diagram-node node-gray">Laptop</span>-->
-<!--                        <span class="diagram-node node-gray">VPS</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="diagram-arrow">↓ Zigbee2MQTT</div>-->
-
-<!--                <div class="diagram-layer">-->
-<!--                    <div class="diagram-layer-label">Smart Home Devices</div>-->
-<!--                    <div class="diagram-nodes">-->
-<!--                        <span class="diagram-node node-green">Światła</span>-->
-<!--                        <span class="diagram-node node-green">Rolety</span>-->
-<!--                        <span class="diagram-node node-green">Sensory</span>-->
-<!--                        <span class="diagram-node node-green">TV</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="homelab-features fade-up">-->
-
-<!--                <div class="feature-row">-->
-<!--                    <div class="feature-icon">🖥️</div>-->
-<!--                    <div>-->
-<!--                        <div class="feature-title">Proxmox VE 8.4</div>-->
-<!--                        <p class="feature-desc pl">Serwer domowy z trzema kontenerami LXC: Home Assistant OS, NAS i monitoring DNS. Wszystko na jednym fizycznym hoście.</p>-->
-<!--                        <p class="feature-desc en">Home server with three LXC containers: Home Assistant OS, NAS, and DNS monitoring. Everything on one physical host.</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="feature-row">-->
-<!--                    <div class="feature-icon">🏠</div>-->
-<!--                    <div>-->
-<!--                        <div class="feature-title">Home Assistant 17.0</div>-->
-<!--                        <p class="feature-desc pl">Pełna automatyzacja domu: salon, sypialnia, kuchnia, toaleta, przedpokój. Zigbee2MQTT, rolety, czujniki, termostat.</p>-->
-<!--                        <p class="feature-desc en">Full home automation: living room, bedroom, kitchen, bathroom, hallway. Zigbee2MQTT, blinds, sensors, thermostat.</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="feature-row">-->
-<!--                    <div class="feature-icon">🔒</div>-->
-<!--                    <div>-->
-<!--                        <div class="feature-title pl">Bezpieczny dostęp zdalny</div>-->
-<!--                        <div class="feature-title en">Secure remote access</div>-->
-<!--                        <p class="feature-desc pl">Cloudflare Tunnels + Cloudflare Access na piotrjalocha.dev bez otwartych portów. Tailscale VPN dla urządzeń prywatnych.</p>-->
-<!--                        <p class="feature-desc en">Cloudflare Tunnels + Access on piotrjalocha.dev, no open ports. Tailscale VPN for private devices.</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="feature-row">-->
-<!--                    <div class="feature-icon">📡</div>-->
-<!--                    <div>-->
-<!--                        <div class="feature-title">AdGuard + monitoring DNS</div>-->
-<!--                        <p class="feature-desc pl">Blokowanie reklam na poziomie sieci, własny resolver DNS, monitoring uptime wszystkich usług.</p>-->
-<!--                        <p class="feature-desc en">Network-level ad blocking, custom DNS resolver, uptime monitoring for all services.</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
-
-<!-- FOOTER -->
 <footer>
     <p>
         <span class="pl">© 2026 Piotr Jałocha · Zbudowane z ☕ i </span>
