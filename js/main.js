@@ -12,19 +12,263 @@ langBtn.addEventListener('click', () => {
     html.setAttribute('data-lang', next);
     langBtn.textContent = next === 'pl' ? 'EN' : 'PL';
     localStorage.setItem('lang', next);
+    refreshTaskbarLabels();
 });
 
-// ─── MOBILE BURGER ───
-const burger = document.getElementById('burger');
-const navLinks = document.getElementById('navLinks');
-burger.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-});
-navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => navLinks.classList.remove('open'));
+// ─── WINDOW MANAGER ───
+const desktop = document.getElementById('desktop');
+const taskbarApps = document.getElementById('taskbarApps');
+
+const APP_TITLES = {
+    welcome: { pl: '📝 Witaj.txt', en: '📝 Witaj.txt' },
+    terminal: { pl: '💻 piotr@homelab', en: '💻 piotr@homelab' },
+    about: { pl: '📄 O mnie', en: '📄 About me' },
+    projects: { pl: '📁 Projekty', en: '📁 Projects' },
+    contact: { pl: '✉️ Kontakt', en: '✉️ Contact' },
+    saper: { pl: '💣 Saper', en: '💣 Minesweeper' },
+    mycomputer: { pl: '🖥️ Mój Komputer', en: '🖥️ My Computer' },
+    trash: { pl: '🗑️ Kosz', en: '🗑️ Recycle Bin' }
+};
+
+const DEFAULT_POS = {
+    welcome: { left: '13%', top: '7%' },
+    terminal: { left: '46%', top: '10%' },
+    about: { left: '15%', top: '14%' },
+    projects: { left: '18%', top: '10%' },
+    contact: { left: '20%', top: '11%' },
+    saper: { left: '32%', top: '15%' },
+    mycomputer: { left: '24%', top: '18%' },
+    trash: { left: '22%', top: '50%' }
+};
+
+const windows = {};
+document.querySelectorAll('.os-window').forEach(el => {
+    windows[el.dataset.app] = { el, taskbarBtn: null, minimized: false, positioned: false };
 });
 
-// ─── PROJECT MODALS ───
+let zTop = 10;
+let openCount = 0;
+let activeApp = null;
+
+function isMobile() {
+    return window.matchMedia('(max-width: 900px)').matches;
+}
+
+function placeWindow(app) {
+    const w = windows[app];
+    if (w.positioned || isMobile()) return;
+    const pos = DEFAULT_POS[app] || { left: '10%', top: '10%' };
+    const cascade = (openCount % 6) * 22;
+    w.el.style.left = `calc(${pos.left} + ${cascade}px)`;
+    w.el.style.top = `calc(${pos.top} + ${cascade}px)`;
+    w.positioned = true;
+}
+
+function updateTaskbarButtonLabel(btn, app) {
+    const lang = html.getAttribute('data-lang');
+    const t = APP_TITLES[app];
+    btn.textContent = t ? t[lang] : app;
+}
+
+function refreshTaskbarLabels() {
+    document.querySelectorAll('.taskbar-app-btn').forEach(btn => updateTaskbarButtonLabel(btn, btn.dataset.app));
+}
+
+function createTaskbarButton(app) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'taskbar-app-btn';
+    btn.dataset.app = app;
+    updateTaskbarButtonLabel(btn, app);
+    btn.addEventListener('click', () => {
+        if (activeApp === app && !windows[app].minimized) {
+            minimizeWindow(app);
+        } else {
+            focusWindow(app);
+        }
+    });
+    taskbarApps.appendChild(btn);
+    return btn;
+}
+
+function openWindow(app) {
+    const w = windows[app];
+    if (!w) return;
+    openCount++;
+    placeWindow(app);
+    w.el.classList.add('open');
+    w.minimized = false;
+    if (!w.taskbarBtn) w.taskbarBtn = createTaskbarButton(app);
+    focusWindow(app);
+    if (app === 'saper') msBuildBoard();
+}
+
+function closeWindow(app) {
+    const w = windows[app];
+    if (!w) return;
+    w.el.classList.remove('open', 'maximized');
+    if (w.taskbarBtn) { w.taskbarBtn.remove(); w.taskbarBtn = null; }
+    w.minimized = false;
+    if (activeApp === app) activeApp = null;
+    if (app === 'saper') clearInterval(msTimerInterval);
+}
+
+function minimizeWindow(app) {
+    const w = windows[app];
+    if (!w) return;
+    w.el.classList.remove('open');
+    w.minimized = true;
+    if (w.taskbarBtn) w.taskbarBtn.classList.remove('active');
+    if (activeApp === app) activeApp = null;
+}
+
+function focusWindow(app) {
+    const w = windows[app];
+    if (!w) return;
+    if (w.minimized) {
+        w.el.classList.add('open');
+        w.minimized = false;
+    }
+    zTop += 1;
+    w.el.style.zIndex = zTop;
+    activeApp = app;
+    document.querySelectorAll('.taskbar-app-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.app === app));
+}
+
+function toggleMaximize(app) {
+    windows[app].el.classList.toggle('maximized');
+}
+
+// window-chrome buttons (minimize / maximize / close) via delegation
+document.addEventListener('click', (e) => {
+    const actionBtn = e.target.closest('[data-win-action]');
+    if (!actionBtn) return;
+    const winEl = actionBtn.closest('.os-window');
+    if (!winEl) return;
+    const app = winEl.dataset.app;
+    const action = actionBtn.dataset.winAction;
+    if (action === 'close') closeWindow(app);
+    else if (action === 'minimize') minimizeWindow(app);
+    else if (action === 'maximize') toggleMaximize(app);
+});
+
+// desktop icons + any button that should open/focus a window (Witaj.txt CTAs, Start Menu)
+document.querySelectorAll('.desktop-icon, [data-open-app]').forEach(el => {
+    const app = el.dataset.app || el.dataset.openApp;
+    el.addEventListener('click', () => {
+        openWindow(app);
+        closeStartMenu();
+    });
+});
+
+// ─── DRAG ───
+document.querySelectorAll('.os-window').forEach(winEl => {
+    const titleBar = winEl.querySelector('.title-bar');
+    let dragging = false, startX = 0, startY = 0, startLeft = 0, startTop = 0;
+
+    titleBar.addEventListener('mousedown', (e) => {
+        if (isMobile() || winEl.classList.contains('maximized')) return;
+        if (e.target.closest('.title-bar-controls')) return;
+        dragging = true;
+        const rect = winEl.getBoundingClientRect();
+        startX = e.clientX;
+        startY = e.clientY;
+        startLeft = rect.left;
+        startTop = rect.top;
+        focusWindow(winEl.dataset.app);
+        e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!dragging) return;
+        const desktopRect = desktop.getBoundingClientRect();
+        let newLeft = startLeft + (e.clientX - startX);
+        let newTop = startTop + (e.clientY - startY);
+        newLeft = Math.max(0, Math.min(newLeft, desktopRect.width - winEl.offsetWidth));
+        newTop = Math.max(0, Math.min(newTop, desktopRect.height - 40));
+        winEl.style.left = `${newLeft}px`;
+        winEl.style.top = `${newTop}px`;
+    });
+
+    window.addEventListener('mouseup', () => { dragging = false; });
+});
+
+// ─── START MENU ───
+const startBtn = document.getElementById('startBtn');
+const startMenu = document.getElementById('startMenu');
+
+function openStartMenu() {
+    startMenu.classList.add('open');
+    startMenu.setAttribute('aria-hidden', 'false');
+    startBtn.classList.add('open');
+    startBtn.setAttribute('aria-expanded', 'true');
+}
+
+function closeStartMenu() {
+    startMenu.classList.remove('open');
+    startMenu.setAttribute('aria-hidden', 'true');
+    startBtn.classList.remove('open');
+    startBtn.setAttribute('aria-expanded', 'false');
+}
+
+startBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (startMenu.classList.contains('open')) closeStartMenu();
+    else openStartMenu();
+});
+
+document.addEventListener('click', (e) => {
+    if (startMenu.classList.contains('open') && !startMenu.contains(e.target) && e.target !== startBtn) {
+        closeStartMenu();
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && startMenu.classList.contains('open')) closeStartMenu();
+});
+
+// ─── LOGOUT (Start Menu joke item) ───
+const logoutBtn = document.getElementById('logoutBtn');
+const logoutOverlay = document.getElementById('logoutOverlay');
+
+function resetDesktop() {
+    Object.keys(windows).forEach(app => closeWindow(app));
+    openCount = 0;
+    Object.values(windows).forEach(w => {
+        w.positioned = false;
+        w.el.style.left = '';
+        w.el.style.top = '';
+        w.el.style.zIndex = '';
+        w.el.classList.remove('maximized');
+    });
+    openWindow('welcome');
+    openWindow('terminal');
+}
+
+logoutBtn.addEventListener('click', () => {
+    closeStartMenu();
+    logoutOverlay.classList.add('open');
+    logoutOverlay.setAttribute('aria-hidden', 'false');
+    setTimeout(() => {
+        resetDesktop();
+        logoutOverlay.classList.remove('open');
+        logoutOverlay.setAttribute('aria-hidden', 'true');
+    }, 1800);
+});
+
+// ─── TRAY CLOCK ───
+const trayClock = document.getElementById('trayClock');
+function updateClock() {
+    trayClock.textContent = new Date().toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' });
+}
+updateClock();
+setInterval(updateClock, 30000);
+
+// ─── DEFAULT-OPEN WINDOWS ───
+openWindow('welcome');
+openWindow('terminal');
+
+// ─── PROJECT DETAILS MODAL ───
 const projectsData = {
     homelab: {
         icon: '🏠',
@@ -69,7 +313,6 @@ const projectsData = {
 };
 
 const modalOverlay = document.getElementById('modalOverlay');
-const modalBox = document.getElementById('modalBox');
 const modalBody = document.getElementById('modalBody');
 const modalClose = document.getElementById('modalClose');
 let lastFocusedEl = null;
@@ -106,14 +349,12 @@ function openModal(id) {
     renderModal(id);
     modalOverlay.classList.add('open');
     modalOverlay.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
     modalClose.focus();
 }
 
 function closeModal() {
     modalOverlay.classList.remove('open');
     modalOverlay.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
     if (lastFocusedEl) lastFocusedEl.focus();
 }
 
@@ -128,7 +369,7 @@ document.querySelectorAll('.project-card').forEach(card => {
     });
 });
 
-document.querySelectorAll('.project-btn').forEach(btn => {
+document.querySelectorAll('[data-open-modal]').forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.stopPropagation();
         openModal(btn.dataset.openModal);
@@ -260,9 +501,6 @@ const msGridEl = document.getElementById('msGrid');
 const msMineCountEl = document.getElementById('msMineCount');
 const msTimerEl = document.getElementById('msTimer');
 const msFaceEl = document.getElementById('msFace');
-const minesweeperOverlay = document.getElementById('minesweeperOverlay');
-const minesweeperBtn = document.getElementById('minesweeperBtn');
-const minesweeperClose = document.getElementById('minesweeperClose');
 
 function msIndex(r, c) { return r * MS_COLS + c; }
 function msCellEl(i) { return msGridEl.children[i]; }
@@ -392,24 +630,3 @@ function msEndGame(won) {
 }
 
 msFaceEl.addEventListener('click', msBuildBoard);
-
-function openMinesweeper() {
-    msBuildBoard();
-    minesweeperOverlay.classList.add('open');
-    minesweeperOverlay.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeMinesweeper() {
-    minesweeperOverlay.classList.remove('open');
-    minesweeperOverlay.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    clearInterval(msTimerInterval);
-}
-
-minesweeperBtn.addEventListener('click', openMinesweeper);
-minesweeperClose.addEventListener('click', closeMinesweeper);
-minesweeperOverlay.addEventListener('click', (e) => { if (e.target === minesweeperOverlay) closeMinesweeper(); });
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && minesweeperOverlay.classList.contains('open')) closeMinesweeper();
-});
