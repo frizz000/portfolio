@@ -265,8 +265,11 @@ updateClock();
 setInterval(updateClock, 30000);
 
 // ─── DEFAULT-OPEN WINDOWS ───
-openWindow('welcome');
+// terminal opens first so welcome ends up focused/on top — matters most on
+// mobile, where the two windows are fully maximized and stacked instead of
+// cascaded side by side.
 openWindow('terminal');
+openWindow('welcome');
 
 // ─── PROJECT DETAILS MODAL ───
 const projectsData = {

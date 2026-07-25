@@ -7,40 +7,122 @@
     <meta name="description" content="Inżynier informatyki (PJATK), marketing sportowy, pasjonat smart home. Tworzenie stron, konfiguracja Home Assistant, Proxmox, sieci domowe.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='8' fill='%230a58f7'/><text x='50' y='68' font-family='Tahoma,Arial,sans-serif' font-size='48' font-weight='bold' fill='white' text-anchor='middle'>pj</text></svg>">
     <link rel="stylesheet" href="https://unpkg.com/xp.css/dist/XP.css">
-    <link rel="stylesheet" href="css/style.css?v=4">
+    <link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
+
+<!-- ─── ICON SPRITE (Luna-style desktop / start-menu icons) ─── -->
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <defs>
+        <linearGradient id="gradPaper" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff"/>
+            <stop offset="1" stop-color="#e9ecef"/>
+        </linearGradient>
+        <linearGradient id="gradFolderBack" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffdd7a"/>
+            <stop offset="1" stop-color="#e6a622"/>
+        </linearGradient>
+        <linearGradient id="gradFolderFront" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffe89c"/>
+            <stop offset="0.5" stop-color="#ffc94d"/>
+            <stop offset="1" stop-color="#f5a623"/>
+        </linearGradient>
+        <linearGradient id="gradEnvelope" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff"/>
+            <stop offset="1" stop-color="#dbe7f8"/>
+        </linearGradient>
+        <radialGradient id="gradBomb" cx="0.35" cy="0.3" r="0.85">
+            <stop offset="0" stop-color="#5c5c5c"/>
+            <stop offset="0.55" stop-color="#1a1a1a"/>
+            <stop offset="1" stop-color="#000000"/>
+        </radialGradient>
+        <linearGradient id="gradMonBody" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fbfbfb"/>
+            <stop offset="1" stop-color="#bdbdbd"/>
+        </linearGradient>
+        <linearGradient id="gradMonScreen" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#9dd0ff"/>
+            <stop offset="1" stop-color="#1948b0"/>
+        </linearGradient>
+        <linearGradient id="gradBin" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#eef1f4"/>
+            <stop offset="1" stop-color="#a3a9af"/>
+        </linearGradient>
+
+        <symbol id="icon-notepad" viewBox="0 0 32 32">
+            <path d="M7 3h13l5 5v21H7z" fill="url(#gradPaper)" stroke="#8a8a8a" stroke-width="0.6"/>
+            <path d="M20 3l5 5h-5z" fill="#d6d6d6" stroke="#8a8a8a" stroke-width="0.6"/>
+            <rect x="10" y="13" width="13" height="1.6" fill="#3a6ea5"/>
+            <rect x="10" y="17" width="13" height="1.6" fill="#3a6ea5"/>
+            <rect x="10" y="21" width="9" height="1.6" fill="#3a6ea5"/>
+            <rect x="10" y="25" width="12" height="1.6" fill="#e0a02c"/>
+        </symbol>
+
+        <symbol id="icon-folder" viewBox="0 0 32 32">
+            <path d="M3 9h10l2 -2.5h12a2 2 0 0 1 2 2V12H3z" fill="url(#gradFolderBack)" stroke="#a8790f" stroke-width="0.5"/>
+            <path d="M3 12h26a2 2 0 0 1 2 2l-2 12.5a2 2 0 0 1 -2 1.8H5a2 2 0 0 1 -2 -1.8z" fill="url(#gradFolderFront)" stroke="#a8790f" stroke-width="0.5"/>
+        </symbol>
+
+        <symbol id="icon-mail" viewBox="0 0 32 32">
+            <rect x="2" y="8" width="28" height="18" rx="2" fill="url(#gradEnvelope)" stroke="#3a6ea5" stroke-width="1"/>
+            <path d="M2.5 8.5L16 18l13.5 -9.5" fill="none" stroke="#3a6ea5" stroke-width="1.3"/>
+        </symbol>
+
+        <symbol id="icon-bomb" viewBox="0 0 32 32">
+            <circle cx="16" cy="19" r="11" fill="url(#gradBomb)"/>
+            <path d="M17 8c1 -3 4 -4 6 -3" stroke="#6b6b6b" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+            <circle cx="23.5" cy="4.5" r="2" fill="#ffcc33"/>
+            <circle cx="12" cy="15" r="2.4" fill="#ffffff" opacity="0.35"/>
+        </symbol>
+
+        <symbol id="icon-monitor" viewBox="0 0 32 32">
+            <rect x="3" y="4" width="26" height="18" rx="2" fill="url(#gradMonBody)" stroke="#8a8a8a" stroke-width="1"/>
+            <rect x="6" y="7" width="20" height="12" fill="url(#gradMonScreen)"/>
+            <rect x="12" y="23" width="8" height="3" fill="#c9c9c9"/>
+            <rect x="9" y="26.5" width="14" height="2.4" rx="1" fill="#b7b7b7"/>
+        </symbol>
+
+        <symbol id="icon-bin" viewBox="0 0 32 32">
+            <rect x="13" y="4" width="6" height="2.4" rx="1" fill="#b9bec4"/>
+            <rect x="7" y="7.5" width="18" height="3" rx="1" fill="#c3c8cd" stroke="#7f858c" stroke-width="0.6"/>
+            <path d="M9 11h14l-1.4 16.2a2 2 0 0 1 -2 1.8h-7.2a2 2 0 0 1 -2 -1.8z" fill="url(#gradBin)" stroke="#7f858c" stroke-width="1"/>
+            <line x1="13.2" y1="14" x2="13.9" y2="25" stroke="#7f858c" stroke-width="1"/>
+            <line x1="16" y1="14" x2="16" y2="25" stroke="#7f858c" stroke-width="1"/>
+            <line x1="18.8" y1="14" x2="18.1" y2="25" stroke="#7f858c" stroke-width="1"/>
+        </symbol>
+    </defs>
+</svg>
 
 <div id="desktop">
 
     <div class="desktop-icons">
         <button class="desktop-icon" data-app="about" type="button">
-            <span class="icon-glyph">📄</span>
+            <span class="icon-glyph"><svg class="icon-svg" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-notepad"></use></svg></span>
             <span class="icon-label pl">O mnie</span>
             <span class="icon-label en">About me</span>
         </button>
         <button class="desktop-icon" data-app="projects" type="button">
-            <span class="icon-glyph">📁</span>
+            <span class="icon-glyph"><svg class="icon-svg" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-folder"></use></svg></span>
             <span class="icon-label pl">Projekty</span>
             <span class="icon-label en">Projects</span>
         </button>
         <button class="desktop-icon" data-app="contact" type="button">
-            <span class="icon-glyph">✉️</span>
+            <span class="icon-glyph"><svg class="icon-svg" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-mail"></use></svg></span>
             <span class="icon-label pl">Kontakt</span>
             <span class="icon-label en">Contact</span>
         </button>
         <button class="desktop-icon" data-app="saper" type="button">
-            <span class="icon-glyph">💣</span>
+            <span class="icon-glyph"><svg class="icon-svg" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-bomb"></use></svg></span>
             <span class="icon-label pl">Saper</span>
             <span class="icon-label en">Minesweeper</span>
         </button>
         <button class="desktop-icon" data-app="mycomputer" type="button">
-            <span class="icon-glyph">🖥️</span>
+            <span class="icon-glyph"><svg class="icon-svg" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-monitor"></use></svg></span>
             <span class="icon-label pl">Mój Komputer</span>
             <span class="icon-label en">My Computer</span>
         </button>
         <button class="desktop-icon" data-app="trash" type="button">
-            <span class="icon-glyph">🗑️</span>
+            <span class="icon-glyph"><svg class="icon-svg" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-bin"></use></svg></span>
             <span class="icon-label pl">Kosz</span>
             <span class="icon-label en">Recycle Bin</span>
         </button>
@@ -520,7 +602,19 @@
     <div class="taskbar-divider"></div>
     <div class="taskbar-apps" id="taskbarApps"></div>
     <div class="tray">
-        <button class="btn-xp" id="langToggle">EN</button>
+        <button type="button" id="langToggle">EN</button>
+        <span class="tray-sep" aria-hidden="true"></span>
+        <svg class="tray-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M1 6h2.4L7 3v10L3.4 10H1z" fill="#fff"/>
+            <path d="M9.2 5.2a4 4 0 0 1 0 5.6" stroke="#fff" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+            <path d="M10.8 3.4a6.6 6.6 0 0 1 0 9.2" stroke="#fff" stroke-width="1.1" fill="none" stroke-linecap="round" opacity="0.75"/>
+        </svg>
+        <svg class="tray-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <rect x="1" y="10.5" width="2.4" height="3.5" fill="#fff" opacity="0.55"/>
+            <rect x="4.2" y="8.5" width="2.4" height="5.5" fill="#fff" opacity="0.75"/>
+            <rect x="7.4" y="6" width="2.4" height="8" fill="#fff"/>
+            <rect x="10.6" y="3" width="2.4" height="11" fill="#fff" opacity="0.9"/>
+        </svg>
         <span class="tray-clock" id="trayClock"></span>
     </div>
 </div>
@@ -531,18 +625,24 @@
         <span>🧑‍💻</span>
         <span>Piotr Jałocha<small>pj.dev</small></span>
     </div>
-    <ul class="start-menu-list">
-        <li><button type="button" data-open-app="about">📄 <span class="pl">O mnie</span><span class="en">About me</span></button></li>
-        <li><button type="button" data-open-app="projects">📁 <span class="pl">Projekty</span><span class="en">Projects</span></button></li>
-        <li><button type="button" data-open-app="contact">✉️ <span class="pl">Kontakt</span><span class="en">Contact</span></button></li>
-        <li><button type="button" data-open-app="saper">💣 <span class="pl">Saper</span><span class="en">Minesweeper</span></button></li>
-        <li><button type="button" data-open-app="mycomputer">🖥️ <span class="pl">Mój Komputer</span><span class="en">My Computer</span></button></li>
-        <li><button type="button" data-open-app="trash">🗑️ <span class="pl">Kosz</span><span class="en">Recycle Bin</span></button></li>
-        <li class="divider"></li>
-        <li><a href="https://github.com/frizz000" target="_blank" rel="noopener">💻 GitHub</a></li>
-        <li class="divider"></li>
-        <li><button type="button" id="logoutBtn">🚪 <span class="pl">Wyloguj</span><span class="en">Log off</span></button></li>
-    </ul>
+    <div class="start-menu-body">
+        <ul class="start-menu-list start-menu-col-left">
+            <li><button type="button" data-open-app="about"><svg class="menu-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-notepad"></use></svg> <span class="pl">O mnie</span><span class="en">About me</span></button></li>
+            <li><button type="button" data-open-app="projects"><svg class="menu-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-folder"></use></svg> <span class="pl">Projekty</span><span class="en">Projects</span></button></li>
+            <li><button type="button" data-open-app="contact"><svg class="menu-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-mail"></use></svg> <span class="pl">Kontakt</span><span class="en">Contact</span></button></li>
+            <li class="divider"></li>
+            <li><button type="button" data-open-app="saper"><svg class="menu-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-bomb"></use></svg> <span class="pl">Saper</span><span class="en">Minesweeper</span></button></li>
+        </ul>
+        <ul class="start-menu-list start-menu-col-right">
+            <li><button type="button" data-open-app="mycomputer"><svg class="menu-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-monitor"></use></svg> <span class="pl">Mój Komputer</span><span class="en">My Computer</span></button></li>
+            <li><button type="button" data-open-app="trash"><svg class="menu-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-bin"></use></svg> <span class="pl">Kosz</span><span class="en">Recycle Bin</span></button></li>
+            <li class="divider"></li>
+            <li><a href="https://github.com/frizz000" target="_blank" rel="noopener">💻 GitHub</a></li>
+        </ul>
+    </div>
+    <div class="start-menu-footer">
+        <button type="button" id="logoutBtn">🚪 <span class="pl">Wyloguj</span><span class="en">Log off</span></button>
+    </div>
 </div>
 
 <!-- ─── LOGOUT GAG ─── -->
@@ -568,6 +668,6 @@
     </div>
 </div>
 
-<script src="js/main.js?v=4"></script>
+<script src="js/main.js?v=5"></script>
 </body>
 </html>

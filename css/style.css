@@ -88,12 +88,6 @@ h1, h2, h3, p, ul, fieldset, legend { margin: 0; }
 
 .btn-xp-primary { font-weight: bold; }
 
-#langToggle {
-    padding: 0.35rem 0.6rem;
-    font-size: 0.72rem;
-    min-width: 0;
-}
-
 /* ─── GENERIC WINDOW HELPERS ─── */
 .window { width: 100%; max-width: 100%; }
 
@@ -158,8 +152,13 @@ button, input, select, textarea, fieldset, legend, .status-bar-field {
 .desktop-icon:active { background: rgba(255,255,255,0.28); }
 
 .desktop-icon .icon-glyph {
-    font-size: 1.9rem;
     filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.6));
+}
+
+.icon-svg {
+    display: block;
+    width: 34px;
+    height: 34px;
 }
 
 .desktop-icon .icon-label {
@@ -678,7 +677,12 @@ legend { padding: 0 0.4rem; font-size: 0.8rem; }
 .ms-cell.n7 { color: #000000; }
 .ms-cell.n8 { color: #757575; }
 
-/* ─── TASKBAR ─── */
+/* ─── TASKBAR ───
+   Reference: real Luna taskbar gradient runs #245edb → #3f8cf3 → #245edb
+   → #245edb → #1941a5 (bright highlight band near the top, darkening toward
+   the bottom edge) — closer to true Luna blue than a flat top-to-bottom
+   fade, and what the tray gradient below is deliberately built to contrast
+   with (tray is cyan-shifted, taskbar is pure blue). */
 .taskbar {
     position: fixed;
     left: 0; right: 0; bottom: 0;
@@ -687,104 +691,160 @@ legend { padding: 0 0.4rem; font-size: 0.8rem; }
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    padding: 0 0.4rem;
-    background: linear-gradient(180deg, var(--chrome-hi) 0%, var(--caption-2) 8%, var(--caption-1) 45%, var(--chrome-lo) 100%);
-    border-top: 2px solid var(--chrome-hi);
-    box-shadow: 0 -1px 6px rgba(0,0,0,0.4);
+    padding: 0 0.3rem;
+    background: linear-gradient(180deg, #3f8cf3 0%, #2c6fe0 9%, #1d5fd9 18%, #1d5fd9 88%, #123f9e 100%);
+    border-top: 1px solid #7fb8ff;
+    box-shadow: inset 0 1px rgba(255,255,255,0.45), 0 -1px 6px rgba(0,0,0,0.4);
 }
 
 .start-btn {
     display: flex;
     align-items: center;
-    gap: 0.3rem;
-    height: 78%;
-    background: linear-gradient(180deg, #6fdb50 0%, #3fa524 45%, #1f6e10 100%);
+    gap: 0.35rem;
+    height: 84%;
+    background: radial-gradient(120% 160% at 28% 15%, #8dec72 0%, #4bc13a 30%, #2f8f22 65%, #1a5e0d 100%);
     color: #fff;
     font-weight: bold;
     font-style: italic;
-    font-size: 0.85rem;
-    border: 1px solid #14500a;
-    border-radius: 4px 12px 12px 4px;
-    padding: 0 0.9rem 0 0.4rem;
+    font-size: 0.86rem;
+    border: 1px solid #0d3d06;
+    border-radius: 3px 16px 16px 3px;
+    padding: 0 1rem 0 0.45rem;
     cursor: pointer;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.45);
     min-width: 0;
     min-height: 0;
-    box-shadow: inset 0 1px rgba(255,255,255,0.5);
+    box-shadow: inset 0 1px rgba(255,255,255,0.65), inset 0 -2px 3px rgba(0,0,0,0.25), 1px 1px 3px rgba(0,0,0,0.35);
+    position: relative;
+    overflow: hidden;
 }
 
-.start-btn:active, .start-btn.open {
-    background: linear-gradient(180deg, #3fa524 0%, #1f6e10 100%);
+/* diagonal sheen across the upper-left, the specular highlight Luna's
+   glossy 3D buttons always carried */
+.start-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.18) 22%, rgba(255,255,255,0) 45%);
+    pointer-events: none;
 }
 
-/* Classic four-pane Windows flag, built from flat colored squares instead
-   of an emoji glyph — the window emoji (🪟) is a 2020-era addition that
-   several fonts/OSes don't ship, so it was rendering as a blank tofu box. */
+button.start-btn:active, .start-btn.open {
+    background: radial-gradient(120% 160% at 28% 15%, #3fa524 0%, #2f8f22 40%, #1a5e0d 100%);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+}
+
+/* Windows flag logo: four wavy panes with a light diagonal gradient +
+   a slight skew to suggest waving fabric, in the actual XP-era flag
+   palette (red-orange / green / blue / gold) rather than the flat
+   four-square logo Windows adopted from 8 onward. */
 .start-flag {
     display: inline-grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 1px;
-    width: 14px;
-    height: 14px;
+    width: 15px;
+    height: 15px;
     flex-shrink: 0;
+    transform: skewY(-8deg) scale(1.05);
 }
 
-.start-flag span:nth-child(1) { background: #f6511d; }
-.start-flag span:nth-child(2) { background: #7cb518; }
-.start-flag span:nth-child(3) { background: #2e9ee6; }
-.start-flag span:nth-child(4) { background: #ffb400; }
+.start-flag span { border-radius: 1px; }
+.start-flag span:nth-child(1) { background: linear-gradient(135deg, #ff9a4d, #e8530f); }
+.start-flag span:nth-child(2) { background: linear-gradient(135deg, #a4e06a, #5a9c1f); }
+.start-flag span:nth-child(3) { background: linear-gradient(135deg, #6fc4ff, #0f7fd6); }
+.start-flag span:nth-child(4) { background: linear-gradient(135deg, #ffe17a, #f2a900); }
 
 .taskbar-divider {
     width: 2px;
-    height: 70%;
-    background: rgba(0,0,0,0.3);
+    height: 72%;
+    background: rgba(0,0,0,0.35);
     box-shadow: 1px 0 rgba(255,255,255,0.25);
     flex-shrink: 0;
 }
 
 .taskbar-apps {
     display: flex;
-    gap: 0.3rem;
+    gap: 0.25rem;
     flex: 1;
     min-width: 0;
     overflow-x: auto;
-    height: 78%;
+    height: 82%;
     align-items: center;
 }
 
+/* Real XP taskbar buttons are blue-toned rectangles, not the beige 3D
+   pushbutton bevel XP.css' default .btn-xp uses — that gray bevel reads
+   fine on a window body but clashes against the blue chrome here. */
 .taskbar-app-btn {
     display: flex;
     align-items: center;
     gap: 0.35rem;
-    font-size: 0.72rem;
+    font-size: 0.74rem;
     max-width: 160px;
     height: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    padding: 0 0.6rem;
-    background: var(--face);
-    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
-    border: none;
+    padding: 0 0.65rem;
+    background: linear-gradient(180deg, #7fb8ff 0%, #3f8cf3 45%, #1d5fd9 100%);
+    border: 1px solid #0f3d91;
+    border-radius: 3px;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
+    box-shadow: inset 0 1px rgba(255,255,255,0.55);
     cursor: pointer;
     flex-shrink: 0;
     min-width: 0;
     min-height: 0;
 }
 
-.taskbar-app-btn.active {
-    background: #d8d3c0;
-    box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+/* XP.css ships `button:not(:disabled):hover`/`.active` at specificity
+   (0,2,1) — one class higher than a plain two-class selector — so these
+   need the `button` type qualifier too, or XP.css's default beige
+   pressed-button look silently wins back. */
+button.taskbar-app-btn:hover {
+    background: linear-gradient(180deg, #9bc9ff 0%, #4f97f5 45%, #2468db 100%);
+    box-shadow: inset 0 1px rgba(255,255,255,0.55);
 }
 
+button.taskbar-app-btn.active {
+    background: linear-gradient(180deg, #0f3d91 0%, #1a56b0 40%, #2f74d6 100%);
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.15);
+    border-color: #082257;
+}
+
+/* ─── SYSTEM TRAY (the bottom-right corner) ───
+   Real Luna's notification area reads as a *recessed* panel: a cyan-shifted
+   gradient distinct from the taskbar's pure blue, sunk in with a dark/light
+   groove border rather than sitting flush like the rest of the chrome. */
 .tray {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding-left: 0.5rem;
-    border-left: 1px solid var(--chrome-border-dark);
-    height: 70%;
+    gap: 0.55rem;
+    padding: 0 0.6rem;
+    margin-left: 0.15rem;
+    height: 76%;
+    flex-shrink: 0;
+    background: linear-gradient(180deg, #1290e9 0%, #19b9f3 9%, #1290e9 18%, #1290e9 88%, #0d5fb8 100%);
+    border-radius: 4px 0 0 4px;
+    box-shadow:
+        inset 1px 1px 2px rgba(0,0,0,0.5),
+        inset -1px 0 rgba(255,255,255,0.2);
+}
+
+.tray-icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.4));
+}
+
+.tray-sep {
+    width: 1px;
+    height: 60%;
+    background: rgba(0,0,0,0.3);
+    box-shadow: 1px 0 rgba(255,255,255,0.15);
     flex-shrink: 0;
 }
 
@@ -793,6 +853,25 @@ legend { padding: 0 0.4rem; font-size: 0.8rem; }
     font-size: 0.72rem;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
     white-space: nowrap;
+}
+
+/* language indicator: a flat two-letter badge like XP's language-bar tray
+   icon, not a raised 3D button */
+#langToggle {
+    background: #eef3fb;
+    color: #1d3a63;
+    border: 1px solid #0d5fb8;
+    box-shadow: inset 0 1px rgba(255,255,255,0.8);
+    border-radius: 2px;
+    font-weight: bold;
+    padding: 0.15rem 0.4rem;
+    font-size: 0.68rem;
+    min-width: 0;
+    min-height: 0;
+}
+
+#langToggle:active {
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);
 }
 
 /* ─── START MENU ─── */
@@ -833,10 +912,28 @@ legend { padding: 0 0.4rem; font-size: 0.8rem; }
     font-size: 0.68rem;
 }
 
+/* Two-column body, like real Luna: a wider white column of shortcuts on
+   the left, a narrower lavender-tinted "system" column on the right. */
+.start-menu-body {
+    display: flex;
+    align-items: stretch;
+}
+
 .start-menu-list {
     list-style: none;
     margin: 0;
     padding: 0.35rem;
+}
+
+.start-menu-col-left {
+    flex: 1 1 58%;
+    background: #fff;
+}
+
+.start-menu-col-right {
+    flex: 1 1 42%;
+    background: linear-gradient(160deg, #e2ecfc 0%, #c7d9f5 100%);
+    border-left: 1px solid #a9c1e8;
 }
 
 .start-menu-list li { margin: 0; }
@@ -844,13 +941,13 @@ legend { padding: 0 0.4rem; font-size: 0.8rem; }
 .start-menu-list button, .start-menu-list a {
     display: flex;
     align-items: center;
-    gap: 0.55rem;
+    gap: 0.5rem;
     width: 100%;
     text-align: left;
     background: none;
     border: none;
-    padding: 0.5rem 0.6rem;
-    font-size: 0.8rem;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.78rem;
     color: var(--text-dark);
     text-decoration: none;
     cursor: pointer;
@@ -864,11 +961,48 @@ legend { padding: 0 0.4rem; font-size: 0.8rem; }
     color: #fff;
 }
 
+.start-menu-list .menu-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
 .start-menu-list .divider {
     height: 1px;
     background: var(--face-border-dark);
     margin: 0.35rem 0.3rem;
     box-shadow: 0 1px var(--face-border-light);
+}
+
+/* bottom "log off" strip, the orange gradient bar real XP anchors its
+   Log Off / Turn Off Computer buttons to */
+.start-menu-footer {
+    background: linear-gradient(180deg, #ffd98f 0%, #f0ab3d 45%, #dd9422 100%);
+    border-top: 1px solid #b97a1c;
+    padding: 0.4rem 0.5rem;
+}
+
+.start-menu-footer button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0.4rem 0.5rem;
+    font-size: 0.78rem;
+    font-weight: bold;
+    color: #4a2e00;
+    text-shadow: 0 1px rgba(255,255,255,0.4);
+    cursor: pointer;
+    box-shadow: none;
+    border-radius: 3px;
+    min-width: 0;
+    min-height: 0;
+}
+
+.start-menu-footer button:hover {
+    background: rgba(255,255,255,0.35);
 }
 
 /* ─── LOGOUT GAG ─── */
@@ -915,6 +1049,8 @@ legend { padding: 0 0.4rem; font-size: 0.8rem; }
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
+    :root { --taskbar-h: 46px; }
+
     .about-grid { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
@@ -932,7 +1068,37 @@ legend { padding: 0 0.4rem; font-size: 0.8rem; }
         margin: 0;
     }
 
+    /* Touch targets: XP.css ships 16×14px window-chrome buttons, sized for
+       a mouse pointer. Enlarge them (and the taskbar row that hosts them)
+       so minimize/maximize/close are reliably tappable. */
+    .title-bar-controls button {
+        min-width: 32px;
+        min-height: 26px;
+    }
+
+    .taskbar-app-btn {
+        font-size: 0.8rem;
+        max-width: 130px;
+    }
+
+    /* A tall single column of icons runs off the bottom of short phone
+       screens — wrap into a compact grid instead, like a phone home
+       screen, so nothing sits behind the taskbar. */
+    .desktop-icons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: calc(100vw - 2rem);
+        gap: 0.5rem 0.25rem;
+    }
+
     .start-menu { width: calc(100vw - 0.8rem); }
+}
+
+/* Two-column Start Menu body gets cramped once the whole menu is much
+   narrower than ~360px — stack the columns instead of squeezing them. */
+@media (max-width: 380px) {
+    .start-menu-body { flex-direction: column; }
+    .start-menu-col-right { border-left: none; border-top: 1px solid #a9c1e8; }
 }
 
 @media (max-width: 600px) {
@@ -940,5 +1106,25 @@ legend { padding: 0 0.4rem; font-size: 0.8rem; }
     .projects-grid { grid-template-columns: 1fr; }
     .modal-window { max-height: 92vh; }
     .terminal-body { font-size: 0.7rem; }
-    .desktop-icon { width: 74px; }
+    .desktop-icon { width: 78px; }
+
+    /* Sub-16px inputs trigger iOS Safari's auto-zoom on focus. */
+    .field-row-stacked input,
+    .field-row-stacked select,
+    .field-row-stacked textarea {
+        font-size: 16px;
+    }
+
+    /* Narrow phones: start + tray already claim most of the width, so
+       shrink app buttons further — two open windows should still both
+       fit without forcing a horizontal scroll to find the second one. */
+    .taskbar-app-btn {
+        max-width: 92px;
+        font-size: 0.7rem;
+        padding: 0 0.4rem;
+        gap: 0.25rem;
+    }
+
+    .tray { gap: 0.4rem; padding: 0 0.4rem; }
+    .tray-icon { width: 13px; height: 13px; }
 }
