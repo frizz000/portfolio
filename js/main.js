@@ -312,6 +312,22 @@ const projectsData = {
         links: [
             { label: { pl: 'Zobacz stronę →', en: 'View website →' }, url: 'https://calltime.pl' }
         ]
+    },
+    mundialtyper: {
+        icon: '⚽',
+        title: { pl: 'Mundial Typer 2026', en: 'Mundial Typer 2026' },
+        desc: {
+            pl: 'Prywatna aplikacja do typowania wyników meczów Mistrzostw Świata 2026, stworzona na własny użytek dla dwóch grup znajomych. Zawiera ranking (ogólny i per grupa), tabele fazy grupowej, wizualizację drabinki pucharowej, subskrybowalny kalendarz iCal oraz automatyczne przypomnienia mailowe przed meczami.',
+            en: 'A private app for predicting World Cup 2026 match results, built for personal use across two friend groups. It includes rankings (overall and per group), group-stage tables, a knockout bracket visualization, a subscribable iCal calendar feed, and automated email reminders before matches.'
+        },
+        tech: ['Python', 'FastAPI', 'SQLite', 'JWT auth', 'Vanilla JS'],
+        note: {
+            pl: 'Projekt na własny użytek (prywatna liga ze znajomymi), rejestracja tylko przez zaproszenie.',
+            en: 'A personal-use project (a private league with friends), registration is invite-only.'
+        },
+        links: [
+            { label: { pl: 'Kod na GitHub →', en: 'Code on GitHub →' }, url: 'https://github.com/frizz000/mundial-typer.git' }
+        ]
     }
 };
 
