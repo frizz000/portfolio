@@ -240,8 +240,8 @@
     if (have.indexOf(fig.dataset.src.replace(/^img\//, '').replace(/\.\w+$/, '')) < 0) return;
     var probe = new Image();
     probe.onload = function () {
-      var img = doc.createElement('img'); img.src = fig.dataset.src; img.loading = 'lazy'; img.alt = fig.dataset['alt' + (lang === 'pl' ? 'Pl' : 'En')] || '';
-      (fig.querySelector('.plate-sheet') || fig).appendChild(img);
+      var img = doc.createElement('img'); img.src = fig.dataset.src; img.loading = fig.classList.contains('plate-hero') ? 'eager' : 'lazy'; img.decoding = 'async'; if (fig.dataset.w) { img.width = +fig.dataset.w; img.height = +fig.dataset.h; } img.alt = fig.dataset['alt' + (lang === 'pl' ? 'Pl' : 'En')] || '';
+      (fig.querySelector('.plate-sheet, .swap-sheet, .band-sheet') || fig).appendChild(img);
       if (fig.classList.contains('plate')) fig.classList.add('has-photo'); else fig.hidden = false;
       measure(); buildDescent();
     };

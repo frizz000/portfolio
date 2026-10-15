@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="pl" data-lang="pl">
+<html lang="pl" data-lang="pl" data-photos="rider field base ride3">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Piotr Jałocha | Eventy na żywo i oprogramowanie z AI</title>
 <meta name="description" content="Piotr Jałocha: Sport Event Marketing Support w Red Bull, inżynier informatyki. Prowadzi eventy na żywo i buduje narzędzia dla nich z pomocą AI.">
-<meta name="theme-color" content="#A58BF2">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23A58BF2'/%3E%3Cpath d='M10 14 C26 14 22 30 34 32 S40 50 54 50' fill='none' stroke='%230E1317' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='54' cy='50' r='5' fill='%230E1317'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#B08457">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23B08457'/%3E%3Cpath d='M10 14 C26 14 22 30 34 32 S40 50 54 50' fill='none' stroke='%230E1317' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='54' cy='50' r='5' fill='%230E1317'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=13">
-<link rel="stylesheet" href="css/game.css?v=13">
+<link rel="stylesheet" href="css/style.css?v=14">
+<link rel="stylesheet" href="css/game.css?v=14">
 </head>
 <body>
 <a class="skip" href="#field"><span class="pl">Pomiń do treści</span><span class="en">Skip to content</span></a>
@@ -44,7 +44,7 @@
     </div>
 
     <!-- Map-sheet plate: photo if img/rider.jpg exists, otherwise the authored drawing -->
-    <figure class="plate plate-hero" data-src="img/rider.jpg" data-alt-pl="Piotr na trasie zjazdowej" data-alt-en="Piotr on a downhill trail">
+    <figure class="plate plate-hero" data-src="img/rider.jpg" data-w="1086" data-h="725" data-alt-pl="Piotr w głębokim przechyle w bandzie na trasie zjazdowej, w tle wyciąg krzesełkowy i chmury" data-alt-en="Piotr leaning hard through a berm on a downhill trail, chairlift and clouds behind">
       <div class="plate-ruler" aria-hidden="true"><span>000</span><span>100</span><span>200</span><span>300</span><span>400</span></div>
       <div class="plate-sheet">
         <svg class="contours plate-contours" data-contours="4,[[330,90,11],[40,430,9]]" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
@@ -73,7 +73,7 @@
       </div>
       <figcaption class="plate-cap">
         <span class="cap-art"><span class="pl">Ark. 01 &middot; Start &middot; 1:10 000</span><span class="en">Sheet 01 &middot; Start &middot; 1:10 000</span></span>
-        <span class="cap-photo"><span class="pl">Ark. 01 &middot; Zdjęcie</span><span class="en">Sheet 01 &middot; Photo</span></span>
+        <span class="cap-photo"><span class="pl">Ark. 01 &middot; Fot. archiwum własne</span><span class="en">Sheet 01 &middot; Photo: own archive</span></span>
         <span class="cap-note cap-art"><span class="pl">ilustracja SVG zbudowana z AI</span><span class="en">SVG illustration built with AI</span></span>
       </figcaption>
     </figure>
@@ -110,7 +110,10 @@
         <div class="board-row" role="row"><span role="cell" class="sp">05</span><span role="cell" class="t">&times;2</span><span role="cell" class="ev">Full Moon <small class="pl">dwie edycje</small><small class="en">two editions</small></span></div>
         <p class="board-foot"><span class="pl">Zakres: akredytacje, harmonogram, logistyka, catering, ekipy w terenie, partnerzy B2B</span><span class="en">Scope: accreditation, run-of-show, logistics, catering, field crews, B2B partners</span></p>
       </div>
-      <figure class="swap" data-src="img/field.jpg" data-alt-pl="Zdjęcie z pracy przy evencie" data-alt-en="Photo from event work" hidden></figure>
+      <figure class="swap" data-src="img/field.jpg" data-w="1086" data-h="725" data-alt-pl="Piotr na rowerze Santa Cruz w locie nad krawędzią stoku, w tle dolina i chmury" data-alt-en="Piotr on a Santa Cruz bike in the air over a slope edge, valley and clouds behind" hidden>
+        <div class="swap-sheet"></div>
+        <figcaption class="plate-cap"><span><span class="pl">Ark. 02 &middot; Teren</span><span class="en">Sheet 02 &middot; Field</span></span><span><span class="pl">Fot. archiwum własne</span><span class="en">Photo: own archive</span></span></figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -294,6 +297,11 @@
       <h2 id="h-base"><span class="pl">Obóz bazowy</span><span class="en">Base Camp</span></h2>
     </div>
 
+    <figure class="band" data-src="img/base.jpg" data-w="1600" data-h="1068" data-alt-pl="Piotr w wysokim skoku nad zboczem, za nim kurz i gęsty las, nad nim krzesło wyciągu" data-alt-en="Piotr in a big jump over a slope, dust and dense forest behind, a chairlift chair above" hidden>
+      <div class="band-sheet"></div>
+      <figcaption class="plate-cap"><span><span class="pl">Ark. 05 &middot; Obóz bazowy</span><span class="en">Sheet 05 &middot; Base camp</span></span><span><span class="pl">Fot. archiwum własne</span><span class="en">Photo: own archive</span></span></figcaption>
+    </figure>
+
     <div class="spread">
       <figure class="plate plate-base" data-src="img/base.jpg" data-alt-pl="Piotr w górach" data-alt-en="Piotr in the mountains">
         <div class="plate-ruler" aria-hidden="true"><span>000</span><span>100</span><span>200</span><span>300</span><span>400</span></div>
@@ -312,7 +320,7 @@
         </div>
         <figcaption class="plate-cap">
           <span class="cap-art"><span class="pl">Ark. 05 &middot; Obóz bazowy</span><span class="en">Sheet 05 &middot; Base camp</span></span>
-          <span class="cap-photo"><span class="pl">Ark. 05 &middot; Zdjęcie</span><span class="en">Sheet 05 &middot; Photo</span></span>
+          <span class="cap-photo"><span class="pl">Ark. 05 &middot; Fot. archiwum własne</span><span class="en">Sheet 05 &middot; Photo: own archive</span></span>
           <span class="cap-note cap-art"><span class="pl">ilustracja SVG zbudowana z AI</span><span class="en">SVG illustration built with AI</span></span>
         </figcaption>
       </figure>
@@ -334,6 +342,10 @@
         </div>
       </div>
     </div>
+
+    <figure class="band band-thin" data-src="img/ride3.jpg" data-w="1086" data-h="725" data-alt-pl="Piotr w locie nad szlakiem, w tle góry i kwiaty" data-alt-en="Piotr airborne over a trail, mountains and flowers behind" hidden>
+      <div class="band-sheet"></div>
+    </figure>
   </div>
 </section>
 
@@ -391,7 +403,7 @@
   <div class="rail-plot" id="railPlot"></div>
 </nav>
 
-<script src="js/main.js?v=13" defer></script>
-<script src="js/game.js?v=13" defer></script>
+<script src="js/main.js?v=14" defer></script>
+<script src="js/game.js?v=14" defer></script>
 </body>
 </html>
