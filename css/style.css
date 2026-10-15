@@ -1,6 +1,8 @@
 /* Trasa: the portfolio as one downhill run drawn as a trail map. */
 :root {
-  --orange: #FF5B1F;
+  --field: #8E9E2A;   /* rotten lichen: hero + finish ground */
+  --orange: #CADB45;  /* acid lime: accent on ink */
+  --olive: #6F7F1C;   /* accent on snow */
   --snow: #F1F5F7;
   --ink: #0E1317;
   --green: #1FA35B;
@@ -10,7 +12,7 @@
   --rule: rgba(14, 19, 23, .16);
   --on-ink: #E9EEF1;
   --on-ink-muted: #A3B3BC;    /* on ink, 8:1 */
-  --on-orange-muted: #2A1206; /* on orange, 8:1 */
+  --on-orange-muted: #1B2306; /* on field */
   --focus: var(--ink);
   --display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
   --body: 'Hanken Grotesk', system-ui, sans-serif;
@@ -161,12 +163,12 @@ h2 { font: 900 clamp(3rem, 9vw, 5rem)/.92 var(--display); text-transform: upperc
 .plate-sheet > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; z-index: 3; }
 .plate-contours path { stroke-opacity: .2; stroke-width: 1; }
 .plate-art { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
-.plate-art .sun { fill: var(--orange); }
+.plate-art .sun { fill: var(--olive); }
 .plate-art .mass { fill: var(--ink); }
 .plate-art .hatch { fill: none; stroke: var(--snow); stroke-opacity: .55; stroke-width: 2; stroke-linecap: round; }
 .plate-art .gate { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; }
-.plate-art .tape { fill: none; stroke: var(--orange); stroke-width: 6; stroke-linecap: butt; }
-.plate-art .line { fill: none; stroke: var(--orange); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 2 11; }
+.plate-art .tape { fill: none; stroke: var(--olive); stroke-width: 6; stroke-linecap: butt; }
+.plate-art .line { fill: none; stroke: var(--olive); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 2 11; }
 .plate-art .speed { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; stroke-opacity: .45; }
 .plate-art .rider .wheel { fill: var(--snow); stroke: var(--ink); stroke-width: 5; }
 .plate-art .rider .head { fill: var(--ink); }
@@ -174,13 +176,13 @@ h2 { font: 900 clamp(3rem, 9vw, 5rem)/.92 var(--display); text-transform: upperc
 .plate-art .rider .frame { stroke-width: 4; }
 .plate-art .rider .limb { stroke-width: 7; }
 .plate-art .rider .torso-o { stroke-width: 18; }
-.plate-art .rider .torso { stroke: var(--orange); stroke-width: 12; }
+.plate-art .rider .torso { stroke: var(--olive); stroke-width: 12; }
 .plate-art .rider .chin { stroke-width: 5; }
-.plate-art .rider .goggle { fill: var(--orange); stroke: var(--snow); stroke-width: 2; stroke-linejoin: round; }
+.plate-art .rider .goggle { fill: var(--olive); stroke: var(--snow); stroke-width: 2; stroke-linejoin: round; }
 .plate-art .rider .num { fill: var(--ink); stroke: none; font: 900 10px var(--display); letter-spacing: .02em; }
 .plate-art .track-ski { fill: none; stroke: var(--snow); stroke-width: 2.5; stroke-linecap: round; }
-.plate-base .plate-art .line { stroke: var(--orange); stroke-width: 4; stroke-dasharray: 1 9; }
-.plate-art .tent { fill: var(--orange); stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+.plate-base .plate-art .line { stroke: var(--olive); stroke-width: 4; stroke-dasharray: 1 9; }
+.plate-art .tent { fill: var(--olive); stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
 .plate-art .tent + .hatch { stroke: var(--ink); stroke-opacity: 1; }
 .crop { position: absolute; z-index: 4; width: 14px; height: 14px; border: 0 solid var(--ink); pointer-events: none; }
 .plate .crop { display: none; }
@@ -195,7 +197,7 @@ h2 { font: 900 clamp(3rem, 9vw, 5rem)/.92 var(--display); text-transform: upperc
 .plate:not(.has-photo) .plate-sheet > img { display: none; }
 
 /* ---------- HERO ---------- */
-.hero { position: relative; background: var(--orange); min-height: 100svh; display: flex; flex-direction: column; overflow: hidden; }
+.hero { position: relative; background: var(--field); min-height: 100svh; display: flex; flex-direction: column; overflow: hidden; }
 .hero .contours path { stroke-opacity: .28; }
 .hero .plate-contours path { stroke-opacity: .2; }
 .hero-inner { position: relative; z-index: 2; width: 100%; max-width: 1120px; margin: 0 auto; padding: 76px 20px 0; flex: 1; display: grid; gap: 32px; align-content: start; }
@@ -225,7 +227,7 @@ h2 { font: 900 clamp(3rem, 9vw, 5rem)/.92 var(--display); text-transform: upperc
 .board-head { padding: 12px 0; font: 700 .72rem/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--on-ink-muted); border-bottom: 1px solid rgba(233, 238, 241, .25); }
 .board-row { padding: 16px 0; border-bottom: 1px solid rgba(233, 238, 241, .14); transition: background .2s; }
 .board-row .sp { font: 500 .85rem/1 var(--mono); color: var(--on-ink-muted); font-variant-numeric: tabular-nums; }
-.board-row:hover { background: rgba(255, 91, 31, .1); }
+.board-row:hover { background: rgba(202, 219, 69, .1); }
 .board-row .t { font: 500 1.35rem/1 var(--mono); color: var(--orange); font-variant-numeric: tabular-nums; }
 .board-row .ev { font: 800 clamp(1.75rem, 5vw, 2.75rem)/1 var(--display); text-transform: uppercase; letter-spacing: .01em; }
 .board-row .ev small { font: 700 .72rem/1 var(--body); letter-spacing: .08em; color: var(--on-ink-muted); margin-left: 10px; text-transform: uppercase; vertical-align: middle; }
@@ -243,7 +245,7 @@ h2 { font: 900 clamp(3rem, 9vw, 5rem)/.92 var(--display); text-transform: upperc
 .trail h3 { margin: 0; font: inherit; }
 .trail-head { width: 100%; display: grid; grid-template-columns: auto 1fr auto; grid-template-areas: "sign title chev" "sign sum chev" "sign cx chev" "sign year chev"; gap: 2px 16px; align-items: center; text-align: left; padding: 22px 0; background: none; border: 0; color: inherit; cursor: pointer; font: inherit; transition: padding .3s var(--ease), background .2s; }
 .trail-head .sign { grid-area: sign; --s: 40px; }
-.trail-title { grid-area: title; justify-self: start; padding-bottom: 6px; background: linear-gradient(var(--orange), var(--orange)) 0 100% / 0 4px no-repeat; transition: background-size .35s var(--ease); font: 900 clamp(1.9rem, 5.5vw, 3rem)/1 var(--display); text-transform: uppercase; }
+.trail-title { grid-area: title; justify-self: start; padding-bottom: 6px; background: linear-gradient(var(--olive), var(--olive)) 0 100% / 0 4px no-repeat; transition: background-size .35s var(--ease); font: 900 clamp(1.9rem, 5.5vw, 3rem)/1 var(--display); text-transform: uppercase; }
 .trail-sum { grid-area: sum; color: var(--muted); font-size: 1rem; line-height: 1.4; }
 .trail-cx { grid-area: cx; font-size: .9rem; color: var(--muted); margin-top: 4px; }
 .trail-cx b { color: var(--ink); font-weight: 700; }
@@ -308,9 +310,9 @@ html[data-lang="pl"] .st-line.no-game .fallback.en { display: none; }
 .camp-text p:first-child { font-weight: 500; font-size: 1.15rem; }
 
 /* ---------- FINISH ---------- */
-.st-finish { background: var(--orange); border-top: 0 !important; padding-top: 0; }
+.st-finish { background: var(--field); border-top: 0 !important; padding-top: 0; }
 .st-finish .contours path { stroke-opacity: .28; }
-.checker { height: 28px; margin-bottom: 72px; background: repeating-conic-gradient(var(--ink) 0 25%, var(--orange) 0 50%) 0 0 / 28px 28px; position: relative; z-index: 1; }
+.checker { height: 28px; margin-bottom: 72px; background: repeating-conic-gradient(var(--ink) 0 25%, var(--field) 0 50%) 0 0 / 28px 28px; position: relative; z-index: 1; }
 .finish-grid { display: grid; gap: 48px; margin-top: 44px; }
 @media (min-width: 960px) { .finish-grid { grid-template-columns: 1.1fr 1fr; gap: 72px; } }
 .big-mail { display: inline-block; font: 900 clamp(1.55rem, 3.6vw, 2.9rem)/1.05 var(--display); text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; text-decoration-thickness: 4px; }
@@ -349,7 +351,7 @@ html[data-lang="pl"] .st-line.no-game .fallback.en { display: none; }
 
 /* v11 */
 .arr { width: .9em; height: .9em; vertical-align: -.1em; margin-left: .2em; }
-.rule-ex { margin: 24px 0 0; padding: 14px 16px; border: 1px solid rgba(255, 91, 31, .55); background: rgba(233, 238, 241, .06); }
+.rule-ex { margin: 24px 0 0; padding: 14px 16px; border: 1px solid rgba(202, 219, 69, .55); background: rgba(233, 238, 241, .06); }
 .rule-ex figcaption { font-size: .85rem; color: var(--on-ink-muted); }
 .rule-ex blockquote { margin: 8px 0 0; font: 400 .9rem/1.5 var(--mono); color: #fff; }
 .trails { padding: 0 14px; }
