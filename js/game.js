@@ -4,7 +4,7 @@
   'use strict';
   if (window.TheLine) return;
 
-  var INK = '#0E1317', SNOW = '#F1F5F7', ORANGE = '#93A424', WHITE = '#FBFCFD';
+  var INK = '#0E1317', SNOW = '#F1F5F7', ORANGE = '#8F76F0', WHITE = '#FBFCFD';
   var FD = "'Big Shoulders Display','Arial Narrow',Impact,sans-serif";
   var FM = "'JetBrains Mono',ui-monospace,Menlo,monospace";
   var STEP = 8, DT = 1 / 120, VIEW_H = 330;
@@ -505,7 +505,7 @@
         c.lineJoin = 'round';
         for (var kk = 1; kk <= 9; kk++) {
           var off = 9 + kk * 12 + kk * kk * 0.8;
-          if (kk === 4) { c.strokeStyle = 'rgba(147,164,36,0.6)'; c.lineWidth = lw * 1.6; c.setLineDash([9 * lw, 7 * lw]); }
+          if (kk === 4) { c.strokeStyle = 'rgba(143,118,240,0.6)'; c.lineWidth = lw * 1.6; c.setLineDash([9 * lw, 7 * lw]); }
           else { c.strokeStyle = 'rgba(14,19,23,' + (0.22 - kk * 0.017).toFixed(3) + ')'; c.lineWidth = lw * 1.1; }
           c.beginPath(); c.moveTo(ra * STEP, hs[ra - idx0] + off);
           for (q = ra + 1; q <= rb; q++) c.lineTo(q * STEP, hs[q - idx0] + off);
@@ -521,7 +521,7 @@
       for (q = 0; q < 8; q++) {
         var G = gaps[q]; if (!G.on || G.x1 < x0 - 20 || G.x0 > x1 + 20) continue;
         c.beginPath(); c.moveTo(G.x0, G.y0); c.lineTo(G.x1, G.y1); c.lineTo(G.x1, bot); c.lineTo(G.x0, bot); c.closePath(); c.fill();
-        c.strokeStyle = 'rgba(147,164,36,0.9)'; c.lineWidth = lw * 2; c.beginPath(); c.moveTo(G.x0 + 1, G.y0 + 8); c.lineTo(G.x0 + 1, bot); c.stroke();
+        c.strokeStyle = 'rgba(143,118,240,0.9)'; c.lineWidth = lw * 2; c.beginPath(); c.moveTo(G.x0 + 1, G.y0 + 8); c.lineTo(G.x0 + 1, bot); c.stroke();
       }
       // checkpoint poles (behind obstacles)
       for (q = 0; q < cps.length; q++) { var cq = cps[q]; if (cq.on && cq.x > x0 - 80 && cq.x < x1 + 80) drawCp(c, cq, lw, 0); }

@@ -1,6 +1,6 @@
 /* The Line - scoped to .tl */
 .tl {
-  --tl-orange: #93A424; --tl-snow: #F1F5F7; --tl-ink: #0E1317;
+  --tl-orange: #8F76F0; --tl-snow: #F1F5F7; --tl-ink: #0E1317;
   --tl-green: #1FA35B; --tl-blue: #1D6FE8; --tl-red: #D42A25;
   font-family: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
   color: var(--tl-ink); position: relative; max-width: 100%;
@@ -22,7 +22,7 @@
 .tl-btn:disabled { opacity: 0.4; cursor: default; }
 .tl-pausebtn:disabled { display: none; }
 .tl-go { background: var(--tl-orange); font-size: 20px; padding: 12px 28px; margin-top: 4px; }
-.tl-go:hover { background: #A5B72E !important; }
+.tl-go:hover { background: #A58BF2 !important; }
 .tl button:focus-visible, .tl-stage:focus-visible { outline: 3px solid var(--tl-blue); outline-offset: 2px; }
 .tl-stage {
   position: relative; width: 100%; aspect-ratio: 2.3 / 1; min-height: 260px; max-height: 480px;
