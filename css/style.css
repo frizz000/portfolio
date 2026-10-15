@@ -1,1130 +1,361 @@
-/* ═══════════════════════════════════════════════
-   Windows XP "Luna" retro theme
-   Built on top of XP.css (loaded before this file)
-   ═══════════════════════════════════════════════ */
-
+/* Trasa: the portfolio as one downhill run drawn as a trail map. */
 :root {
-    --desktop-bg: #0054e3;
-    --caption-1: #0054e3;
-    --caption-2: #3d95ff;
-    --chrome-hi: #6fb4ff;
-    --chrome-lo: #003a9e;
-    --chrome-border: #0831d9;
-    --chrome-border-dark: #001ea0;
-    --face: #ece9d8;
-    --face-border-light: #ffffff;
-    --face-border-dark: #716f64;
-    --text-dark: #000000;
-    --text-dim-dark: #3a3a3a;
-    --accent: #ffd54f;
-    --accent-dark: #d99b00;
-    --green: #33ff66;
-    --sans: Tahoma, "Segoe UI", "MS Sans Serif", Arial, sans-serif;
-    --title-font: "Trebuchet MS", Tahoma, sans-serif;
-    --mono: "Perfect DOS VGA 437 Win", "Consolas", monospace;
-    --desktop-text-shadow: 0 1px 2px rgba(0,0,0,0.75), 0 2px 8px rgba(0,0,0,0.5);
-    --taskbar-h: 38px;
+  --orange: #FF5B1F;
+  --snow: #F1F5F7;
+  --ink: #0E1317;
+  --green: #1FA35B;
+  --blue: #1D6FE8;
+  --red: #D42A25;
+  --muted: #475862;           /* on snow, 7:1 */
+  --rule: rgba(14, 19, 23, .16);
+  --on-ink: #E9EEF1;
+  --on-ink-muted: #A3B3BC;    /* on ink, 8:1 */
+  --on-orange-muted: #2A1206; /* on orange, 8:1 */
+  --focus: var(--ink);
+  --display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+  --body: 'Hanken Grotesk', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  --rail: 0px;
 }
-
-* { box-sizing: border-box; }
-
-html, body {
-    height: 100%;
-    overflow: hidden;
-}
-
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 24px; scrollbar-color: var(--ink) var(--snow); }
 body {
-    margin: 0;
-    font-family: var(--sans);
-    color: var(--text-dark);
-    background-color: var(--desktop-bg);
-    /* Real XP "Bliss" wallpaper, sized down for the web (335 KB vs. the
-       2.6 MB original), layered over a small self-authored SVG recreation
-       that only ever shows if the JPEG fails to load. The page never
-       scrolls in this desktop-simulation layout, so a plain body
-       background is enough — no need for the fixed-position scroll trick
-       an earlier scrolling version of this site used. */
-    background-image: url('../img/winxp-wallpaper.jpg'), url('../img/wallpaper.svg');
-    background-size: cover, cover;
-    background-position: center bottom, center bottom;
-    background-repeat: no-repeat, no-repeat;
-    position: relative;
-}
-
-h1, h2, h3, p, ul, fieldset, legend { margin: 0; }
-
-/* Reskin every XP.css window's title bar from the current color-scheme
-   variables (same specificity as XP.css's own `.title-bar` rule, loaded
-   after it, so this wins in the cascade — no !important needed). */
-.title-bar {
-    background: linear-gradient(180deg, var(--chrome-hi) 0%, var(--caption-2) 8%, var(--caption-1) 45%, var(--chrome-lo) 100%);
-    border-top-color: var(--chrome-border);
-    border-left-color: var(--chrome-border);
-    border-right-color: var(--chrome-border-dark);
-}
-
-/* ─── XP BUTTON (for <a> tags, styled to match XP.css's own <button> bevel
-   exactly: a box-shadow stack rather than border-outset, which is the
-   actual technique real Win32 buttons use) ─── */
-.btn-xp {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-family: var(--sans);
-    font-size: 0.78rem;
-    color: var(--text-dark);
-    text-decoration: none;
-    background: var(--face);
-    border: none;
-    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
-    padding: 0.4rem 0.9rem;
-    cursor: pointer;
-    line-height: 1.2;
-}
-
-.btn-xp:active {
-    box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
-}
-
-.btn-xp-primary { font-weight: bold; }
-
-/* ─── GENERIC WINDOW HELPERS ─── */
-.window { width: 100%; max-width: 100%; }
-
-.title-bar-text {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-family: var(--title-font);
-}
-
-/* Real Luna used Tahoma for every piece of UI chrome except the title bar
-   (which used bold Trebuchet MS, handled above) — override XP.css's Arial
-   default so buttons, form fields, fieldsets and the status bar match. */
-button, input, select, textarea, fieldset, legend, .status-bar-field {
-    font-family: var(--sans);
-}
-
-/* decorative min/max/close buttons on non-functional windows: visual only */
-.title-bar-controls button[aria-hidden="true"] { pointer-events: none; }
-
-.section-sub {
-    color: var(--text-dim-dark);
-    font-size: 0.95rem;
-    max-width: 560px;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-}
-
-/* ─── DESKTOP ─── */
-#desktop {
-    position: fixed;
-    inset: 0 0 var(--taskbar-h) 0;
-    overflow: hidden;
-}
-
-.desktop-icons {
-    position: absolute;
-    top: 1.25rem;
-    left: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    z-index: 1;
-}
-
-.desktop-icon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.3rem;
-    width: 82px;
-    background: none;
-    border: 1px solid transparent;
-    cursor: pointer;
-    padding: 0.4rem 0.3rem;
-    min-width: 0;
-    min-height: 0;
-    box-shadow: none;
-}
-
-.desktop-icon:hover { background: rgba(255,255,255,0.14); }
-.desktop-icon:active { background: rgba(255,255,255,0.28); }
-
-.desktop-icon .icon-glyph {
-    filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.6));
-}
-
-.icon-svg {
-    display: block;
-    width: 34px;
-    height: 34px;
-}
-
-.desktop-icon .icon-label {
-    color: #fff;
-    text-shadow: var(--desktop-text-shadow);
-    font-size: 0.72rem;
-    text-align: center;
-    line-height: 1.25;
-}
-
-/* ─── APP WINDOWS ─── */
-.os-window {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    max-height: 82vh;
-    box-shadow: 3px 3px 14px rgba(0,0,0,0.45);
-}
-
-.os-window.open { display: flex; }
-
-.os-window .window-body {
-    flex: 1;
-    overflow-y: auto;
-}
-
-.os-window .title-bar { cursor: move; }
-
-.os-window.maximized {
-    position: fixed !important;
-    inset: 0 0 var(--taskbar-h) 0 !important;
-    width: auto !important;
-    max-width: none !important;
-    max-height: none !important;
-}
-
-@media (min-width: 901px) {
-    #win-welcome { width: min(400px, 92vw); }
-    #win-terminal { width: min(480px, 92vw); }
-    #win-about { width: min(680px, 94vw); }
-    #win-projects { width: min(760px, 94vw); }
-    #win-contact { width: min(720px, 94vw); }
-    #win-saper { width: 300px; }
-    #win-mycomputer { width: min(460px, 92vw); }
-    #win-trash { width: min(340px, 90vw); }
-}
-
-/* ─── TERMINAL ─── */
-.terminal-body {
-    background: #000;
-    color: #c0c0c0;
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    line-height: 1.9;
-    padding: 1rem !important;
-    overflow-x: auto;
-}
-
-.t-line {
-    display: flex;
-    gap: 0.5rem;
-    align-items: flex-start;
-    flex-wrap: wrap;
-}
-.t-prompt { color: #c0c0c0; flex-shrink: 0; }
-.t-cmd { color: #fff; }
-.t-out { color: #c0c0c0; }
-.t-out.green, .green { color: var(--green); }
-.t-out.dim { color: #808080; }
-
-.t-cursor {
-    display: inline-block;
-    width: 7px; height: 13px;
-    background: #c0c0c0;
-    animation: blink 1.1s step-end infinite;
-    vertical-align: text-bottom;
-}
-
-@keyframes blink { 50% { opacity: 0; } }
-
-/* ─── WITAJ.TXT ─── */
-.welcome-name {
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-bottom: 0.35rem;
-}
-
-.welcome-role {
-    font-size: 0.95rem;
-    font-weight: bold;
-    color: var(--accent-dark);
-    margin-bottom: 0.9rem;
-}
-
-.hero-ctas {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    margin-top: 0.25rem;
-}
-
-/* ─── ABOUT ─── */
-.about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.75rem;
-    align-items: start;
-}
-
-fieldset {
-    border: 1px groove var(--face-border-dark);
-    padding: 0.75rem;
-    margin-bottom: 0.9rem;
-}
-
-legend { padding: 0 0.4rem; font-size: 0.8rem; }
-
-.skill-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-}
-
-.skill-tag, .tech-tag {
-    font-size: 0.72rem;
-    padding: 0.25rem 0.6rem;
-    background: var(--face);
-    border: 1px inset var(--face);
-    color: var(--text-dim-dark);
-}
-
-.about-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.6rem;
-}
-
-.stat-card {
-    background: #fff;
-    border: 1px inset var(--face);
-    padding: 0.75rem;
-    text-align: center;
-}
-
-.stat-num {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--accent-dark);
-    line-height: 1;
-    margin-bottom: 0.3rem;
-}
-
-.stat-label {
-    font-size: 0.72rem;
-    color: var(--text-dim-dark);
-}
-
-/* ─── PROJECTS ─── */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.25rem;
-    margin-top: 1.25rem;
-}
-
-.project-card {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-.project-card .window-body {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
-.project-desc {
-    font-size: 0.88rem;
-    color: var(--text-dim-dark);
-    line-height: 1.6;
-    margin-bottom: 0.9rem;
-}
-
-.project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-bottom: 1rem;
-}
-
-.project-card .btn-xp {
-    margin-top: auto;
-    align-self: flex-start;
-}
-
-/* ─── PROJECT / MODAL WINDOW ─── */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,20,50,0.55);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    z-index: 3500;
-    opacity: 0;
-    visibility: hidden;
-}
-
-.modal-overlay.open {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-window {
-    max-width: 560px;
-    width: 100%;
-    max-height: 88vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.modal-window .window-body {
-    overflow-y: auto;
-}
-
-.modal-icon { font-size: 2rem; margin-bottom: 0.75rem; }
-
-.modal-title {
-    font-size: 1.15rem;
-    font-weight: bold;
-    color: var(--text-dark);
-    margin-bottom: 0.9rem;
-    line-height: 1.3;
-}
-
-.modal-desc {
-    font-size: 0.9rem;
-    color: var(--text-dim-dark);
-    line-height: 1.7;
-    margin-bottom: 1.25rem;
-}
-
-.modal-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-bottom: 1.25rem;
-}
-
-.modal-note {
-    font-size: 0.78rem;
-    color: var(--text-dim-dark);
-    font-style: italic;
-    background: #fff;
-    border: 1px inset var(--face);
-    padding: 0.5rem 0.7rem;
-    margin-bottom: 1.25rem;
-}
-
-.modal-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--face-border-dark);
-}
-
-/* ─── CONTACT ─── */
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.3fr;
-    gap: 2rem;
-    align-items: start;
-    margin-top: 1.25rem;
-}
-
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.contact-item {
-    display: flex;
-    gap: 0.75rem;
-    align-items: flex-start;
-}
-
-.contact-icon {
-    font-size: 1.1rem;
-    flex-shrink: 0;
-    width: 1.4rem;
-    text-align: center;
-}
-
-.contact-label {
-    font-size: 0.68rem;
-    font-weight: bold;
-    color: var(--text-dim-dark);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 0.15rem;
-}
-
-.contact-value {
-    font-size: 0.88rem;
-    color: var(--text-dark);
-}
-
-.contact-value a {
-    color: #0a58f7;
-    text-decoration: none;
-}
-
-.contact-value a:hover { text-decoration: underline; }
-
-/* FORM */
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.9rem;
-}
-
-.field-row-stacked {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    width: 100%;
-}
-
-.field-row-stacked label {
-    font-size: 0.72rem;
-    color: var(--text-dim-dark);
-}
-
-.field-row-stacked input,
-.field-row-stacked select,
-.field-row-stacked textarea {
-    width: 100%;
-    font-family: var(--sans);
-}
-
-.field-row-stacked textarea {
-    resize: vertical;
-    min-height: 110px;
-}
-
-.form-status {
-    font-size: 0.8rem;
-    padding: 0.6rem 0.8rem;
-    border: 1px inset var(--face);
-    background: #fff;
-    display: none;
-}
-
-.form-status.success {
-    display: block;
-    color: #0a7d1e;
-}
-
-.form-status.error {
-    display: block;
-    color: #c40000;
-}
-
-/* ─── MÓJ KOMPUTER ─── */
-.drive-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-    margin-bottom: 1rem;
-}
-
-.drive-row {
-    display: flex;
-    gap: 0.7rem;
-    align-items: flex-start;
-}
-
-.drive-icon { font-size: 1.4rem; flex-shrink: 0; }
-
-.drive-info { flex: 1; min-width: 0; }
-
-.drive-name {
-    font-size: 0.82rem;
-    font-weight: bold;
-    margin-bottom: 0.3rem;
-}
-
-.drive-bar {
-    height: 12px;
-    background: #fff;
-    border: 1px inset var(--face);
-    margin-bottom: 0.3rem;
-}
-
-.drive-bar-fill {
-    height: 100%;
-    background: linear-gradient(180deg, var(--chrome-hi), var(--caption-1));
-}
-
-.drive-detail {
-    font-size: 0.72rem;
-    color: var(--text-dim-dark);
-}
-
-.mycomputer-footer {
-    font-size: 0.78rem;
-    color: var(--text-dim-dark);
-    padding-top: 0.75rem;
-    border-top: 1px solid var(--face-border-dark);
-}
-
-.mycomputer-footer a { color: #0a58f7; }
-
-/* ─── KOSZ ─── */
-.trash-joke {
-    font-size: 0.8rem;
-    color: var(--text-dim-dark);
-    font-style: italic;
-    margin-top: 0.5rem;
-}
-
-/* ─── MINESWEEPER (Saper.exe) ─── */
-.ms-panel {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--face);
-    border: 2px inset var(--face);
-    padding: 0.5rem;
-    margin-bottom: 0.6rem;
-}
-
-.ms-counter {
-    font-family: 'Courier New', monospace;
-    font-weight: bold;
-    font-size: 1.3rem;
-    color: #ff0000;
-    background: #000;
-    padding: 0.1rem 0.4rem;
-    letter-spacing: 2px;
-    border: 1px inset #333;
-    min-width: 2.6em;
-    text-align: center;
-}
-
-.ms-face {
-    font-size: 1.2rem;
-    line-height: 1;
-    width: 2.2rem;
-    height: 2.2rem;
-    min-width: 0;
-    min-height: 0;
-    background: var(--face);
-    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-}
-
-.ms-face:active {
-    box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
-}
-
-.ms-grid {
-    display: grid;
-    grid-template-columns: repeat(9, 28px);
-    grid-auto-rows: 28px;
-    gap: 0;
-    border: 2px inset var(--face);
-    width: max-content;
-    margin: 0 auto;
-}
-
-.ms-cell {
-    width: 28px;
-    height: 28px;
-    min-width: 0;
-    min-height: 0;
-    padding: 0;
-    font-size: 0.85rem;
-    font-weight: bold;
-    font-family: var(--sans);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--face);
-    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
-    border: none;
-    cursor: pointer;
-    user-select: none;
-}
-
-.ms-cell.revealed {
-    box-shadow: inset 1px 1px grey;
-    cursor: default;
-}
-
-.ms-cell.mine-hit { background: #ff0000; }
-
-.ms-cell.n1 { color: #0000ff; }
-.ms-cell.n2 { color: #008200; }
-.ms-cell.n3 { color: #ff0000; }
-.ms-cell.n4 { color: #000084; }
-.ms-cell.n5 { color: #840000; }
-.ms-cell.n6 { color: #008284; }
-.ms-cell.n7 { color: #000000; }
-.ms-cell.n8 { color: #757575; }
-
-/* ─── TASKBAR ───
-   Reference: real Luna taskbar gradient runs #245edb → #3f8cf3 → #245edb
-   → #245edb → #1941a5 (bright highlight band near the top, darkening toward
-   the bottom edge) — closer to true Luna blue than a flat top-to-bottom
-   fade, and what the tray gradient below is deliberately built to contrast
-   with (tray is cyan-shifted, taskbar is pure blue). */
-.taskbar {
-    position: fixed;
-    left: 0; right: 0; bottom: 0;
-    height: var(--taskbar-h);
-    z-index: 2000;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0 0.3rem;
-    background: linear-gradient(180deg, #3f8cf3 0%, #2c6fe0 9%, #1d5fd9 18%, #1d5fd9 88%, #123f9e 100%);
-    border-top: 1px solid #7fb8ff;
-    box-shadow: inset 0 1px rgba(255,255,255,0.45), 0 -1px 6px rgba(0,0,0,0.4);
-}
-
-.start-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    height: 84%;
-    background: radial-gradient(120% 160% at 28% 15%, #8dec72 0%, #4bc13a 30%, #2f8f22 65%, #1a5e0d 100%);
-    color: #fff;
-    font-weight: bold;
-    font-style: italic;
-    font-size: 0.86rem;
-    border: 1px solid #0d3d06;
-    border-radius: 3px 16px 16px 3px;
-    padding: 0 1rem 0 0.45rem;
-    cursor: pointer;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.45);
-    min-width: 0;
-    min-height: 0;
-    box-shadow: inset 0 1px rgba(255,255,255,0.65), inset 0 -2px 3px rgba(0,0,0,0.25), 1px 1px 3px rgba(0,0,0,0.35);
-    position: relative;
-    overflow: hidden;
-}
-
-/* diagonal sheen across the upper-left, the specular highlight Luna's
-   glossy 3D buttons always carried */
-.start-btn::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(115deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.18) 22%, rgba(255,255,255,0) 45%);
-    pointer-events: none;
-}
-
-button.start-btn:active, .start-btn.open {
-    background: radial-gradient(120% 160% at 28% 15%, #3fa524 0%, #2f8f22 40%, #1a5e0d 100%);
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
-}
-
-/* Windows flag logo: four wavy panes with a light diagonal gradient +
-   a slight skew to suggest waving fabric, in the actual XP-era flag
-   palette (red-orange / green / blue / gold) rather than the flat
-   four-square logo Windows adopted from 8 onward. */
-.start-flag {
-    display: inline-grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 1px;
-    width: 15px;
-    height: 15px;
-    flex-shrink: 0;
-    transform: skewY(-8deg) scale(1.05);
-}
-
-.start-flag span { border-radius: 1px; }
-.start-flag span:nth-child(1) { background: linear-gradient(135deg, #ff9a4d, #e8530f); }
-.start-flag span:nth-child(2) { background: linear-gradient(135deg, #a4e06a, #5a9c1f); }
-.start-flag span:nth-child(3) { background: linear-gradient(135deg, #6fc4ff, #0f7fd6); }
-.start-flag span:nth-child(4) { background: linear-gradient(135deg, #ffe17a, #f2a900); }
-
-.taskbar-divider {
-    width: 2px;
-    height: 72%;
-    background: rgba(0,0,0,0.35);
-    box-shadow: 1px 0 rgba(255,255,255,0.25);
-    flex-shrink: 0;
-}
-
-.taskbar-apps {
-    display: flex;
-    gap: 0.25rem;
-    flex: 1;
-    min-width: 0;
-    overflow-x: auto;
-    height: 82%;
-    align-items: center;
-}
-
-/* Real XP taskbar buttons are blue-toned rectangles, not the beige 3D
-   pushbutton bevel XP.css' default .btn-xp uses — that gray bevel reads
-   fine on a window body but clashes against the blue chrome here. */
-.taskbar-app-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-size: 0.74rem;
-    max-width: 160px;
-    height: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    padding: 0 0.65rem;
-    background: linear-gradient(180deg, #7fb8ff 0%, #3f8cf3 45%, #1d5fd9 100%);
-    border: 1px solid #0f3d91;
-    border-radius: 3px;
-    color: #fff;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
-    box-shadow: inset 0 1px rgba(255,255,255,0.55);
-    cursor: pointer;
-    flex-shrink: 0;
-    min-width: 0;
-    min-height: 0;
-}
-
-/* XP.css ships `button:not(:disabled):hover`/`.active` at specificity
-   (0,2,1) — one class higher than a plain two-class selector — so these
-   need the `button` type qualifier too, or XP.css's default beige
-   pressed-button look silently wins back. */
-button.taskbar-app-btn:hover {
-    background: linear-gradient(180deg, #9bc9ff 0%, #4f97f5 45%, #2468db 100%);
-    box-shadow: inset 0 1px rgba(255,255,255,0.55);
-}
-
-button.taskbar-app-btn.active {
-    background: linear-gradient(180deg, #0f3d91 0%, #1a56b0 40%, #2f74d6 100%);
-    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.15);
-    border-color: #082257;
-}
-
-/* ─── SYSTEM TRAY (the bottom-right corner) ───
-   Real Luna's notification area reads as a *recessed* panel: a cyan-shifted
-   gradient distinct from the taskbar's pure blue, sunk in with a dark/light
-   groove border rather than sitting flush like the rest of the chrome. */
-.tray {
-    display: flex;
-    align-items: center;
-    gap: 0.55rem;
-    padding: 0 0.6rem;
-    margin-left: 0.15rem;
-    height: 76%;
-    flex-shrink: 0;
-    background: linear-gradient(180deg, #1290e9 0%, #19b9f3 9%, #1290e9 18%, #1290e9 88%, #0d5fb8 100%);
-    border-radius: 4px 0 0 4px;
-    box-shadow:
-        inset 1px 1px 2px rgba(0,0,0,0.5),
-        inset -1px 0 rgba(255,255,255,0.2);
-}
-
-.tray-icon {
-    width: 15px;
-    height: 15px;
-    flex-shrink: 0;
-    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.4));
-}
-
-.tray-sep {
-    width: 1px;
-    height: 60%;
-    background: rgba(0,0,0,0.3);
-    box-shadow: 1px 0 rgba(255,255,255,0.15);
-    flex-shrink: 0;
-}
-
-.tray-clock {
-    color: #fff;
-    font-size: 0.72rem;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-    white-space: nowrap;
-}
-
-/* language indicator: a flat two-letter badge like XP's language-bar tray
-   icon, not a raised 3D button */
-#langToggle {
-    background: #eef3fb;
-    color: #1d3a63;
-    border: 1px solid #0d5fb8;
-    box-shadow: inset 0 1px rgba(255,255,255,0.8);
-    border-radius: 2px;
-    font-weight: bold;
-    padding: 0.15rem 0.4rem;
-    font-size: 0.68rem;
-    min-width: 0;
-    min-height: 0;
-}
-
-#langToggle:active {
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);
-}
-
-/* ─── START MENU ─── */
-.start-menu {
-    display: none;
-    flex-direction: column;
-    position: fixed;
-    left: 0.4rem;
-    bottom: calc(var(--taskbar-h) + 0.4rem);
-    width: 250px;
-    background: var(--face);
-    border: 2px solid var(--chrome-border);
-    box-shadow: 3px 3px 14px rgba(0,0,0,0.5);
-    z-index: 2100;
-    overflow: hidden;
-}
-
-.start-menu.open { display: flex; }
-
-.start-menu-header {
-    background: linear-gradient(180deg, var(--chrome-hi), var(--caption-1));
-    color: #fff;
-    padding: 0.7rem 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-weight: bold;
-    font-size: 0.9rem;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
-}
-
-.start-menu-header span:first-child { font-size: 1.6rem; }
-
-.start-menu-header small {
-    display: block;
-    font-weight: normal;
-    opacity: 0.85;
-    font-size: 0.68rem;
-}
-
-/* Two-column body, like real Luna: a wider white column of shortcuts on
-   the left, a narrower lavender-tinted "system" column on the right. */
-.start-menu-body {
-    display: flex;
-    align-items: stretch;
-}
-
-.start-menu-list {
-    list-style: none;
-    margin: 0;
-    padding: 0.35rem;
-}
-
-.start-menu-col-left {
-    flex: 1 1 58%;
-    background: #fff;
-}
-
-.start-menu-col-right {
-    flex: 1 1 42%;
-    background: linear-gradient(160deg, #e2ecfc 0%, #c7d9f5 100%);
-    border-left: 1px solid #a9c1e8;
-}
-
-.start-menu-list li { margin: 0; }
-
-.start-menu-list button, .start-menu-list a {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    width: 100%;
-    text-align: left;
-    background: none;
-    border: none;
-    padding: 0.5rem 0.5rem;
-    font-size: 0.78rem;
-    color: var(--text-dark);
-    text-decoration: none;
-    cursor: pointer;
-    min-width: 0;
-    min-height: 0;
-    box-shadow: none;
-}
-
-.start-menu-list button:hover, .start-menu-list a:hover {
-    background: var(--caption-1);
-    color: #fff;
-}
-
-.start-menu-list .menu-icon {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-}
-
-.start-menu-list .divider {
-    height: 1px;
-    background: var(--face-border-dark);
-    margin: 0.35rem 0.3rem;
-    box-shadow: 0 1px var(--face-border-light);
-}
-
-/* bottom "log off" strip, the orange gradient bar real XP anchors its
-   Log Off / Turn Off Computer buttons to */
-.start-menu-footer {
-    background: linear-gradient(180deg, #ffd98f 0%, #f0ab3d 45%, #dd9422 100%);
-    border-top: 1px solid #b97a1c;
-    padding: 0.4rem 0.5rem;
-}
-
-.start-menu-footer button {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    width: 100%;
-    background: none;
-    border: none;
-    padding: 0.4rem 0.5rem;
-    font-size: 0.78rem;
-    font-weight: bold;
-    color: #4a2e00;
-    text-shadow: 0 1px rgba(255,255,255,0.4);
-    cursor: pointer;
-    box-shadow: none;
-    border-radius: 3px;
-    min-width: 0;
-    min-height: 0;
-}
-
-.start-menu-footer button:hover {
-    background: rgba(255,255,255,0.35);
-}
-
-/* ─── LOGOUT GAG ─── */
-.logout-overlay {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at center, #3d95ff 0%, #08245e 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.75rem;
-    color: #fff;
-    z-index: 4000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s ease;
-}
-
-.logout-overlay.open {
-    opacity: 1;
-    visibility: visible;
-}
-
-.logout-spinner {
-    font-size: 2.5rem;
-    animation: spin 1.6s linear infinite;
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
-
-.logout-overlay p {
-    font-size: 1rem;
-    text-shadow: var(--desktop-text-shadow);
-}
-
-/* ─── LANG SWITCHER ─── */
-[data-lang="pl"] .en { display: none; }
-[data-lang="en"] .pl { display: none; }
-
-.title-bar-text.pl, .title-bar-text.en { display: inline; }
-[data-lang="pl"] .title-bar-text.en { display: none; }
-[data-lang="en"] .title-bar-text.pl { display: none; }
-
-/* ─── RESPONSIVE ─── */
-@media (max-width: 900px) {
-    :root { --taskbar-h: 46px; }
-
-    .about-grid { grid-template-columns: 1fr; }
-    .contact-grid { grid-template-columns: 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-
-    /* JS skips setting inline left/top on mobile and skips drag entirely,
-       but a window opened on a wide viewport and then resized down could
-       still carry inline positioning from before — force the maximized
-       mobile layout regardless of that leftover inline style. */
-    .os-window.open {
-        position: fixed !important;
-        inset: 0 0 var(--taskbar-h) 0 !important;
-        width: auto !important;
-        max-width: none !important;
-        max-height: none !important;
-        margin: 0;
-    }
-
-    /* Touch targets: XP.css ships 16×14px window-chrome buttons, sized for
-       a mouse pointer. Enlarge them (and the taskbar row that hosts them)
-       so minimize/maximize/close are reliably tappable. */
-    .title-bar-controls button {
-        min-width: 32px;
-        min-height: 26px;
-    }
-
-    .taskbar-app-btn {
-        font-size: 0.8rem;
-        max-width: 130px;
-    }
-
-    /* A tall single column of icons runs off the bottom of short phone
-       screens — wrap into a compact grid instead, like a phone home
-       screen, so nothing sits behind the taskbar. */
-    .desktop-icons {
-        flex-direction: row;
-        flex-wrap: wrap;
-        width: calc(100vw - 2rem);
-        gap: 0.5rem 0.25rem;
-    }
-
-    .start-menu { width: calc(100vw - 0.8rem); }
-}
-
-/* Two-column Start Menu body gets cramped once the whole menu is much
-   narrower than ~360px — stack the columns instead of squeezing them. */
-@media (max-width: 380px) {
-    .start-menu-body { flex-direction: column; }
-    .start-menu-col-right { border-left: none; border-top: 1px solid #a9c1e8; }
-}
-
-@media (max-width: 600px) {
-    .about-stats { grid-template-columns: 1fr 1fr; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .modal-window { max-height: 92vh; }
-    .terminal-body { font-size: 0.7rem; }
-    .desktop-icon { width: 78px; }
-
-    /* Sub-16px inputs trigger iOS Safari's auto-zoom on focus. */
-    .field-row-stacked input,
-    .field-row-stacked select,
-    .field-row-stacked textarea {
-        font-size: 16px;
-    }
-
-    /* Narrow phones: start + tray already claim most of the width, so
-       shrink app buttons further — two open windows should still both
-       fit without forcing a horizontal scroll to find the second one. */
-    .taskbar-app-btn {
-        max-width: 92px;
-        font-size: 0.7rem;
-        padding: 0 0.4rem;
-        gap: 0.25rem;
-    }
-
-    .tray { gap: 0.4rem; padding: 0 0.4rem; }
-    .tray-icon { width: 13px; height: 13px; }
+  margin: 0; background: var(--snow); color: var(--ink);
+  font: 400 1.0625rem/1.6 var(--body); -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; caret-color: var(--orange);
+}
+@media (min-width: 1024px) { :root { --rail: 96px; } body { padding-left: var(--rail); } }
+
+::selection { background: var(--ink); color: var(--orange); }
+.st-ai ::selection, .rail ::selection { background: var(--orange); color: var(--ink); }
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: var(--snow); }
+::-webkit-scrollbar-thumb { background: var(--ink); border: 3px solid var(--snow); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: var(--orange); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+.st-ai, .st-finish .btn { --focus: var(--orange); }
+.hero, .st-finish { --focus: var(--ink); }
+a { color: inherit; text-underline-offset: .22em; text-decoration-thickness: 2px; }
+
+/* i18n */
+html[data-lang="pl"] .en, html[data-lang="en"] .pl { display: none !important; }
+.skip { position: fixed; left: 12px; top: -80px; z-index: 100; background: var(--ink); color: var(--snow); padding: 10px 16px; font-weight: 700; }
+.skip:focus { top: 12px; }
+
+/* ---------- trail shapes ---------- */
+.shape { --s: 22px; display: inline-grid; place-items: center; width: var(--s); height: var(--s); flex: none; background: var(--ink); color: #fff; }
+.shape b { font: 800 calc(var(--s) * .4) / 1 var(--display); letter-spacing: .02em; }
+.g-black { border-radius: 16%; transform: rotate(45deg) scale(.82); }
+.g-split { border-radius: 50%; background: var(--ink); color: var(--orange); }
+.g-split b { font-size: calc(var(--s) * .42); }
+.g-black b { transform: rotate(-45deg); }
+.g-blue { background: var(--blue); border-radius: 14%; }
+.g-green { background: var(--green); border-radius: 50%; color: var(--ink); }
+.g-red { background: var(--red); border-radius: 50%; box-shadow: inset 0 0 0 calc(var(--s) * .08) var(--red), inset 0 0 0 calc(var(--s) * .15) var(--snow); }
+.g-start { background: var(--ink); clip-path: polygon(0 0, 100% 50%, 0 100%); --s: 18px; }
+.g-finish { background: conic-gradient(var(--ink) 25%, #fff 0 50%, var(--ink) 0 75%, #fff 0) 0 0 / 50% 50%; border-radius: 6px; border: 2px solid var(--ink); }
+.sign { --s: 56px; }
+.st-head { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.badge { align-self: flex-end; margin-bottom: 10px; background: var(--ink); color: var(--orange); font: 800 .95rem/1 var(--display); letter-spacing: .12em; text-transform: uppercase; padding: 7px 12px 6px; border-radius: 2px; }
+html.gut .badge, html.lane .st-field .badge { margin-left: 18px; }
+
+/* ---------- language switch ---------- */
+.langbar { position: fixed; z-index: 60; top: 12px; right: 12px; display: flex; gap: 2px; background: var(--ink); border-radius: 999px; padding: 4px; }
+.langbar button { font: 700 .8rem/1 var(--body); letter-spacing: .06em; min-width: 48px; min-height: 40px; padding: 0 16px; border: 0; border-radius: 999px; background: transparent; color: var(--on-ink-muted); cursor: pointer; }
+.langbar button[aria-pressed="true"] { background: var(--orange); color: var(--ink); }
+.langbar button:hover:not([aria-pressed="true"]) { color: #fff; }
+.langbar { --focus: var(--orange); }
+
+/* ---------- route rail: thin elevation profile (desktop), slim progress line (mobile) ---------- */
+.rail { position: fixed; z-index: 50; left: 0; top: 0; right: 0; height: 56px; background: var(--snow); border-bottom: 1px solid var(--rule); pointer-events: none; }
+.rail-bar { position: absolute; left: 0; right: 0; bottom: -1px; height: 4px; background: rgba(14, 19, 23, .14); }
+.rail-bar i { display: block; height: 100%; width: 100%; background: var(--ink); transform-origin: 0 50%; transform: scaleX(0); }
+.rail-flag { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 8px; max-width: calc(100% - 150px); color: var(--ink); font: 700 .75rem/1 var(--body); letter-spacing: .08em; text-transform: uppercase; }
+.rail-flag svg { color: var(--orange); flex: none; }
+.rail-flag span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rail-plot { display: none; }
+.rail-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.rail-svg .base { fill: none; stroke: var(--rule); stroke-width: 2; stroke-linecap: round; }
+.rail-svg .edge { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.rail-svg .rider { fill: var(--orange); stroke: var(--ink); stroke-width: 2; }
+.mk { position: absolute; transform: translate(-50%, -50%); width: 22px; height: 22px; display: grid; place-items: center; border: 0; padding: 0; text-decoration: none; cursor: pointer; pointer-events: auto; }
+.mk::after { content: ""; position: absolute; inset: -12px; } /* 44px target */
+.mk .shape { --s: 14px; transition: width .2s, height .2s; }
+.mk.is-active .shape { --s: 20px; }
+.mk .mk-label { position: absolute; left: calc(100% + 10px); top: 50%; transform: translateY(-50%); white-space: nowrap; background: var(--ink); color: var(--on-ink); font: 700 .72rem/1 var(--body); letter-spacing: .07em; text-transform: uppercase; padding: 8px 11px; border-radius: 3px; box-shadow: 0 6px 16px rgba(14, 19, 23, .28); opacity: 0; pointer-events: none; transition: opacity .18s; z-index: 2; }
+.mk .mk-label i { font-style: normal; color: var(--orange); margin-left: 8px; }
+.mk:hover, .mk:focus-visible { z-index: 3; }
+.mk:hover .mk-label, .mk:focus-visible .mk-label { opacity: 1; }
+@media (min-width: 1024px) {
+  .rail { top: 0; bottom: 0; right: auto; width: var(--rail); height: auto; border-bottom: 0; border-right: 1px solid var(--rule); pointer-events: auto; }
+  .rail-bar { display: none; }
+  .rail-flag { left: 14px; top: 18px; transform: none; flex-direction: column; align-items: flex-start; gap: 6px; max-width: none; font-size: .7rem; letter-spacing: .06em; }
+  .rail-flag span { overflow: visible; }
+  .rail-plot { display: block; position: absolute; left: 22px; right: 22px; top: 84px; bottom: 28px; }
+  .langbar { top: 16px; right: 20px; }
+}
+@media (max-width: 1023px) {
+  .mk { display: none; }
+  html { scroll-padding-top: 68px; }
+  .langbar { top: 6px; right: 8px; }
+  .langbar button { min-height: 36px; padding: 0 14px; }
+}
+
+/* ---------- the descent: route line between stations ---------- */
+.descent { position: absolute; z-index: 6; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; }
+.descent svg { position: absolute; left: 0; top: 0; overflow: visible; }
+.descent path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.descent .route { stroke: var(--ink); stroke-width: 6; }
+.descent .route-night { stroke: var(--orange); stroke-width: 6; }
+.descent .stub { stroke: var(--ink); stroke-width: 3; }
+.descent .dmk { position: absolute; transform: translate(-50%, -50%); display: flex; line-height: 0; }
+.descent .dmk .shape { --s: 52px; background-clip: padding-box; box-shadow: 0 0 0 5px var(--snow); }
+.descent .dmk .g-red { box-shadow: inset 0 0 0 calc(var(--s) * .08) var(--red), inset 0 0 0 calc(var(--s) * .15) var(--snow), 0 0 0 5px var(--snow); }
+.descent .dmk.sm .shape { --s: 26px; box-shadow: 0 0 0 4px var(--snow); }
+.descent .dmk.sm .g-red { box-shadow: inset 0 0 0 calc(var(--s) * .08) var(--red), inset 0 0 0 calc(var(--s) * .15) var(--snow), 0 0 0 4px var(--snow); }
+.descent .dmk.night .shape { box-shadow: 0 0 0 5px var(--ink); }
+.descent .dmk.night .g-blue { outline: 0; }
+.descent .dmk.on-orange .shape { box-shadow: 0 0 0 5px var(--orange); }
+.descent .dmk.sp-mk .shape { --s: 38px; box-shadow: 0 0 0 4px var(--snow); }
+.descent .dmk.gate .shape { --s: 34px; }
+.lane-tag { position: absolute; transform: translateX(-50%); width: 76px; padding: 3px 0 2px; background: var(--snow); text-align: center; font: 700 .72rem/1.25 var(--body); letter-spacing: .06em; text-transform: uppercase; font-variant-numeric: tabular-nums; pointer-events: none; }
+.lane-tag b { display: block; font: 900 1rem/1 var(--display); letter-spacing: .02em; }
+.lane-tag span { color: var(--muted); }
+html.gut .st-head .sign, html.lane .st-field .st-head .sign, html.lane .st-shipped .st-head .sign { display: none; }
+html.gut .st-head, html.lane .st-field .st-head, html.lane .st-shipped .st-head { gap: 0; }
+
+/* ---------- shared layout ---------- */
+.wrap { position: relative; z-index: 1; width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+@media (min-width: 768px) { .wrap { padding: 0 48px; } }
+main { position: relative; }
+@media (min-width: 1024px) { .st-field .wrap, .st-shipped .wrap { padding-left: 136px; } }
+.station { position: relative; padding: 72px 0 88px; overflow: hidden; }
+@media (min-width: 1024px) { .station { padding: 112px 0 128px; } }
+.station + .station { border-top: 1px solid var(--rule); }
+h2 { font: 900 clamp(3rem, 9vw, 5rem)/.92 var(--display); text-transform: uppercase; letter-spacing: -.005em; margin: 0; text-wrap: balance; }
+.lead { max-width: 62ch; margin: 28px 0 0; font-size: clamp(1.0625rem, 2.2vw, 1.25rem); line-height: 1.55; text-wrap: pretty; }
+.contours { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.contours path { fill: none; stroke: var(--ink); stroke-width: 1.2; stroke-opacity: .22; }
+.contours.faint path { stroke-opacity: .09; }
+.split { display: grid; gap: 40px; margin-top: 48px; align-items: start; }
+@media (min-width: 900px) { .split:has(.swap:not([hidden])) { grid-template-columns: 1.3fr 1fr; } }
+.swap { margin: 0; aspect-ratio: 4 / 5; background: var(--ink); border-radius: 6px; overflow: hidden; }
+.swap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* buttons & links */
+.btn { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 24px; font: 700 1rem/1 var(--body); text-decoration: none; border: 2px solid var(--ink); border-radius: 4px; cursor: pointer; transition: background .2s, color .2s, transform .2s var(--ease); }
+.btn-ink { background: var(--ink); color: var(--snow); }
+.btn-ink:hover { background: var(--snow); color: var(--ink); }
+.btn-line { background: transparent; color: var(--ink); }
+.btn-line:hover { background: var(--ink); color: var(--orange); }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: .55; cursor: progress; }
+.ulink { font-weight: 700; }
+.ulink:hover { color: var(--orange); background: var(--ink); text-decoration-color: transparent; padding: 0 4px; margin: 0 -4px; }
+
+/* ---------- map-sheet plate (hero + base camp) ---------- */
+.plate { --pad: 18px; position: relative; margin: 0; padding: var(--pad); }
+.plate-ruler { position: absolute; left: var(--pad); right: var(--pad); top: 0; height: var(--pad); display: flex; justify-content: space-between; align-items: center; font: 500 .6rem/1 var(--mono); letter-spacing: .06em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.plate-sheet { position: relative; aspect-ratio: 4 / 5; background: var(--snow); border: 3px solid var(--ink); overflow: hidden; }
+.plate-sheet > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; z-index: 3; }
+.plate-contours path { stroke-opacity: .2; stroke-width: 1; }
+.plate-art { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+.plate-art .sun { fill: var(--orange); }
+.plate-art .mass { fill: var(--ink); }
+.plate-art .hatch { fill: none; stroke: var(--snow); stroke-opacity: .55; stroke-width: 2; stroke-linecap: round; }
+.plate-art .gate { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; }
+.plate-art .tape { fill: none; stroke: var(--orange); stroke-width: 6; stroke-linecap: butt; }
+.plate-art .line { fill: none; stroke: var(--orange); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 2 11; }
+.plate-art .speed { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; stroke-opacity: .45; }
+.plate-art .rider .wheel { fill: var(--snow); stroke: var(--ink); stroke-width: 5; }
+.plate-art .rider .head { fill: var(--ink); }
+.plate-art .rider path { fill: none; stroke: var(--ink); stroke-linecap: round; stroke-linejoin: round; }
+.plate-art .rider .frame { stroke-width: 4; }
+.plate-art .rider .limb { stroke-width: 7; }
+.plate-art .rider .torso-o { stroke-width: 18; }
+.plate-art .rider .torso { stroke: var(--orange); stroke-width: 12; }
+.plate-art .rider .chin { stroke-width: 5; }
+.plate-art .rider .goggle { fill: var(--orange); stroke: var(--snow); stroke-width: 2; stroke-linejoin: round; }
+.plate-art .rider .num { fill: var(--ink); stroke: none; font: 900 10px var(--display); letter-spacing: .02em; }
+.plate-art .track-ski { fill: none; stroke: var(--snow); stroke-width: 2.5; stroke-linecap: round; }
+.plate-base .plate-art .line { stroke: var(--orange); stroke-width: 4; stroke-dasharray: 1 9; }
+.plate-art .tent { fill: var(--orange); stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+.plate-art .tent + .hatch { stroke: var(--ink); stroke-opacity: 1; }
+.crop { position: absolute; z-index: 4; width: 14px; height: 14px; border: 0 solid var(--ink); pointer-events: none; }
+.plate .crop { display: none; }
+.plate-cap { margin: 10px 0 0; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font: 700 .72rem/1.3 var(--body); letter-spacing: .08em; text-transform: uppercase; }
+.photo-tape { position: absolute; z-index: 6; top: 46px; left: -12px; transform: rotate(-5deg); background: var(--ink); color: var(--orange); font: 800 1rem/1 var(--display); letter-spacing: .12em; text-transform: uppercase; padding: 9px 16px 8px; box-shadow: 0 4px 10px rgba(14, 19, 23, .25); clip-path: polygon(0 0, 100% 0, 98% 50%, 100% 100%, 0 100%, 2% 50%); }
+.plate.has-photo .photo-tape { display: none; }
+.plate-cap .cap-note { font-weight: 500; letter-spacing: .04em; text-transform: none; }
+.plate .cap-photo { display: none; }
+.plate.has-photo .cap-photo { display: inline; }
+.plate.has-photo .cap-art { display: none; }
+.plate.has-photo .plate-art, .plate.has-photo .plate-contours { display: none; }
+.plate:not(.has-photo) .plate-sheet > img { display: none; }
+
+/* ---------- HERO ---------- */
+.hero { position: relative; background: var(--orange); min-height: 100svh; display: flex; flex-direction: column; overflow: hidden; }
+.hero .contours path { stroke-opacity: .28; }
+.hero .plate-contours path { stroke-opacity: .2; }
+.hero-inner { position: relative; z-index: 2; width: 100%; max-width: 1120px; margin: 0 auto; padding: 76px 20px 0; flex: 1; display: grid; gap: 32px; align-content: start; }
+@media (min-width: 768px) { .hero-inner { padding: 76px 48px 0; } }
+.hero-copy { position: relative; z-index: 3; }
+@media (min-width: 960px) {
+  .hero-inner { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 56px; align-items: center; align-content: center; padding-top: 48px; padding-bottom: 0; }
+  .hero .plate { max-width: 560px; justify-self: end; width: 100%; transform: translateX(-72px) rotate(1.4deg); transform-origin: 50% 60%; z-index: 1; }
+  .hero-name span + span { margin-left: min(13vw, 190px); }
+}
+.hero .plate-sheet { aspect-ratio: 1 / 1; }
+@media (min-width: 960px) { .hero .plate-sheet { aspect-ratio: 400 / 470; max-height: 66vh; } }
+.hero-name { position: relative; z-index: 3; font: 900 clamp(4.4rem, 17vw, 6rem)/.86 var(--display); text-transform: uppercase; letter-spacing: -.01em; margin: 0; }
+.hero-name span { display: block; }
+.hero-sentence { max-width: 24ch; margin: 28px 0 0; font: 500 clamp(1.4rem, 3.6vw, 2rem)/1.2 var(--body); text-wrap: balance; }
+.hero-role { max-width: 34ch; margin: 14px 0 0; color: var(--on-orange-muted); font-size: .95rem; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.hero .btn-ink:hover { background: var(--snow); }
+.hero-route { position: relative; z-index: 1; display: block; width: 100%; height: 16vh; min-height: 100px; max-height: 170px; color: var(--ink); margin-top: 8px; clip-path: inset(0 0 0 0); }
+
+/* ---------- S1 board ---------- */
+.board { background: var(--ink); color: var(--on-ink); border-radius: 6px; padding: 8px 20px 16px; }
+@media (min-width: 768px) { .board { padding: 12px 32px 20px; } }
+.board-head, .board-row { display: grid; grid-template-columns: 2.2rem 4.2rem 1fr; gap: 16px; align-items: baseline; }
+@media (min-width: 640px) { .board-head, .board-row { grid-template-columns: 3rem 6rem 1fr; } }
+@media (min-width: 1024px) { .board-head, .board-row { grid-template-columns: 6rem 1fr; } .board .sp, .board .col-sp { display: none; } }
+.board-head { padding: 12px 0; font: 700 .72rem/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--on-ink-muted); border-bottom: 1px solid rgba(233, 238, 241, .25); }
+.board-row { padding: 16px 0; border-bottom: 1px solid rgba(233, 238, 241, .14); transition: background .2s; }
+.board-row .sp { font: 500 .85rem/1 var(--mono); color: var(--on-ink-muted); font-variant-numeric: tabular-nums; }
+.board-row:hover { background: rgba(255, 91, 31, .1); }
+.board-row .t { font: 500 1.35rem/1 var(--mono); color: var(--orange); font-variant-numeric: tabular-nums; }
+.board-row .ev { font: 800 clamp(1.75rem, 5vw, 2.75rem)/1 var(--display); text-transform: uppercase; letter-spacing: .01em; }
+.board-row .ev small { font: 700 .72rem/1 var(--body); letter-spacing: .08em; color: var(--on-ink-muted); margin-left: 10px; text-transform: uppercase; vertical-align: middle; }
+.board-foot { margin: 18px 0 0; font: 400 .9rem/1.6 var(--body); color: var(--on-ink-muted); }
+
+/* ---------- S2 trails ---------- */
+.grade-note { display: flex; gap: 12px; align-items: flex-start; max-width: 62ch; margin: 20px 0 0; font-size: .95rem; line-height: 1.5; color: var(--muted); }
+.grade-note .shape { --s: 18px; margin-top: 3px; }
+.grade-note b { color: var(--ink); }
+.legend { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 28px 0 0; padding: 0; font-size: .9rem; color: var(--muted); }
+.legend li { display: flex; align-items: center; gap: 8px; }
+.legend .shape { --s: 18px; }
+.trails { margin-top: 24px; border-top: 2px solid var(--ink); }
+.trail { border-bottom: 1px solid var(--rule); }
+.trail h3 { margin: 0; font: inherit; }
+.trail-head { width: 100%; display: grid; grid-template-columns: auto 1fr auto; grid-template-areas: "sign title chev" "sign sum chev" "sign cx chev" "sign year chev"; gap: 2px 16px; align-items: center; text-align: left; padding: 22px 0; background: none; border: 0; color: inherit; cursor: pointer; font: inherit; transition: padding .3s var(--ease), background .2s; }
+.trail-head .sign { grid-area: sign; --s: 40px; }
+.trail-title { grid-area: title; justify-self: start; padding-bottom: 6px; background: linear-gradient(var(--orange), var(--orange)) 0 100% / 0 4px no-repeat; transition: background-size .35s var(--ease); font: 900 clamp(1.9rem, 5.5vw, 3rem)/1 var(--display); text-transform: uppercase; }
+.trail-sum { grid-area: sum; color: var(--muted); font-size: 1rem; line-height: 1.4; }
+.trail-cx { grid-area: cx; font-size: .9rem; color: var(--muted); margin-top: 4px; }
+.trail-cx b { color: var(--ink); font-weight: 700; }
+.trail-year { grid-area: year; font: 500 .85rem/1.4 var(--body); color: var(--muted); font-variant-numeric: tabular-nums; }
+.chev { grid-area: chev; transition: transform .35s var(--ease); }
+.trail-head:hover .trail-title, .trail-head:focus-visible .trail-title { background-size: 100% 4px; }
+.trail-head[aria-expanded="true"] .chev { transform: rotate(180deg); }
+@media (min-width: 900px) {
+  .trail-head { grid-template-columns: auto minmax(0, 1.1fr) minmax(0, 1.2fr) 7rem auto; grid-template-areas: "sign title sum year chev" "sign cx cx cx chev"; gap: 2px 24px; }
+  .trail-year { text-align: right; }
+  html.lane .trail-head { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr) auto; grid-template-areas: "title sum chev" "cx cx chev"; }
+  html.lane .trail-head .sign { display: none; }
+  html.lane .trail-year { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  html.lane .trail-inner { padding-left: 0; }
+}
+.trail-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s var(--ease); visibility: hidden; }
+.trail.open .trail-panel { grid-template-rows: 1fr; visibility: visible; }
+.trail-inner { overflow: hidden; display: grid; gap: 20px; padding: 0 0 0 0; min-height: 0; }
+.trail.open .trail-inner { padding-bottom: 32px; }
+@media (min-width: 900px) { .trail-inner { grid-template-columns: 1.4fr 1fr; gap: 48px; padding-left: 56px; } }
+.trail-inner p { margin: 0 0 12px; max-width: 62ch; }
+.trail-inner .note { color: var(--muted); font-size: .95rem; }
+.tech { font: 500 .9rem/1.7 var(--body); color: var(--muted); }
+.trail-meta { display: flex; flex-direction: column; gap: 12px; }
+
+/* ---------- S3 night control room: git log as evidence ---------- */
+.st-ai { background: var(--ink); color: var(--on-ink); border-top: 0 !important; }
+.st-ai .lead { max-width: 58ch; }
+.proof { display: grid; gap: 56px; margin-top: 48px; }
+@media (min-width: 1100px) { .proof { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 72px; } }
+.commits-cmd { margin: 0 0 12px; font: 400 .85rem/1.4 var(--mono); color: var(--on-ink-muted); overflow-wrap: anywhere; }
+.cmd-note { color: var(--orange); white-space: nowrap; }
+.commit-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--orange); }
+.commit-list li { display: grid; grid-template-columns: 4.4rem 1fr; grid-template-areas: "h m" "d m"; gap: 0 14px; padding: 11px 0; border-bottom: 1px solid rgba(233, 238, 241, .14); font: 400 .85rem/1.5 var(--mono); }
+.commit-list .h { grid-area: h; color: var(--orange); }
+.commit-list time { grid-area: d; color: var(--on-ink-muted); font-size: .75rem; font-variant-numeric: tabular-nums; }
+.commit-list .m { grid-area: m; overflow-wrap: anywhere; }
+@media (min-width: 640px) { .commit-list li { grid-template-columns: 4.4rem 6.4rem 1fr; grid-template-areas: "h d m"; } }
+.commit-list li:first-child .m { color: #fff; }
+.commits-note { margin: 16px 0 0; font-size: .9rem; color: var(--on-ink-muted); max-width: 60ch; }
+.uses-h { margin: 0; padding-bottom: 12px; border-bottom: 2px solid var(--orange); font: 800 1.9rem/1 var(--display); text-transform: uppercase; }
+.uses-list { margin: 0; }
+.uses-list > div { padding: 18px 0; border-bottom: 1px solid rgba(233, 238, 241, .14); }
+.uses-list dt { font: 800 1.45rem/1.1 var(--display); text-transform: uppercase; letter-spacing: .01em; color: #fff; }
+.uses-list dd { margin: 6px 0 0; max-width: 46ch; color: var(--on-ink); }
+
+/* ---------- S4 ---------- */
+#the-line { margin-top: 36px; }
+.fallback { display: none; color: var(--muted); }
+.st-line.no-game .fallback.pl { display: block; }
+html[data-lang="en"] .st-line.no-game .fallback.en { display: block; }
+html[data-lang="pl"] .st-line.no-game .fallback.en { display: none; }
+.skiplink { margin: 24px 0 0; }
+
+/* ---------- S5 spread ---------- */
+.spread { display: grid; gap: 40px; margin-top: 44px; align-items: start; }
+@media (min-width: 900px) { .spread { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 72px; } .plate-base { transform: rotate(-1.2deg); } }
+.plate-base { max-width: 420px; }
+.camp-big { margin: 0; font: 900 clamp(2.2rem, 5.2vw, 3.5rem)/.98 var(--display); text-transform: uppercase; max-width: 15ch; text-wrap: balance; }
+.camp-text { margin-top: 28px; max-width: 54ch; }
+.camp-text p { margin: 0 0 14px; }
+.camp-text p:first-child { font-weight: 500; font-size: 1.15rem; }
+
+/* ---------- FINISH ---------- */
+.st-finish { background: var(--orange); border-top: 0 !important; padding-top: 0; }
+.st-finish .contours path { stroke-opacity: .28; }
+.checker { height: 28px; margin-bottom: 72px; background: repeating-conic-gradient(var(--ink) 0 25%, var(--orange) 0 50%) 0 0 / 28px 28px; position: relative; z-index: 1; }
+.finish-grid { display: grid; gap: 48px; margin-top: 44px; }
+@media (min-width: 960px) { .finish-grid { grid-template-columns: 1.1fr 1fr; gap: 72px; } }
+.big-mail { display: inline-block; font: 900 clamp(1.55rem, 3.6vw, 2.9rem)/1.05 var(--display); text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; text-decoration-thickness: 4px; }
+.big-mail:hover { background: var(--ink); color: var(--orange); text-decoration-color: transparent; }
+.contact-list { list-style: none; margin: 36px 0 0; padding: 0; border-top: 2px solid var(--ink); }
+.contact-list li { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 14px 0; border-bottom: 1px solid rgba(14, 19, 23, .3); color: var(--on-orange-muted); }
+.contact-list .cl { font-weight: 500; }
+.contact-list a { color: var(--ink); font-weight: 700; }
+.form { display: grid; gap: 8px; align-content: start; }
+.form label { font-weight: 700; font-size: .95rem; margin-top: 8px; }
+.form input, .form textarea { width: 100%; font: 400 1rem/1.4 var(--body); color: var(--ink); background: var(--snow); border: 2px solid var(--ink); border-radius: 4px; padding: 12px 14px; min-height: 48px; }
+.form textarea { resize: vertical; min-height: 140px; }
+.form input:focus, .form textarea:focus { outline: 3px solid var(--ink); outline-offset: 2px; }
+.form input:user-invalid, .form textarea:user-invalid { border-color: var(--red); background: #fff; }
+.form .btn { justify-self: start; margin-top: 12px; }
+.hp { position: absolute !important; left: -9999px; }
+.form-status { min-height: 1.5em; margin: 4px 0 0; font-weight: 700; }
+.form-status.error { background: var(--ink); color: #fff; padding: 8px 12px; border-radius: 4px; }
+.form-status.success { background: var(--ink); color: #6FE3A0; padding: 8px 12px; border-radius: 4px; }
+.foot { background: var(--ink); color: var(--on-ink-muted); padding: 28px 0; font: 400 .9rem/1.4 var(--body); }
+.foot p { margin: 0; }
+
+/* ---------- the one authored moment: the line draws, contours draw in ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .js .hero-route { animation: draw-route 2.4s var(--ease) .3s both; }
+  .js .hero .contours:not(.plate-contours) path, .js .contours.faint path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 3.2s var(--ease) both; animation-delay: calc(var(--i, 0) * 70ms); }
+  .js .plate-art .line { animation: fade-in 1.4s var(--ease) .9s both; }
+}
+@keyframes draw-route { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+/* v11 */
+.arr { width: .9em; height: .9em; vertical-align: -.1em; margin-left: .2em; }
+.rule-ex { margin: 24px 0 0; padding: 14px 16px; border: 1px solid rgba(255, 91, 31, .55); background: rgba(233, 238, 241, .06); }
+.rule-ex figcaption { font-size: .85rem; color: var(--on-ink-muted); }
+.rule-ex blockquote { margin: 8px 0 0; font: 400 .9rem/1.5 var(--mono); color: #fff; }
+.trails { padding: 0 14px; }
+@media (min-width: 1024px) { .station + .station { border-top: 0; } .station + .station::before { content: ''; position: absolute; top: 0; left: 16px; right: 16px; height: 1px; background: var(--rule); } }
+@media (min-width: 960px) and (max-width: 1199px) {
+  .hero .plate { transform: rotate(1.4deg); max-width: 460px; }
+  .hero-inner { gap: 72px; }
+  .cta-row { margin-top: 36px; position: relative; z-index: 4; }
 }

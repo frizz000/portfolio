@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "css/game.css"
+        ],
+        "createdAt": "2026-10-15T20:26:37.146Z",
+        "reason": "false positive: 2px divider between segmented MTB/SKI toggle buttons, not a card accent border"
+      }
+    ]
+  }
+}

@@ -1,698 +1,397 @@
 <!DOCTYPE html>
 <html lang="pl" data-lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piotr Jałocha | Developer & Smart Home Enthusiast</title>
-    <meta name="description" content="Inżynier informatyki (PJATK), marketing sportowy, pasjonat smart home. Tworzenie stron, konfiguracja Home Assistant, Proxmox, sieci domowe.">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='8' fill='%230a58f7'/><text x='50' y='68' font-family='Tahoma,Arial,sans-serif' font-size='48' font-weight='bold' fill='white' text-anchor='middle'>pj</text></svg>">
-    <link rel="stylesheet" href="https://unpkg.com/xp.css/dist/XP.css">
-    <link rel="stylesheet" href="css/style.css?v=5">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piotr Jałocha | Eventy na żywo i oprogramowanie z AI</title>
+<meta name="description" content="Piotr Jałocha: Sport Event Marketing Support w Red Bull, inżynier informatyki. Prowadzi eventy na żywo i buduje narzędzia dla nich z pomocą AI.">
+<meta name="theme-color" content="#FF5B1F">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23FF5B1F'/%3E%3Cpath d='M10 14 C26 14 22 30 34 32 S40 50 54 50' fill='none' stroke='%230E1317' stroke-width='7' stroke-linecap='round'/%3E%3Ccircle cx='54' cy='50' r='5' fill='%230E1317'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=11">
+<link rel="stylesheet" href="css/game.css?v=11">
 </head>
 <body>
+<a class="skip" href="#field"><span class="pl">Pomiń do treści</span><span class="en">Skip to content</span></a>
 
-<!-- ─── ICON SPRITE (Luna-style desktop / start-menu icons) ─── -->
-<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
-    <defs>
-        <linearGradient id="gradPaper" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#ffffff"/>
-            <stop offset="1" stop-color="#e9ecef"/>
-        </linearGradient>
-        <linearGradient id="gradFolderBack" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#ffdd7a"/>
-            <stop offset="1" stop-color="#e6a622"/>
-        </linearGradient>
-        <linearGradient id="gradFolderFront" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#ffe89c"/>
-            <stop offset="0.5" stop-color="#ffc94d"/>
-            <stop offset="1" stop-color="#f5a623"/>
-        </linearGradient>
-        <linearGradient id="gradEnvelope" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#ffffff"/>
-            <stop offset="1" stop-color="#dbe7f8"/>
-        </linearGradient>
-        <radialGradient id="gradBomb" cx="0.35" cy="0.3" r="0.85">
-            <stop offset="0" stop-color="#5c5c5c"/>
-            <stop offset="0.55" stop-color="#1a1a1a"/>
-            <stop offset="1" stop-color="#000000"/>
-        </radialGradient>
-        <linearGradient id="gradMonBody" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#fbfbfb"/>
-            <stop offset="1" stop-color="#bdbdbd"/>
-        </linearGradient>
-        <linearGradient id="gradMonScreen" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#9dd0ff"/>
-            <stop offset="1" stop-color="#1948b0"/>
-        </linearGradient>
-        <linearGradient id="gradBin" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#eef1f4"/>
-            <stop offset="1" stop-color="#a3a9af"/>
-        </linearGradient>
-
-        <symbol id="icon-notepad" viewBox="0 0 32 32">
-            <path d="M7 3h13l5 5v21H7z" fill="url(#gradPaper)" stroke="#8a8a8a" stroke-width="0.6"/>
-            <path d="M20 3l5 5h-5z" fill="#d6d6d6" stroke="#8a8a8a" stroke-width="0.6"/>
-            <rect x="10" y="13" width="13" height="1.6" fill="#3a6ea5"/>
-            <rect x="10" y="17" width="13" height="1.6" fill="#3a6ea5"/>
-            <rect x="10" y="21" width="9" height="1.6" fill="#3a6ea5"/>
-            <rect x="10" y="25" width="12" height="1.6" fill="#e0a02c"/>
-        </symbol>
-
-        <symbol id="icon-folder" viewBox="0 0 32 32">
-            <path d="M3 9h10l2 -2.5h12a2 2 0 0 1 2 2V12H3z" fill="url(#gradFolderBack)" stroke="#a8790f" stroke-width="0.5"/>
-            <path d="M3 12h26a2 2 0 0 1 2 2l-2 12.5a2 2 0 0 1 -2 1.8H5a2 2 0 0 1 -2 -1.8z" fill="url(#gradFolderFront)" stroke="#a8790f" stroke-width="0.5"/>
-        </symbol>
-
-        <symbol id="icon-mail" viewBox="0 0 32 32">
-            <rect x="2" y="8" width="28" height="18" rx="2" fill="url(#gradEnvelope)" stroke="#3a6ea5" stroke-width="1"/>
-            <path d="M2.5 8.5L16 18l13.5 -9.5" fill="none" stroke="#3a6ea5" stroke-width="1.3"/>
-        </symbol>
-
-        <symbol id="icon-bomb" viewBox="0 0 32 32">
-            <circle cx="16" cy="19" r="11" fill="url(#gradBomb)"/>
-            <path d="M17 8c1 -3 4 -4 6 -3" stroke="#6b6b6b" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-            <circle cx="23.5" cy="4.5" r="2" fill="#ffcc33"/>
-            <circle cx="12" cy="15" r="2.4" fill="#ffffff" opacity="0.35"/>
-        </symbol>
-
-        <symbol id="icon-monitor" viewBox="0 0 32 32">
-            <rect x="3" y="4" width="26" height="18" rx="2" fill="url(#gradMonBody)" stroke="#8a8a8a" stroke-width="1"/>
-            <rect x="6" y="7" width="20" height="12" fill="url(#gradMonScreen)"/>
-            <rect x="12" y="23" width="8" height="3" fill="#c9c9c9"/>
-            <rect x="9" y="26.5" width="14" height="2.4" rx="1" fill="#b7b7b7"/>
-        </symbol>
-
-        <symbol id="icon-bin" viewBox="0 0 32 32">
-            <rect x="13" y="4" width="6" height="2.4" rx="1" fill="#b9bec4"/>
-            <rect x="7" y="7.5" width="18" height="3" rx="1" fill="#c3c8cd" stroke="#7f858c" stroke-width="0.6"/>
-            <path d="M9 11h14l-1.4 16.2a2 2 0 0 1 -2 1.8h-7.2a2 2 0 0 1 -2 -1.8z" fill="url(#gradBin)" stroke="#7f858c" stroke-width="1"/>
-            <line x1="13.2" y1="14" x2="13.9" y2="25" stroke="#7f858c" stroke-width="1"/>
-            <line x1="16" y1="14" x2="16" y2="25" stroke="#7f858c" stroke-width="1"/>
-            <line x1="18.8" y1="14" x2="18.1" y2="25" stroke="#7f858c" stroke-width="1"/>
-        </symbol>
-    </defs>
-</svg>
-
-<div id="desktop">
-
-    <div class="desktop-icons">
-        <button class="desktop-icon" data-app="about" type="button">
-            <span class="icon-glyph"><svg class="icon-svg" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-notepad"></use></svg></span>
-            <span class="icon-label pl">O mnie</span>
-            <span class="icon-label en">About me</span>
-        </button>
-        <button class="desktop-icon" data-app="projects" type="button">
-            <span class="icon-glyph"><svg class="icon-svg" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-folder"></use></svg></span>
-            <span class="icon-label pl">Projekty</span>
-            <span class="icon-label en">Projects</span>
-        </button>
-        <button class="desktop-icon" data-app="contact" type="button">
-            <span class="icon-glyph"><svg class="icon-svg" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-mail"></use></svg></span>
-            <span class="icon-label pl">Kontakt</span>
-            <span class="icon-label en">Contact</span>
-        </button>
-        <button class="desktop-icon" data-app="saper" type="button">
-            <span class="icon-glyph"><svg class="icon-svg" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-bomb"></use></svg></span>
-            <span class="icon-label pl">Saper</span>
-            <span class="icon-label en">Minesweeper</span>
-        </button>
-        <button class="desktop-icon" data-app="mycomputer" type="button">
-            <span class="icon-glyph"><svg class="icon-svg" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-monitor"></use></svg></span>
-            <span class="icon-label pl">Mój Komputer</span>
-            <span class="icon-label en">My Computer</span>
-        </button>
-        <button class="desktop-icon" data-app="trash" type="button">
-            <span class="icon-glyph"><svg class="icon-svg" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-bin"></use></svg></span>
-            <span class="icon-label pl">Kosz</span>
-            <span class="icon-label en">Recycle Bin</span>
-        </button>
-    </div>
-
-    <!-- ─── WITAJ.TXT (default open) ─── -->
-    <div class="window os-window" id="win-welcome" data-app="welcome">
-        <div class="title-bar">
-            <div class="title-bar-text pl">📝 Witaj.txt - Notatnik</div>
-            <div class="title-bar-text en">📝 Witaj.txt - Notepad</div>
-            <div class="title-bar-controls">
-                <button aria-label="Minimize" data-win-action="minimize"></button>
-                <button aria-label="Maximize" data-win-action="maximize"></button>
-                <button aria-label="Close" data-win-action="close"></button>
-            </div>
-        </div>
-        <div class="window-body">
-            <p class="welcome-name">Piotr Jałocha</p>
-            <p class="welcome-role pl">Programista i pasjonat smart home</p>
-            <p class="welcome-role en">Developer &amp; smart home enthusiast</p>
-            <p class="section-sub pl">Inżynier informatyki (PJATK), aktualnie pracuję w marketingu sportowym. Wcześniej instruktor programowania, teraz zajmuję się też smart home, tworzeniem stron i usługami IT.</p>
-            <p class="section-sub en">Computer science engineer (PJATK), currently working in sports marketing. Former programming instructor, also doing smart home setups, web development and IT services.</p>
-            <div class="hero-ctas">
-                <button class="btn-xp btn-xp-primary" type="button" data-open-app="contact">
-                    <span class="pl">Napisz do mnie →</span>
-                    <span class="en">Get in touch →</span>
-                </button>
-                <button class="btn-xp" type="button" data-open-app="projects">
-                    <span class="pl">Zobacz projekty</span>
-                    <span class="en">View projects</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ─── TERMINAL (default open) ─── -->
-    <div class="window os-window" id="win-terminal" data-app="terminal">
-        <div class="title-bar">
-            <div class="title-bar-text pl">Wiersz polecenia: piotr@homelab</div>
-            <div class="title-bar-text en">Command Prompt: piotr@homelab</div>
-            <div class="title-bar-controls">
-                <button aria-label="Minimize" data-win-action="minimize"></button>
-                <button aria-label="Maximize" data-win-action="maximize"></button>
-                <button aria-label="Close" data-win-action="close"></button>
-            </div>
-        </div>
-        <div class="window-body terminal-body">
-            <div class="t-line">
-                <span class="t-prompt">C:\home\piotr&gt;</span>
-                <span class="t-cmd">type about.json</span>
-            </div>
-            <div class="t-line"><span class="t-out">{</span></div>
-            <div class="t-line"><span class="t-out">&nbsp;&nbsp;"name": <span class="green">"Piotr Jałocha"</span>,</span></div>
-            <div class="t-line"><span class="t-out">&nbsp;&nbsp;"role": <span class="green">"Sports Marketing & Dev"</span>,</span></div>
-            <div class="t-line"><span class="t-out">&nbsp;&nbsp;"edu": <span class="green">"PJATK MSc"</span>,</span></div>
-            <div class="t-line"><span class="t-out">&nbsp;&nbsp;"skills": [</span></div>
-            <div class="t-line"><span class="t-out">&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">"Java"</span>, <span class="green">"Python"</span>, <span class="green">"Js"</span>, <span class="green">"React"</span>, <span class="green">"Node.js"</span>,</span></div>
-            <div class="t-line"><span class="t-out">&nbsp;&nbsp;&nbsp;&nbsp;<span class="green">"Home Assistant"</span>, <span class="green">"Proxmox"</span></span></div>
-            <div class="t-line"><span class="t-out">&nbsp;&nbsp;]</span></div>
-            <div class="t-line"><span class="t-out">}</span></div>
-            <div class="t-line">
-                <span class="t-prompt">C:\home\piotr&gt;</span>
-                <span class="t-cmd">uptime homelab</span>
-            </div>
-            <div class="t-line"><span class="t-out green">✓ All services operational</span></div>
-            <div class="t-line"><span class="t-out dim">  Proxmox 8.4 · HA 17.0 · 4 LXC</span></div>
-            <div class="t-line">
-                <span class="t-prompt">C:\home\piotr&gt;</span>
-                <span class="t-cmd"><span class="t-cursor"></span></span>
-            </div>
-        </div>
-    </div>
-
-    <!-- ─── O MNIE ─── -->
-    <div class="window os-window" id="win-about" data-app="about">
-        <div class="title-bar">
-            <div class="title-bar-text">Właściwości: Piotr Jałocha</div>
-            <div class="title-bar-controls">
-                <button aria-label="Minimize" data-win-action="minimize"></button>
-                <button aria-label="Maximize" data-win-action="maximize"></button>
-                <button aria-label="Close" data-win-action="close"></button>
-            </div>
-        </div>
-        <div class="window-body">
-            <div class="about-grid">
-                <div>
-                    <p class="section-sub pl">Kończę studia magisterskie na PJATK. Na co dzień zajmuję się marketingiem sportowym, wcześniej pracowałem jako instruktor programowania. Po godzinach rozwijam własny homelab i pomagam przy smart home.</p>
-                    <p class="section-sub en">Finishing my master's at PJATK. Currently working in sports marketing, used to be a programming instructor. After hours I run my own homelab and help people with smart home setups.</p>
-
-                    <fieldset>
-                        <legend>Dev</legend>
-                        <div class="skill-group">
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">Java</span>
-                            <span class="skill-tag">JS</span>
-                            <span class="skill-tag">React</span>
-                            <span class="skill-tag">Node.js</span>
-                            <span class="skill-tag">SQL</span>
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>Infra</legend>
-                        <div class="skill-group">
-                            <span class="skill-tag">Proxmox</span>
-                            <span class="skill-tag">Docker</span>
-                            <span class="skill-tag">Linux</span>
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>Smart Home</legend>
-                        <div class="skill-group">
-                            <span class="skill-tag">Home Assistant</span>
-                            <span class="skill-tag">Zigbee2MQTT</span>
-                        </div>
-                    </fieldset>
-                    <fieldset>
-                        <legend>Network</legend>
-                        <div class="skill-group">
-                            <span class="skill-tag">Cloudflare</span>
-                            <span class="skill-tag">Tailscale</span>
-                        </div>
-                    </fieldset>
-                </div>
-                <div>
-                    <fieldset>
-                        <legend class="pl">Statystyki</legend>
-                        <legend class="en">Statistics</legend>
-                        <div class="about-stats">
-                            <div class="stat-card">
-                                <div class="stat-num">3+</div>
-                                <div class="stat-label pl">lata doświadczenia w nauczaniu</div>
-                                <div class="stat-label en">years teaching experience</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-num">PJATK</div>
-                                <div class="stat-label pl">Inżynieria + Magister</div>
-                                <div class="stat-label en">BSc + MSc in progress</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-num">24/7</div>
-                                <div class="stat-label pl">homelab online</div>
-                                <div class="stat-label en">homelab uptime</div>
-                            </div>
-                            <div class="stat-card">
-                                <div class="stat-num">∞</div>
-                                <div class="stat-label pl">pasja do automatyzacji</div>
-                                <div class="stat-label en">passion for automation</div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
-        </div>
-        <div class="status-bar">
-            <p class="status-bar-field pl">Gotowy</p>
-            <p class="status-bar-field en">Ready</p>
-            <p class="status-bar-field">PJATK · Otwock, PL</p>
-        </div>
-    </div>
-
-    <!-- ─── PROJEKTY ─── -->
-    <div class="window os-window" id="win-projects" data-app="projects">
-        <div class="title-bar">
-            <div class="title-bar-text pl">📁 Eksplorator - Projekty</div>
-            <div class="title-bar-text en">📁 Explorer - Projects</div>
-            <div class="title-bar-controls">
-                <button aria-label="Minimize" data-win-action="minimize"></button>
-                <button aria-label="Maximize" data-win-action="maximize"></button>
-                <button aria-label="Close" data-win-action="close"></button>
-            </div>
-        </div>
-        <div class="window-body">
-            <p class="section-sub pl">Wybrane realizacje łączące automatykę budynkową, inżynierię oprogramowania i infrastrukturę self-hosted. Kliknij okno, aby zobaczyć szczegóły.</p>
-            <p class="section-sub en">Selected work combining building automation, software engineering and self-hosted infrastructure. Click a window to see details.</p>
-
-            <div class="projects-grid">
-
-                <article class="window project-card" data-project="homelab" tabindex="0" role="button" aria-haspopup="dialog">
-                    <div class="title-bar">
-                        <div class="title-bar-text">🏠 <span class="pl">Home Lab & Automatyka</span><span class="en">Home Lab & Automation</span></div>
-                        <div class="title-bar-controls">
-                            <button aria-label="Minimize" tabindex="-1" aria-hidden="true"></button>
-                            <button aria-label="Maximize" tabindex="-1" aria-hidden="true"></button>
-                            <button aria-label="Close" tabindex="-1" aria-hidden="true"></button>
-                        </div>
-                    </div>
-                    <div class="window-body">
-                        <p class="project-desc pl">Kompletna infrastruktura oparta na Proxmox VE i Home Assistant, sterująca fizycznymi instalacjami domowymi.</p>
-                        <p class="project-desc en">A complete infrastructure built on Proxmox VE and Home Assistant, controlling real physical home installations.</p>
-                        <div class="project-tags">
-                            <span class="tech-tag">Proxmox</span>
-                            <span class="tech-tag">Home Assistant</span>
-                            <span class="tech-tag">Docker</span>
-                            <span class="tech-tag">Sieci LAN</span>
-                            <span class="tech-tag">IoT</span>
-                        </div>
-                        <button class="btn-xp" type="button" data-open-modal="homelab">
-                            <span class="pl">Zobacz szczegóły →</span>
-                            <span class="en">View details →</span>
-                        </button>
-                    </div>
-                </article>
-
-                <article class="window project-card" data-project="talenttrop" tabindex="0" role="button" aria-haspopup="dialog">
-                    <div class="title-bar">
-                        <div class="title-bar-text">🎯 <span class="pl">Talent Trop - Skauting AI</span><span class="en">Talent Trop - AI Scouting</span></div>
-                        <div class="title-bar-controls">
-                            <button aria-label="Minimize" tabindex="-1" aria-hidden="true"></button>
-                            <button aria-label="Maximize" tabindex="-1" aria-hidden="true"></button>
-                            <button aria-label="Close" tabindex="-1" aria-hidden="true"></button>
-                        </div>
-                    </div>
-                    <div class="window-body">
-                        <p class="project-desc pl">Platforma do skautingu sportowego z analizą danych opartą na modelach językowych (LLM).</p>
-                        <p class="project-desc en">A sports scouting platform with data analysis powered by large language models (LLM).</p>
-                        <div class="project-tags">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Vercel</span>
-                            <span class="tech-tag">Supabase</span>
-                            <span class="tech-tag">LLM (ChatGPT/Claude)</span>
-                        </div>
-                        <button class="btn-xp" type="button" data-open-modal="talenttrop">
-                            <span class="pl">Zobacz szczegóły →</span>
-                            <span class="en">View details →</span>
-                        </button>
-                    </div>
-                </article>
-
-                <article class="window project-card" data-project="calltime" tabindex="0" role="button" aria-haspopup="dialog">
-                    <div class="title-bar">
-                        <div class="title-bar-text">📅 Calltime - Event Management PWA</div>
-                        <div class="title-bar-controls">
-                            <button aria-label="Minimize" tabindex="-1" aria-hidden="true"></button>
-                            <button aria-label="Maximize" tabindex="-1" aria-hidden="true"></button>
-                            <button aria-label="Close" tabindex="-1" aria-hidden="true"></button>
-                        </div>
-                    </div>
-                    <div class="window-body">
-                        <p class="project-desc pl">Aplikacja wielodostępna (PWA) optymalizująca logistykę masowych wydarzeń.</p>
-                        <p class="project-desc en">A multi-tenant PWA app streamlining logistics for large-scale events.</p>
-                        <div class="project-tags">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Supabase</span>
-                            <span class="tech-tag">Vercel</span>
-                        </div>
-                        <button class="btn-xp" type="button" data-open-modal="calltime">
-                            <span class="pl">Zobacz szczegóły →</span>
-                            <span class="en">View details →</span>
-                        </button>
-                    </div>
-                </article>
-
-                <article class="window project-card" data-project="mundialtyper" tabindex="0" role="button" aria-haspopup="dialog">
-                    <div class="title-bar">
-                        <div class="title-bar-text">⚽ Mundial Typer 2026</div>
-                        <div class="title-bar-controls">
-                            <button aria-label="Minimize" tabindex="-1" aria-hidden="true"></button>
-                            <button aria-label="Maximize" tabindex="-1" aria-hidden="true"></button>
-                            <button aria-label="Close" tabindex="-1" aria-hidden="true"></button>
-                        </div>
-                    </div>
-                    <div class="window-body">
-                        <p class="project-desc pl">Prywatna aplikacja do typowania wyników meczów Mistrzostw Świata 2026, z rankingiem, drabinką pucharową i kalendarzem iCal.</p>
-                        <p class="project-desc en">A private app for predicting World Cup 2026 match results, with rankings, a knockout bracket and an iCal calendar feed.</p>
-                        <div class="project-tags">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">FastAPI</span>
-                            <span class="tech-tag">SQLite</span>
-                            <span class="tech-tag">Vanilla JS</span>
-                        </div>
-                        <button class="btn-xp" type="button" data-open-modal="mundialtyper">
-                            <span class="pl">Zobacz szczegóły →</span>
-                            <span class="en">View details →</span>
-                        </button>
-                    </div>
-                </article>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- ─── KONTAKT ─── -->
-    <div class="window os-window" id="win-contact" data-app="contact">
-        <div class="title-bar">
-            <div class="title-bar-text pl">Nowa wiadomość</div>
-            <div class="title-bar-text en">New message</div>
-            <div class="title-bar-controls">
-                <button aria-label="Minimize" data-win-action="minimize"></button>
-                <button aria-label="Maximize" data-win-action="maximize"></button>
-                <button aria-label="Close" data-win-action="close"></button>
-            </div>
-        </div>
-        <div class="window-body">
-            <p class="section-sub pl">Masz pytania o korepetycje, inteligentny dom lub usługi IT? Napisz - odpiszę najszybciej jak mogę.</p>
-            <p class="section-sub en">Questions about tutoring, smart home, or IT services? Write to me - I'll reply as fast as I can.</p>
-
-            <div class="contact-grid">
-                <div class="contact-info">
-
-                    <div class="contact-item">
-                        <span class="contact-icon">📍</span>
-                        <div>
-                            <div class="contact-label pl">Lokalizacja</div>
-                            <div class="contact-label en">Location</div>
-                            <div class="contact-value">Otwock, Mazowieckie</div>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <span class="contact-icon">💬</span>
-                        <div>
-                            <div class="contact-label">WhatsApp</div>
-                            <div class="contact-value"><a href="https://wa.me/qr/XUXUIKKPRFLRD1" target="_blank">Napisz na WhatsApp →</a></div>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <span class="contact-icon">💻</span>
-                        <div>
-                            <div class="contact-label">GitHub</div>
-                            <div class="contact-value"><a href="https://github.com/frizz000" target="_blank">github.com/frizz000</a></div>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <span class="contact-icon">💼</span>
-                        <div>
-                            <div class="contact-label">LinkedIn</div>
-                            <div class="contact-value"><a href="https://www.linkedin.com/in/piotr-ja%C5%82ocha" target="_blank">linkedin.com/in/piotr-jałocha</a></div>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <span class="contact-icon">🕐</span>
-                        <div>
-                            <div class="contact-label pl">Czas odpowiedzi</div>
-                            <div class="contact-label en">Response time</div>
-                            <div class="contact-value pl">Zazwyczaj tego samego dnia</div>
-                            <div class="contact-value en">Usually same day</div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <form class="contact-form" id="contactForm">
-                    <div class="form-row">
-                        <div class="field-row-stacked">
-                            <label for="fname" class="pl">Imię *</label>
-                            <label for="fname" class="en">Name *</label>
-                            <input type="text" id="fname" name="name" required placeholder="Jan Kowalski">
-                        </div>
-                        <div class="field-row-stacked">
-                            <label for="femail" class="pl">Email *</label>
-                            <label for="femail" class="en">Email *</label>
-                            <input type="email" id="femail" name="email" required placeholder="jan@example.com">
-                        </div>
-                    </div>
-                    <div class="field-row-stacked">
-                        <label for="fsubject" class="pl">Temat</label>
-                        <label for="fsubject" class="en">Subject</label>
-                        <select id="fsubject" name="subject">
-                            <option value="" class="pl">Wybierz temat...</option>
-                            <option value="" class="en">Select topic...</option>
-                            <option value="korepetycje" class="pl">Korepetycje z informatyki</option>
-                            <option value="tutoring" class="en">IT Tutoring</option>
-                            <option value="smarthome" class="pl">Inteligentny dom</option>
-                            <option value="smarthome-en" class="en">Smart Home setup</option>
-                            <option value="it" class="pl">Usługi IT / serwer</option>
-                            <option value="it-en" class="en">IT services / server</option>
-                            <option value="strona" class="pl">Strona internetowa</option>
-                            <option value="website" class="en">Website development</option>
-                            <option value="inne" class="pl">Inne</option>
-                            <option value="other" class="en">Other</option>
-                        </select>
-                    </div>
-                    <div class="field-row-stacked">
-                        <label for="fmsg" class="pl">Wiadomość *</label>
-                        <label for="fmsg" class="en">Message *</label>
-                        <textarea id="fmsg" name="message" required placeholder="Opisz czego potrzebujesz..."></textarea>
-                    </div>
-                    <div id="formStatus" class="form-status"></div>
-                    <button type="submit" class="btn-xp btn-xp-primary">
-                        <span class="pl">Wyślij wiadomość →</span>
-                        <span class="en">Send message →</span>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- ─── SAPER ─── -->
-    <div class="window os-window" id="win-saper" data-app="saper">
-        <div class="title-bar">
-            <div class="title-bar-text">💣 Saper.exe</div>
-            <div class="title-bar-controls">
-                <button aria-label="Minimize" data-win-action="minimize"></button>
-                <button aria-label="Maximize" data-win-action="maximize"></button>
-                <button aria-label="Close" data-win-action="close"></button>
-            </div>
-        </div>
-        <div class="window-body">
-            <div class="ms-panel">
-                <div class="ms-counter" id="msMineCount">010</div>
-                <button class="ms-face" id="msFace" type="button" aria-label="Nowa gra">🙂</button>
-                <div class="ms-counter" id="msTimer">000</div>
-            </div>
-            <div class="ms-grid" id="msGrid"></div>
-        </div>
-        <div class="status-bar">
-            <p class="status-bar-field pl">LPM: odkryj pole · PPM: postaw flagę</p>
-            <p class="status-bar-field en">Left click: reveal · Right click: flag</p>
-        </div>
-    </div>
-
-    <!-- ─── MÓJ KOMPUTER ─── -->
-    <div class="window os-window" id="win-mycomputer" data-app="mycomputer">
-        <div class="title-bar">
-            <div class="title-bar-text pl">🖥️ Mój Komputer</div>
-            <div class="title-bar-text en">🖥️ My Computer</div>
-            <div class="title-bar-controls">
-                <button aria-label="Minimize" data-win-action="minimize"></button>
-                <button aria-label="Maximize" data-win-action="maximize"></button>
-                <button aria-label="Close" data-win-action="close"></button>
-            </div>
-        </div>
-        <div class="window-body">
-            <div class="drive-list">
-                <div class="drive-row">
-                    <span class="drive-icon">💾</span>
-                    <div class="drive-info">
-                        <div class="drive-name">Lokalny dysk (C:) — Dev</div>
-                        <div class="drive-bar"><div class="drive-bar-fill" style="width:82%"></div></div>
-                        <div class="drive-detail">Python, Java, JS, React, Node.js, SQL</div>
-                    </div>
-                </div>
-                <div class="drive-row">
-                    <span class="drive-icon">💾</span>
-                    <div class="drive-info">
-                        <div class="drive-name">Lokalny dysk (D:) — Infra</div>
-                        <div class="drive-bar"><div class="drive-bar-fill" style="width:68%"></div></div>
-                        <div class="drive-detail">Proxmox, Docker, Linux</div>
-                    </div>
-                </div>
-                <div class="drive-row">
-                    <span class="drive-icon">💾</span>
-                    <div class="drive-info">
-                        <div class="drive-name">Lokalny dysk (E:) — Smart Home</div>
-                        <div class="drive-bar"><div class="drive-bar-fill" style="width:91%"></div></div>
-                        <div class="drive-detail">Home Assistant, Zigbee2MQTT</div>
-                    </div>
-                </div>
-                <div class="drive-row">
-                    <span class="drive-icon">💾</span>
-                    <div class="drive-info">
-                        <div class="drive-name">Lokalny dysk (F:) — Network</div>
-                        <div class="drive-bar"><div class="drive-bar-fill" style="width:57%"></div></div>
-                        <div class="drive-detail">Cloudflare, Tailscale</div>
-                    </div>
-                </div>
-            </div>
-            <p class="mycomputer-footer">
-                <span class="pl">Właściciel: </span><span class="en">Owner: </span><strong>Piotr Jałocha</strong> · piotrjalocha.dev · <a href="https://github.com/frizz000" target="_blank">GitHub</a>
-            </p>
-        </div>
-        <div class="status-bar">
-            <p class="status-bar-field pl">4 obiekty</p>
-            <p class="status-bar-field en">4 object(s)</p>
-        </div>
-    </div>
-
-    <!-- ─── KOSZ ─── -->
-    <div class="window os-window" id="win-trash" data-app="trash">
-        <div class="title-bar">
-            <div class="title-bar-text pl">🗑️ Kosz</div>
-            <div class="title-bar-text en">🗑️ Recycle Bin</div>
-            <div class="title-bar-controls">
-                <button aria-label="Minimize" data-win-action="minimize"></button>
-                <button aria-label="Maximize" data-win-action="maximize"></button>
-                <button aria-label="Close" data-win-action="close"></button>
-            </div>
-        </div>
-        <div class="window-body">
-            <p class="pl">Ten folder jest pusty.</p>
-            <p class="en">This folder is empty.</p>
-            <p class="trash-joke pl">(Wszystkie błędy w kodzie zostały trwale usunięte 🙂)</p>
-            <p class="trash-joke en">(All the bugs in this code have been permanently deleted 🙂)</p>
-        </div>
-        <div class="status-bar">
-            <p class="status-bar-field pl">0 obiektów</p>
-            <p class="status-bar-field en">0 objects</p>
-        </div>
-    </div>
-
+<div class="langbar" role="group" aria-label="Język / Language">
+  <button type="button" data-set-lang="pl" aria-pressed="true">PL</button>
+  <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
 </div>
 
-<!-- ─── TASKBAR ─── -->
-<div class="taskbar">
-    <button class="start-btn" id="startBtn" type="button" aria-haspopup="true" aria-expanded="false">
-        <span class="start-flag" aria-hidden="true"><span></span><span></span><span></span><span></span></span> start
-    </button>
-    <div class="taskbar-divider"></div>
-    <div class="taskbar-apps" id="taskbarApps"></div>
-    <div class="tray">
-        <button type="button" id="langToggle">EN</button>
-        <span class="tray-sep" aria-hidden="true"></span>
-        <svg class="tray-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-            <path d="M1 6h2.4L7 3v10L3.4 10H1z" fill="#fff"/>
-            <path d="M9.2 5.2a4 4 0 0 1 0 5.6" stroke="#fff" stroke-width="1.1" fill="none" stroke-linecap="round"/>
-            <path d="M10.8 3.4a6.6 6.6 0 0 1 0 9.2" stroke="#fff" stroke-width="1.1" fill="none" stroke-linecap="round" opacity="0.75"/>
+<main id="main">
+
+<!-- The descent line between stations (built by js/main.js) -->
+<div class="descent" id="descent" aria-hidden="true"></div>
+
+<!-- ============ START ============ -->
+<header class="hero" id="start" data-name-pl="Start" data-name-en="Start" data-short-pl="Start" data-short-en="Start" data-grade="start">
+  <svg class="contours" data-contours="7,[[900,230,15],[200,660,10],[1080,700,8]]" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <h1 class="hero-name"><span>Piotr</span> <span>Jałocha</span></h1>
+      <p class="hero-sentence pl">Prowadzę eventy na żywo i buduję do nich narzędzia z pomocą AI.</p>
+      <p class="hero-sentence en">I run live events and build the tools for them with AI.</p>
+      <p class="hero-role pl">Sport Event Marketing Support w Red Bull<br>inżynier informatyki (PJATK)</p>
+      <p class="hero-role en">Sport Event Marketing Support at Red Bull<br>computer science engineer (PJATK)</p>
+      <div class="cta-row">
+        <a class="btn btn-ink" href="#field"><span class="pl">Zjedź trasą</span><span class="en">Ride the route</span>
+          <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M10 3v13M4 11l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="btn btn-line" href="#finish"><span class="pl">Napisz do mnie</span><span class="en">Get in touch</span></a>
+      </div>
+    </div>
+
+    <!-- Map-sheet plate: photo if img/rider.jpg exists, otherwise the authored drawing -->
+    <figure class="plate plate-hero" data-src="img/rider.jpg" data-alt-pl="Piotr na trasie zjazdowej" data-alt-en="Piotr on a downhill trail">
+      <div class="plate-ruler" aria-hidden="true"><span>000</span><span>100</span><span>200</span><span>300</span><span>400</span></div>
+      <div class="plate-sheet">
+        <svg class="contours plate-contours" data-contours="4,[[330,90,11],[40,430,9]]" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+        <svg class="plate-art" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Rysunek: rowerzysta zjazdowy w kasku i goglach, z numerem 07 na koszulce, w locie nad krawędzią skoczni">
+          <circle class="sun" cx="332" cy="76" r="36"/>
+          <path class="mass" d="M-10 380 L64 372 L140 376 L170 388 L176 440 L184 520 L-10 520Z"/>
+          <path class="mass" d="M262 478 L410 436 L410 520 L262 520Z"/>
+          <path class="hatch" d="M20 410 L90 402 M40 446 L130 436 M64 482 L150 472 M296 500 L380 486"/>
+          <path class="gate" d="M44 376 V334 M104 374 V340"/>
+          <path class="tape" d="M44 336 L104 342"/>
+          <path class="line" d="M-10 374 L146 374 C204 296 296 320 338 454 L410 432"/>
+          <path class="speed" d="M24 238 H84 M6 276 H58 M40 314 H92"/>
+          <g class="rider" transform="translate(212 262) rotate(-16) scale(2.05)">
+            <circle class="wheel" cx="-32" cy="0" r="20"/><circle class="wheel" cx="32" cy="0" r="20"/>
+            <path class="frame" d="M-32 0 L-10 -26 L16 -26 L32 0 M-10 -26 L-4 -2 L-32 0 M32 0 L20 -32 M13 -35 L27 -33"/>
+            <path class="limb" d="M-8 -30 L8 -14 L-2 -2"/>
+            <path class="torso-o" d="M-8 -30 L16 -60"/>
+            <path class="torso" d="M-8 -30 L16 -60"/>
+            <text class="num" transform="translate(4 -44) rotate(-51)" text-anchor="middle" dominant-baseline="central">07</text>
+            <path class="limb" d="M16 -58 L31 -46 L24 -34"/>
+            <circle class="head" cx="24" cy="-74" r="11"/>
+            <path class="chin" d="M31 -69 L38 -64"/>
+            <path class="goggle" d="M27 -81 L41 -78 L40 -71 L27 -70Z"/>
+          </g>
         </svg>
-        <svg class="tray-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-            <rect x="1" y="10.5" width="2.4" height="3.5" fill="#fff" opacity="0.55"/>
-            <rect x="4.2" y="8.5" width="2.4" height="5.5" fill="#fff" opacity="0.75"/>
-            <rect x="7.4" y="6" width="2.4" height="8" fill="#fff"/>
-            <rect x="10.6" y="3" width="2.4" height="11" fill="#fff" opacity="0.9"/>
-        </svg>
-        <span class="tray-clock" id="trayClock"></span>
-    </div>
-</div>
+      </div>
+      <figcaption class="plate-cap">
+        <span class="cap-art"><span class="pl">Ark. 01 &middot; Start &middot; 1:10 000</span><span class="en">Sheet 01 &middot; Start &middot; 1:10 000</span></span>
+        <span class="cap-photo"><span class="pl">Ark. 01 &middot; Zdjęcie</span><span class="en">Sheet 01 &middot; Photo</span></span>
+        <span class="cap-note cap-art"><span class="pl">ilustracja SVG zbudowana z AI</span><span class="en">SVG illustration built with AI</span></span>
+      </figcaption>
+    </figure>
+  </div>
+  <svg class="hero-route" viewBox="0 0 1000 220" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 24 C180 24 240 70 330 70 S470 30 540 78 S640 168 740 150 S860 126 1000 196" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+  </svg>
+</header>
 
-<!-- ─── START MENU ─── -->
-<div class="start-menu" id="startMenu" aria-hidden="true">
-    <div class="start-menu-header">
-        <span>🧑‍💻</span>
-        <span>Piotr Jałocha<small>pj.dev</small></span>
+<!-- ============ S1 FIELD ============ -->
+<section class="station st-field" id="field" data-short-pl="Teren" data-short-en="Field" data-name-pl="Teren" data-name-en="Field" data-grade="black" aria-labelledby="h-field">
+  <svg class="contours faint" data-contours="3,[[1000,200,12],[120,520,9]]" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+  <div class="wrap">
+    <div class="st-head">
+      <span class="shape sign g-black" aria-hidden="true"><b>S1</b></span>
+      <h2 id="h-field"><span class="pl">Teren</span><span class="en">Field</span></h2>
+      <span class="badge">Red Bull</span>
     </div>
-    <div class="start-menu-body">
-        <ul class="start-menu-list start-menu-col-left">
-            <li><button type="button" data-open-app="about"><svg class="menu-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-notepad"></use></svg> <span class="pl">O mnie</span><span class="en">About me</span></button></li>
-            <li><button type="button" data-open-app="projects"><svg class="menu-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-folder"></use></svg> <span class="pl">Projekty</span><span class="en">Projects</span></button></li>
-            <li><button type="button" data-open-app="contact"><svg class="menu-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-mail"></use></svg> <span class="pl">Kontakt</span><span class="en">Contact</span></button></li>
-            <li class="divider"></li>
-            <li><button type="button" data-open-app="saper"><svg class="menu-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-bomb"></use></svg> <span class="pl">Saper</span><span class="en">Minesweeper</span></button></li>
-        </ul>
-        <ul class="start-menu-list start-menu-col-right">
-            <li><button type="button" data-open-app="mycomputer"><svg class="menu-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-monitor"></use></svg> <span class="pl">Mój Komputer</span><span class="en">My Computer</span></button></li>
-            <li><button type="button" data-open-app="trash"><svg class="menu-icon" viewBox="0 0 32 32" aria-hidden="true"><use href="#icon-bin"></use></svg> <span class="pl">Kosz</span><span class="en">Recycle Bin</span></button></li>
-            <li class="divider"></li>
-            <li><a href="https://github.com/frizz000" target="_blank" rel="noopener">💻 GitHub</a></li>
-        </ul>
-    </div>
-    <div class="start-menu-footer">
-        <button type="button" id="logoutBtn">🚪 <span class="pl">Wyloguj</span><span class="en">Log off</span></button>
-    </div>
-</div>
+    <p class="lead pl">Ponad trzy lata w Red Bullu, od Student Marketeera do Sport Event Marketing Support. Na żywo, kiedy plan przestaje pasować do rzeczywistości.</p>
+    <p class="lead en">Over three years at Red Bull, from Student Marketeer to Sport Event Marketing Support. Live, when the plan stops matching reality.</p>
+    <p class="grade-note"><span class="shape g-black" aria-hidden="true"></span><span class="pl"><b>Trudność: czarna.</b> Event prowadzony w terenie: harmonogram, akredytacje i logistyka muszą trzymać się razem w czasie rzeczywistym. Splity 01&ndash;05 to kolejne eventy, od najnowszego.</span><span class="en"><b>Difficulty: black.</b> An event run in the field: schedule, accreditation and logistics have to hold together in real time. Splits 01&ndash;05 are the events, newest first.</span></p>
 
-<!-- ─── LOGOUT GAG ─── -->
-<div class="logout-overlay" id="logoutOverlay" aria-hidden="true">
-    <div class="logout-spinner">⏻</div>
-    <p class="pl">Trwa wylogowywanie...</p>
-    <p class="en">Logging off...</p>
-</div>
-
-<!-- ─── PROJECT DETAILS MODAL ─── -->
-<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="window modal-window" id="modalBox">
-        <div class="title-bar">
-            <div class="title-bar-text pl">Właściwości projektu</div>
-            <div class="title-bar-text en">Project Properties</div>
-            <div class="title-bar-controls">
-                <button aria-label="Minimize" tabindex="-1" aria-hidden="true"></button>
-                <button aria-label="Maximize" tabindex="-1" aria-hidden="true"></button>
-                <button aria-label="Close" id="modalClose"></button>
-            </div>
+    <div class="split">
+      <div class="board" role="table" aria-label="Run of show">
+        <div class="board-head" role="row">
+          <span role="columnheader" class="col-sp"><span class="pl">Split</span><span class="en">Split</span></span>
+          <span role="columnheader"><span class="pl">Rok</span><span class="en">Year</span></span>
+          <span role="columnheader"><span class="pl">Wydarzenie</span><span class="en">Event</span></span>
         </div>
-        <div class="window-body" id="modalBody"></div>
+        <div class="board-row" role="row"><span role="cell" class="sp">01</span><span role="cell" class="t">2026</span><span role="cell" class="ev">Skoki w Punkt</span></div>
+        <div class="board-row" role="row"><span role="cell" class="sp">02</span><span role="cell" class="t">2026</span><span role="cell" class="ev">Linia Czasu</span></div>
+        <div class="board-row" role="row"><span role="cell" class="sp">03</span><span role="cell" class="t">2025</span><span role="cell" class="ev">Drift Masters</span></div>
+        <div class="board-row" role="row"><span role="cell" class="sp">04</span><span role="cell" class="t">2024</span><span role="cell" class="ev">Sound Clash</span></div>
+        <div class="board-row" role="row"><span role="cell" class="sp">05</span><span role="cell" class="t">&times;2</span><span role="cell" class="ev">Full Moon <small class="pl">dwie edycje</small><small class="en">two editions</small></span></div>
+        <p class="board-foot"><span class="pl">Zakres: akredytacje, harmonogram, logistyka, catering, ekipy w terenie, partnerzy B2B</span><span class="en">Scope: accreditation, run-of-show, logistics, catering, field crews, B2B partners</span></p>
+      </div>
+      <figure class="swap" data-src="img/field.jpg" data-alt-pl="Zdjęcie z pracy przy evencie" data-alt-en="Photo from event work" hidden></figure>
     </div>
-</div>
+  </div>
+</section>
 
-<script src="js/main.js?v=6"></script>
+<!-- ============ S2 SHIPPED ============ -->
+<section class="station st-shipped" id="shipped" data-short-pl="Produkcja" data-short-en="Shipped" data-name-pl="Na produkcji" data-name-en="Shipped" data-grade="red" aria-labelledby="h-shipped">
+  <div class="wrap">
+    <div class="st-head">
+      <span class="shape sign g-red" aria-hidden="true"><b>S2</b></span>
+      <h2 id="h-shipped"><span class="pl">Na produkcji</span><span class="en">Shipped</span></h2>
+    </div>
+    <p class="lead pl">Narzędzia, które zbudowałem, bo ich potrzebowałem: od sklepu po system do obsługi eventu na żywo.</p>
+    <p class="lead en">Tools I built because I needed them: from a web shop to a system that runs a live event.</p>
+
+    <ul class="legend" aria-label="Legenda / Legend">
+      <li><span class="shape g-black" aria-hidden="true"></span><span class="pl">trudność najwyższa</span><span class="en">highest difficulty</span></li>
+      <li><span class="shape g-red" aria-hidden="true"></span><span class="pl">trudność wysoka</span><span class="en">high difficulty</span></li>
+      <li><span class="shape g-blue" aria-hidden="true"></span><span class="pl">trudność średnia</span><span class="en">medium difficulty</span></li>
+      <li><span class="shape g-green" aria-hidden="true"></span><span class="pl">trudność mała</span><span class="en">low difficulty</span></li>
+    </ul>
+
+    <div class="trails">
+      <article class="trail open">
+        <h3><button type="button" class="trail-head" aria-expanded="true" aria-controls="p-calltime">
+          <span class="shape sign g-black" aria-hidden="true"></span>
+          <span class="trail-title">Calltime</span>
+          <span class="trail-sum pl">PWA do zarządzania eventem: akredytacje, harmonogram, catering</span>
+          <span class="trail-sum en">Event management PWA: accreditation, schedule, catering</span>
+          <span class="trail-cx"><span class="pl">trudność:</span><span class="en">difficulty:</span> <b><span class="pl">najwyższa</span><span class="en">highest</span></b></span>
+          <span class="trail-year">2026&ndash;</span>
+          <svg class="chev" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M4 7l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button></h3>
+        <div class="trail-panel" id="p-calltime"><div class="trail-inner">
+          <div>
+            <p class="pl">Narzędzie do zarządzania akredytacjami, harmonogramem i kateringiem, z komunikacją ekipy. Ma moduł skanowania kodów QR i wbudowanego chatbota AI. Zbudowane w architekturze multi-tenant, z naciskiem na bezpieczeństwo i zgodność z RODO.</p>
+            <p class="en">A tool for managing accreditation, scheduling and catering, with crew communication. It includes a QR scanning module and a built-in AI chatbot. Built as a multi-tenant system with a focus on security and GDPR compliance.</p>
+            <p class="note pl">Repozytorium jest prywatne, bo projekt jest częścią mojej pracy magisterskiej.</p>
+            <p class="note en">The repository is private because the project is part of my master's thesis.</p>
+          </div>
+          <div class="trail-meta">
+            <p class="tech">React / JavaScript / Supabase / Vercel</p>
+            <a class="ulink" href="https://calltime.pl" target="_blank" rel="noopener"><span class="pl">Zobacz stronę</span><span class="en">View the site</span> <svg class="arr" viewBox="0 0 16 16" width="1em" height="1em" aria-hidden="true" focusable="false"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div></div>
+      </article>
+
+      <article class="trail">
+        <h3><button type="button" class="trail-head" aria-expanded="false" aria-controls="p-talent">
+          <span class="shape sign g-red" aria-hidden="true"></span>
+          <span class="trail-title">Talent Trop</span>
+          <span class="trail-sum pl">Wyszukiwanie młodych talentów sportowych dla marek</span>
+          <span class="trail-sum en">Scouting young sport talent for brands</span>
+          <span class="trail-cx"><span class="pl">trudność:</span><span class="en">difficulty:</span> <b><span class="pl">wysoka</span><span class="en">high</span></b></span>
+          <span class="trail-year">2026&ndash;</span>
+          <svg class="chev" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M4 7l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button></h3>
+        <div class="trail-panel" id="p-talent"><div class="trail-inner">
+          <div>
+            <p class="pl">Aplikacja webowa analizująca dane zawodników. Generuje ocenę „Talent Score”, bada dopasowanie „Brand Fit” i wyszukuje luki w kadrach sportowych. Pokazuje integrację zewnętrznych API AI z chmurą.</p>
+            <p class="en">A web app analysing athlete data. It generates a "Talent Score", evaluates "Brand Fit" and surfaces gaps in sports rosters. It shows external AI APIs integrated with a cloud stack.</p>
+          </div>
+          <div class="trail-meta">
+            <p class="tech">React / Vercel / Supabase / LLM</p>
+            <a class="ulink" href="https://github.com/frizz000/talent-trop.git" target="_blank" rel="noopener"><span class="pl">Kod na GitHubie</span><span class="en">Code on GitHub</span> <svg class="arr" viewBox="0 0 16 16" width="1em" height="1em" aria-hidden="true" focusable="false"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div></div>
+      </article>
+
+      <article class="trail">
+        <h3><button type="button" class="trail-head" aria-expanded="false" aria-controls="p-mundial">
+          <span class="shape sign g-blue" aria-hidden="true"></span>
+          <span class="trail-title">Mundial Typer 2026</span>
+          <span class="trail-sum pl">Prywatna liga typerów na Mistrzostwa Świata</span>
+          <span class="trail-sum en">Private World Cup prediction league</span>
+          <span class="trail-cx"><span class="pl">trudność:</span><span class="en">difficulty:</span> <b><span class="pl">średnia</span><span class="en">medium</span></b></span>
+          <span class="trail-year">2026</span>
+          <svg class="chev" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M4 7l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button></h3>
+        <div class="trail-panel" id="p-mundial"><div class="trail-inner">
+          <div>
+            <p class="pl">Aplikacja do typowania wyników meczów MŚ 2026 dla dwóch grup znajomych: ranking ogólny i per grupa, tabele fazy grupowej, drabinka pucharowa, kalendarz iCal do subskrypcji i mailowe przypomnienia przed meczami.</p>
+            <p class="en">An app for predicting World Cup 2026 results for two friend groups: overall and per-group rankings, group tables, a knockout bracket, a subscribable iCal feed and email reminders before matches.</p>
+            <p class="note pl">Projekt na własny użytek, rejestracja tylko na zaproszenie.</p>
+            <p class="note en">A personal project, registration by invitation only.</p>
+          </div>
+          <div class="trail-meta">
+            <p class="tech">Python / FastAPI / SQLite / JWT / Vanilla JS</p>
+            <a class="ulink" href="https://github.com/frizz000/mundial-typer.git" target="_blank" rel="noopener"><span class="pl">Kod na GitHubie</span><span class="en">Code on GitHub</span> <svg class="arr" viewBox="0 0 16 16" width="1em" height="1em" aria-hidden="true" focusable="false"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div></div>
+      </article>
+
+      <article class="trail">
+        <h3><button type="button" class="trail-head" aria-expanded="false" aria-controls="p-cone">
+          <span class="shape sign g-green" aria-hidden="true"></span>
+          <span class="trail-title">Conebikes / Conewebdesign</span>
+          <span class="trail-sum pl">Własna marka odzieży rowerowej i sklep internetowy</span>
+          <span class="trail-sum en">Own cycling apparel brand and web shop</span>
+          <span class="trail-cx"><span class="pl">trudność:</span><span class="en">difficulty:</span> <b><span class="pl">mała</span><span class="en">low</span></b></span>
+          <span class="trail-year">2020&ndash;2024</span>
+          <svg class="chev" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M4 7l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button></h3>
+        <div class="trail-panel" id="p-cone"><div class="trail-inner">
+          <div>
+            <p class="pl">Własna marka odzieży rowerowej razem ze sklepem internetowym, prowadzona w latach 2020&ndash;2024 pod nazwami Conebikes.pl i Conewebdesign.pl. Początek drogi od roweru do kodu.</p>
+            <p class="en">My own cycling apparel brand together with a web shop, run in 2020&ndash;2024 as Conebikes.pl and Conewebdesign.pl. Where the road from bikes to code began.</p>
+          </div>
+          <div class="trail-meta">
+            <p class="tech"><span class="pl">marka / e-commerce / strona</span><span class="en">brand / e-commerce / website</span></p>
+          </div>
+        </div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S3 AI PROOF (night control room): the real git log of this repo ============ -->
+<section class="station st-ai" id="ai" data-short-pl="AI" data-short-en="AI" data-name-pl="Warsztat AI" data-name-en="AI Workflow" data-grade="blue" aria-labelledby="h-ai">
+  <div class="wrap">
+    <div class="st-head">
+      <span class="shape sign g-blue" aria-hidden="true"><b>S3</b></span>
+      <h2 id="h-ai"><span class="pl">Warsztat AI</span><span class="en">AI Workflow</span></h2>
+    </div>
+    <p class="lead pl">Nie oddaję myślenia. Model proponuje, ja czytam każdy diff i decyduję, co trafia na produkcję. Ta strona powstała z Claude Code &mdash; commit po commicie.</p>
+    <p class="lead en">I don't outsource the thinking. The model proposes, I read every diff and decide what ships. This site was built with Claude Code &mdash; commit by commit.</p>
+
+    <div class="proof">
+      <div class="commits">
+        <p class="commits-cmd">$ git log --pretty='%h %ad %s' --date=short <span class="cmd-note"><span class="pl"># komunikaty po angielsku i polsku</span><span class="en"># messages in English and Polish</span></span></p>
+        <ol class="commit-list" aria-label="git log (po angielsku i polsku)">
+          <li><span class="h">76eadb8</span><time datetime="2026-07-25">2026-07-25</time><span class="m">Dodaj kartę projektu Mundial Typer 2026</span></li>
+          <li><span class="h">43600c4</span><time datetime="2026-07-25">2026-07-25</time><span class="m">Polish XP simulation: taskbar/tray, start menu, icons, mobile UX</span></li>
+          <li><span class="h">d6c9c33</span><time datetime="2026-07-23">2026-07-23</time><span class="m">Turn the site into a full Windows XP desktop simulation</span></li>
+          <li><span class="h">9ce62ee</span><time datetime="2026-07-23">2026-07-23</time><span class="m">Replace color-theme switcher with a playable Minesweeper easter egg</span></li>
+          <li><span class="h">d63125c</span><time datetime="2026-07-23">2026-07-23</time><span class="m">Tone down hero copy: drop "expert" claim and availability tag</span></li>
+          <li><span class="h">ccbc4a3</span><time datetime="2026-07-22">2026-07-22</time><span class="m">Rebuild site as a Windows XP Luna-themed portfolio</span></li>
+          <li><span class="h">5be2e78</span><time datetime="2026-07-22">2026-07-22</time><span class="m">Replace services/CTA sections with interactive Projects &amp; Home Lab</span></li>
+          <li><span class="h">edbb7bf</span><time datetime="2026-04-05">2026-04-05</time><span class="m">Refactor: split single-file portfolio into HTML/CSS/JS structure</span></li>
+        </ol>
+        <figure class="rule-ex">
+          <figcaption><span class="pl">Krótki fragment PRODUCT.md, reguły, którą dałem AI przy przebudowie tej strony. Z niej wyszła wersja, którą oglądasz.</span><span class="en">Brief excerpt from PRODUCT.md, a rule I gave the AI for rebuilding this site. This version came out of it.</span></figcaption>
+          <blockquote><span class="pl">Do not invent: client names beyond the CV, numbers, attendance figures, testimonials, links to project demos.</span><span class="en">Do not invent: client names beyond the CV, numbers, attendance figures, testimonials, links to project demos.</span></blockquote>
+        </figure>
+        <p class="commits-note"><span class="pl">Wybrane commity z git log tej strony, bez szumu typu cache-bust. Komunikaty są w języku, w którym je pisałem: po angielsku i po polsku.</span><span class="en">Selected commits from this site\'s git log, without cache-bust noise. Messages are in the language I wrote them in: English and Polish.</span></p>
+      </div>
+
+      <div class="uses">
+        <h3 class="uses-h"><span class="pl">Jak użyłem AI w projektach</span><span class="en">How I used AI in the projects</span></h3>
+        <dl class="uses-list">
+          <div><dt>Calltime</dt><dd><span class="pl">Kod powstawał w parze z Claude i Copilotem, a chatbot AI jest też częścią samego produktu.</span><span class="en">The code was written alongside Claude and Copilot, and the AI chatbot is also part of the product itself.</span></dd></div>
+          <div><dt>Talent Trop</dt><dd><span class="pl">AI jest tu dwa razy: pomaga pisać kod i jest składnikiem produktu, bo aplikacja woła zewnętrzne API LLM.</span><span class="en">AI appears twice here: it helps write the code and it is an ingredient of the product, since the app calls external LLM APIs.</span></dd></div>
+          <div><dt>Mundial Typer</dt><dd><span class="pl">Zbudowany z asystentem AI, a każdą zmianę czytam i zatwierdzam sam, zanim trafi do ludzi.</span><span class="en">Built with an AI assistant; I read and approve every change myself before it reaches people.</span></dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ S4 THE LINE ============ -->
+<section class="station st-line" id="line" data-short-pl="Linia" data-short-en="Line" data-name-pl="Linia" data-name-en="The Line" data-grade="green" aria-labelledby="h-line">
+  <div class="wrap">
+    <div class="st-head">
+      <span class="shape sign g-green" aria-hidden="true"><b>S4</b></span>
+      <h2 id="h-line"><span class="pl">Linia</span><span class="en">The Line</span></h2>
+    </div>
+    <p class="lead pl">Opcjonalny zjazd. Spacja lub tapnięcie skacze, po drodze zbierasz punkty kontrolne eventu. Nic na tej stronie od tego nie zależy.</p>
+    <p class="lead en">An optional run. Space or tap to jump, collect event checkpoints on the way. Nothing on this page depends on it.</p>
+    <div id="the-line" data-game-mount></div>
+    <p class="fallback pl" id="lineFallback">Gra wymaga JavaScriptu i nowoczesnej przeglądarki.</p>
+    <p class="fallback en" id="lineFallbackEn">The game needs JavaScript and a modern browser.</p>
+    <p class="skiplink"><a class="ulink" href="#base"><span class="pl">Pomiń grę, przejdź do obozu bazowego</span><span class="en">Skip the game, go to base camp</span> <svg class="arr" viewBox="0 0 16 16" width="1em" height="1em" aria-hidden="true" focusable="false"><path d="M8 2v11M4 9l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+  </div>
+</section>
+
+<!-- ============ S5 BASE CAMP ============ -->
+<section class="station st-base" id="base" data-short-pl="Obóz" data-short-en="Camp" data-name-pl="Obóz bazowy" data-name-en="Base Camp" data-grade="green" aria-labelledby="h-base">
+  <svg class="contours faint" data-contours="11,[[160,200,10],[1050,640,13]]" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+  <div class="wrap">
+    <div class="st-head">
+      <span class="shape sign g-green" aria-hidden="true"><b>S5</b></span>
+      <h2 id="h-base"><span class="pl">Obóz bazowy</span><span class="en">Base Camp</span></h2>
+    </div>
+
+    <div class="spread">
+      <figure class="plate plate-base" data-src="img/base.jpg" data-alt-pl="Piotr w górach" data-alt-en="Piotr in the mountains">
+        <div class="plate-ruler" aria-hidden="true"><span>000</span><span>100</span><span>200</span><span>300</span><span>400</span></div>
+        <div class="plate-sheet">
+          <svg class="contours plate-contours" data-contours="12,[[70,110,9],[340,400,10]]" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+          <svg class="plate-art" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Rysunek: grań z dwoma śladami zjazdu, rowerowym i narciarskim, schodzącymi do obozu">
+            <circle class="sun" cx="86" cy="96" r="38"/>
+            <path class="mass" d="M-10 510 L-10 330 L88 214 L150 266 L252 88 L304 158 L334 128 L410 262 L410 510Z"/>
+            <path class="hatch" d="M252 100 L236 150 M252 100 L274 138 M88 226 L70 270 M334 140 L352 190 M40 380 L120 370 M280 400 L370 392"/>
+            <path class="track-ski" d="M250 112 C206 170 276 204 230 266 C190 322 252 352 214 412 C202 436 214 450 210 466"/>
+            <path class="track-ski" d="M258 114 C216 170 284 206 240 268 C202 322 262 354 224 414 C214 436 224 450 220 468"/>
+            <path class="line" d="M242 110 C196 172 266 202 222 264 C182 322 242 350 204 410 C192 436 204 450 200 466"/>
+            <path class="tent" d="M168 490 L204 450 L240 490Z"/>
+            <path class="hatch" d="M204 450 V490"/>
+          </svg>
+        </div>
+        <figcaption class="plate-cap">
+          <span class="cap-art"><span class="pl">Ark. 05 &middot; Obóz bazowy</span><span class="en">Sheet 05 &middot; Base camp</span></span>
+          <span class="cap-photo"><span class="pl">Ark. 05 &middot; Zdjęcie</span><span class="en">Sheet 05 &middot; Photo</span></span>
+          <span class="cap-note cap-art"><span class="pl">ilustracja SVG zbudowana z AI</span><span class="en">SVG illustration built with AI</span></span>
+        </figcaption>
+      </figure>
+
+      <div class="camp">
+        <p class="camp-big pl">Eventy w dzień. Rower i narty po godzinach. Kod, kiedy reszta śpi.</p>
+        <p class="camp-big en">Events by day. Bike and skis after hours. Code while everyone sleeps.</p>
+        <div class="camp-text pl">
+          <p>Od 2017 uczę jazdy zjazdowej MTB jako instruktor w Totalbikes. Jestem też nauczycielem programowania w Giganci Programowania.</p>
+          <p>Studiuję zarządzanie informacją w PJATK (mgr, od 2025), wcześniej informatykę (inż., 2021&ndash;2025). Angielski na poziomie B2.</p>
+          <p>Pracuję z Claude, ChatGPT i Copilotem. Piszę w React, HTML i CSS.</p>
+          <p>Poza trasą: freeride na rowerze i nartach. Dla odmiany homelab z Proxmoxem i Home Assistantem.</p>
+        </div>
+        <div class="camp-text en">
+          <p>Since 2017 I teach downhill MTB as an instructor at Totalbikes. I am also a programming teacher at Giganci Programowania.</p>
+          <p>I study Information Management at PJATK (MSc, from 2025), after Computer Science (BSc, 2021&ndash;2025). English at B2 level.</p>
+          <p>I work with Claude, ChatGPT and Copilot. I write React, HTML and CSS.</p>
+          <p>Off the piste: freeride on bike and skis. For a change, a homelab with Proxmox and Home Assistant.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINISH ============ -->
+<section class="station st-finish" id="finish" data-name-pl="Meta" data-name-en="Finish" data-short-pl="Meta" data-short-en="Finish" data-grade="finish" aria-labelledby="h-finish">
+  <svg class="contours" data-contours="5,[[1000,180,11],[180,640,9]]" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+  <div class="checker" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="st-head">
+      <span class="shape sign g-finish" aria-hidden="true"></span>
+      <h2 id="h-finish"><span class="pl">Meta</span><span class="en">Finish</span></h2>
+    </div>
+    <p class="lead pl">Tu kończy się trasa. Szukasz kogoś, kto ogarnie event i zbuduje do niego narzędzie? Napisz.</p>
+    <p class="lead en">The route ends here. Looking for someone who can run an event and build the tool for it? Write to me.</p>
+
+    <div class="finish-grid">
+      <div class="contact">
+        <a class="big-mail" href="mailto:piotr.jalochaa@gmail.com">piotr.jalochaa@gmail.com</a>
+        <ul class="contact-list">
+          <li><span class="cl pl">Telefon</span><span class="cl en">Phone</span><a href="tel:+48517870512">517 870 512</a></li>
+          <li><span class="cl">LinkedIn</span><a href="https://www.linkedin.com/in/piotr-jalocha" target="_blank" rel="noopener">linkedin.com/in/piotr-jalocha</a></li>
+          <li><span class="cl">Web</span><a href="https://piotrjalocha.dev">piotrjalocha.dev</a></li>
+        </ul>
+      </div>
+
+      <form id="contactForm" class="form" novalidate>
+        <label for="f-name"><span class="pl">Imię</span><span class="en">Name</span></label>
+        <input id="f-name" name="name" type="text" autocomplete="name" required>
+        <label for="f-email">Email</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" required>
+        <label for="f-msg"><span class="pl">Wiadomość</span><span class="en">Message</span></label>
+        <textarea id="f-msg" name="message" rows="5" required></textarea>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+        <button type="submit" class="btn btn-ink" id="formBtn"><span class="pl">Wyślij wiadomość</span><span class="en">Send message</span></button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>&copy; <span id="year">2026</span> Piotr Jałocha &middot; piotrjalocha.dev</p>
+  </div>
+</footer>
+
+<!-- Route rail (built by js/main.js): thin elevation profile + station markers; slim progress line on mobile -->
+<nav class="rail" id="rail" aria-label="Trasa">
+  <div class="rail-bar" aria-hidden="true"><i id="railBar"></i></div>
+  <div class="rail-flag" aria-hidden="true">
+    <svg viewBox="0 0 20 24" width="16" height="19"><path d="M3 22V2M3 3h14l-4 5 4 5H3" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span id="railNow">Start</span>
+  </div>
+  <div class="rail-plot" id="railPlot"></div>
+</nav>
+
+<script src="js/main.js?v=11" defer></script>
+<script src="js/game.js?v=11" defer></script>
 </body>
 </html>
