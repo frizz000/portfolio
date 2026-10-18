@@ -1,7 +1,7 @@
 /* The Line - scoped to .tl */
 .tl {
-  --tl-orange: #4FD8B5; --tl-snow: #F1F5F7; --tl-ink: #0E1317;
-  --tl-green: #2FA35B; --tl-blue: #1D6FE8; --tl-red: #D42A25;
+  --tl-orange: #4FD8B5; --tl-snow: #F3F1EA; --tl-ink: #10191A;
+  --tl-green: #3E6B3D; --tl-blue: #0E6B5C; --tl-red: #B3173D;
   font-family: 'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
   color: var(--tl-ink); position: relative; max-width: 100%;
 }
@@ -81,7 +81,6 @@
 .tl-chip::before { content: ''; width: 12px; height: 12px; border: 2px solid var(--tl-ink); border-radius: 2px; box-sizing: border-box; }
 .tl-chip.is-on { background: var(--tl-orange); }
 .tl-chip.is-on::before { content: '\2713'; border-color: var(--tl-ink); background: var(--tl-ink); color: var(--tl-orange); font: 900 10px/8px sans-serif; text-align: center; }
-.tl-alt { margin: 10px 0 0; font-size: 13px; line-height: 1.45; color: #3b4650; max-width: 70ch; }
 .tl-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 @media (max-width: 760px) {
   .tl-card--idle .tl-ctext, .tl-card--idle .tl-chint { display: none !important; }

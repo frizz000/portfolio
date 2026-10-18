@@ -13,9 +13,9 @@
 
   /* ---------- language ---------- */
   var META = {
-    pl: { title: 'Piotr Jałocha | Eventy na żywo i oprogramowanie z AI', desc: 'Piotr Jałocha: Sport Event Marketing Support w Red Bull, inżynier informatyki. Prowadzi eventy na żywo i buduje narzędzia dla nich z pomocą AI.',
+    pl: { title: 'Piotr Jałocha | Eventy na żywo i oprogramowanie', desc: 'Piotr Jałocha: Sport Event Marketing Support w Red Bull, inżynier informatyki. Prowadzi eventy na żywo i buduje do nich własne narzędzia.',
           sending: 'Wysyłanie...', send: 'Wyślij wiadomość', ok: 'Wiadomość wysłana. Odezwę się najszybciej, jak mogę.', fail: 'Nie udało się wysłać. Napisz bezpośrednio na piotr.jalochaa@gmail.com.', need: 'Uzupełnij imię, poprawny email i wiadomość.' },
-    en: { title: 'Piotr Jałocha | Live events and AI-built software', desc: 'Piotr Jałocha: Sport Event Marketing Support at Red Bull, computer science engineer. Runs live events and builds the tools for them with AI.',
+    en: { title: 'Piotr Jałocha | Live events and software', desc: 'Piotr Jałocha: Sport Event Marketing Support at Red Bull, computer science engineer. Runs live events and builds his own tools for them.',
           sending: 'Sending...', send: 'Send message', ok: 'Message sent. I will get back to you as soon as I can.', fail: 'Could not send. Please email piotr.jalochaa@gmail.com directly.', need: 'Please fill in your name, a valid email and a message.' }
   };
   var lang = store.get('lang');
@@ -94,8 +94,7 @@
   function shortOf(s) { return s.el.getAttribute('data-short-' + lang) || nameOf(s); }
   var gradeWord = { black: { pl: 'czarna', en: 'black' }, red: { pl: 'czerwona', en: 'red' }, blue: { pl: 'niebieska', en: 'blue' }, green: { pl: 'zielona', en: 'green' } };
   function fullLabel(s, i) {
-    var g = gradeWord[s.grade];
-    return (g ? 'S' + i + ' ' : '') + nameOf(s) + (g ? ' \u00b7 ' + (lang === 'pl' ? 'trasa ' : '') + g[lang] + (lang === 'en' ? ' run' : '') : '');
+    return (gradeWord[s.grade] ? 'S' + i + ' ' : '') + nameOf(s);
   }
   function labels() {
     stations.forEach(function (s, i) {
@@ -138,24 +137,24 @@
     descent.innerHTML = '';
     var desk1 = window.matchMedia('(min-width:1024px)').matches;
     html.classList.toggle('lane', desk1);
+    if (!desk1) { html.classList.remove('gut'); return; }
     var padx = window.innerWidth > 767 ? 48 : 20;
     var mr0 = mainEl.getBoundingClientRect();
-    var cl0 = $('.st-ai .wrap').getBoundingClientRect().left - mr0.left + padx;
+    var cl0 = $('.st-line .wrap').getBoundingClientRect().left - mr0.left + padx;
     var gut = desk1 && cl0 >= 108;
     html.classList.toggle('gut', gut);
     var mr = mainEl.getBoundingClientRect(), sy = window.scrollY, MW = mr.width, MH = mr.height, mTop = mr.top + sy;
     var rel = function (r) { return { top: r.top + sy - mTop, bottom: r.bottom + sy - mTop, left: r.left - mr.left, right: r.right - mr.left }; };
-    var awr = rel($('.st-ai .wrap').getBoundingClientRect());
+    var awr = rel($('.st-line .wrap').getBoundingClientRect());
     var cl = awr.left + padx, cr = awr.right - padx;
     var fw = rel($('.st-field .wrap').getBoundingClientRect());
     var laneX = fw.left + padx + 30;
-    var hr = $('.hero-route').getBoundingClientRect();
-    var sx = MW, sy0 = hr.top + sy - mTop + hr.height * 196 / 220;
-    var xs = gut ? [cl - 74, cr + 74] : [9, 9];
-    var laneIds = { field: 1, shipped: 1 };
+    var sx = laneX, sy0 = rel($('#start').getBoundingClientRect()).bottom;
+    var xs = gut ? [cl - 74, cl - 74] : [9, 9];
+    var laneIds = { field: 1, projects: 1 };
     var ck = rel($('.checker').getBoundingClientRect());
     var items = stations.slice(1).map(function (s, i) {
-      var r = rel(s.el.getBoundingClientRect()), h = $('.st-head', s.el).getBoundingClientRect(), w = rel($('.wrap', s.el).getBoundingClientRect());
+      var r = rel(s.el.getBoundingClientRect()), h = $('.st-head', s.el).getBoundingClientRect(), w = rel($$('.wrap', s.el).pop().getBoundingClientRect());
       var inLane = desk1 && laneIds[s.id], fin = s.grade === 'finish';
       var hy = fin ? (ck.top + ck.bottom) / 2 : ((gut || inLane) ? (h.top + h.height / 2 + sy - mTop) : r.top + 34);
       return { s: s, lane: inLane, fin: fin, x: inLane ? laneX : xs[(i + 1) % 2], hy: hy, end: fin ? hy : w.bottom - 6 };
@@ -174,14 +173,8 @@
       px = it.x; py = it.end;
     });
     var s = sv('svg', { width: MW, height: MH, viewBox: '0 0 ' + MW + ' ' + MH });
-    var nightEl = $('#ai'), nr = rel(nightEl.getBoundingClientRect());
-    var clip = sv('clipPath', { id: 'nightClip' }); clip.appendChild(sv('rect', { x: 0, y: nr.top, width: MW, height: nr.bottom - nr.top }));
-    var clip2 = sv('clipPath', { id: 'dayClip' });
-    clip2.appendChild(sv('rect', { x: 0, y: 0, width: MW, height: nr.top })); clip2.appendChild(sv('rect', { x: 0, y: nr.bottom, width: MW, height: MH - nr.bottom }));
-    s.appendChild(clip); s.appendChild(clip2);
-    var weight = desk1 ? 6 : 3;
-    s.appendChild(sv('path', { d: d, class: 'route', 'clip-path': 'url(#dayClip)', 'stroke-width': weight }));
-    s.appendChild(sv('path', { d: d, class: 'route-night', 'clip-path': 'url(#nightClip)', 'stroke-width': weight }));
+    var weight = 1.75;
+    s.appendChild(sv('path', { d: d, class: 'route', 'stroke-width': weight }));
     descent.appendChild(s);
     if (!desk1) return;
     function mark(x, y, cls, shapeCls, label) {
@@ -190,11 +183,10 @@
       descent.appendChild(m);
     }
     function stub(x, y, x2, extra) { var st = sv('path', { d: 'M' + x + ' ' + y + ' H' + x2, class: 'stub' }); if (extra) st.setAttribute('style', extra); s.appendChild(st); }
-    items.forEach(function (it, i) {
-      if (!gut && !it.lane) return;
-      var night = it.s.id === 'ai', side = it.x < MW / 2 ? 1 : -1;
-      stub(it.x, it.hy, it.x + side * 44, night ? 'stroke:var(--orange)' : '');
-      mark(it.x, it.hy, night ? 'night' : (it.fin ? 'on-orange' : ''), gradeClass[it.s.grade], it.fin ? '' : 'S' + (i + 1));
+    items.forEach(function (it) {
+      if (!it.fin) return;
+      stub(it.x, it.hy, it.x + (it.x < MW / 2 ? 1 : -1) * 44);
+      mark(it.x, it.hy, 'on-orange', gradeClass[it.s.grade], '');
     });
     /* S1: the events are timing splits on the line, feeding the board */
     var board = $('.board'), brl = rel(board.getBoundingClientRect());
@@ -202,17 +194,6 @@
       var r = rel(row.getBoundingClientRect()), y = (r.top + r.bottom) / 2;
       stub(laneX, y, brl.left + 2);
       mark(laneX, y, 'sp-mk', 'g-split', ('0' + (i + 1)).slice(-2));
-    });
-    /* S2: each project is a gate on the line, year and grade printed on the trail */
-    $$('.st-shipped .trail-head').forEach(function (b) {
-      var r = b.getBoundingClientRect(), y = r.top + sy - mTop + 46, rt = rel(r);
-      var gm = $('.sign', b).className.match(/g-(\w+)/), gk = gm[1];
-      stub(laneX, y, rt.left - 10);
-      mark(laneX, y, 'gate', 'g-' + gk);
-      var tag = doc.createElement('div'); tag.className = 'lane-tag'; tag.style.left = laneX + 'px'; tag.style.top = (y + 24) + 'px';
-      var yr = $('.trail-year', b).textContent.replace(/\s+/g, ' ').trim();
-      tag.innerHTML = '<b>' + yr + '</b><span class="pl">' + gradeWord[gk].pl + '</span><span class="en">' + gradeWord[gk].en + '</span>';
-      descent.appendChild(tag);
     });
   }
   var rt;
@@ -234,15 +215,15 @@
   });
 
   /* ---------- optional photos: the <img> only enters the DOM if the file really loads ---------- */
-  // Browsers log a console 404 for every missing image, so only files named in <html data-photos="rider field base"> are probed.
+  // Browsers log a console 404 for every missing image, so only files named in <html data-photos="dirt-jump forest-trail ..."> are probed.
   var have = (html.getAttribute('data-photos') || '').split(/\s+/);
   $$('[data-src]').forEach(function (fig) {
     if (have.indexOf(fig.dataset.src.replace(/^img\//, '').replace(/\.\w+$/, '')) < 0) return;
     var probe = new Image();
     probe.onload = function () {
-      var img = doc.createElement('img'); img.src = fig.dataset.src; img.loading = fig.classList.contains('plate-hero') ? 'eager' : 'lazy'; img.decoding = 'async'; if (fig.dataset.w) { img.width = +fig.dataset.w; img.height = +fig.dataset.h; } img.alt = fig.dataset['alt' + (lang === 'pl' ? 'Pl' : 'En')] || '';
-      (fig.querySelector('.plate-sheet, .swap-sheet, .band-sheet') || fig).appendChild(img);
-      if (fig.classList.contains('plate')) fig.classList.add('has-photo'); else fig.hidden = false;
+      var img = doc.createElement('img'); img.src = fig.dataset.src; img.loading = fig.classList.contains('photo-hero') ? 'eager' : 'lazy'; img.decoding = 'async'; if (fig.dataset.w) { img.width = +fig.dataset.w; img.height = +fig.dataset.h; } img.alt = fig.dataset['alt' + (lang === 'pl' ? 'Pl' : 'En')] || '';
+      (fig.querySelector('.photo-frame') || fig).appendChild(img);
+      fig.hidden = false;
       measure(); buildDescent();
     };
     probe.src = fig.dataset.src;

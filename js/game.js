@@ -4,11 +4,11 @@
   'use strict';
   if (window.TheLine) return;
 
-  var INK = '#0E1317', SNOW = '#F1F5F7', ORANGE = '#4FD8B5', WHITE = '#FBFCFD';
+  var INK = '#10191A', SNOW = '#F3F1EA', ORANGE = '#4FD8B5', WHITE = '#FBFAF6', SKY = '#DDEBD0', HILLS = ['#A9D08F', '#8FBF7A', '#6DA566'], FIR = '#3E6B3D', CLAY = '#A98466', CLAYLT = '#E8D8C0';
   var FD = "'Big Shoulders Display','Arial Narrow',Impact,sans-serif";
   var FM = "'JetBrains Mono',ui-monospace,Menlo,monospace";
   var STEP = 8, DT = 1 / 120, VIEW_H = 330;
-  var GCOL = ['#2FA35B', '#1D6FE8', '#E5322D', INK];
+  var GCOL = ['#3E6B3D', CLAY, '#B3173D', INK];
   function gradeOf(m) { return m < 250 ? 0 : m < 600 ? 1 : m < 1000 ? 2 : 3; }
   var T_ROCK = 0, T_ROOT = 1, T_TREE = 2, T_FLAG = 3, T_BOULDER = 4;
 
@@ -24,7 +24,6 @@
       calm: 'Tryb spokojny: wolniejsze tempo, bez wstrząsów.', crash: 'Wypadek', again: 'Kliknij lub naciśnij Spację, by jechać dalej.',
       nb: 'Nowy rekord!', set: 'Checkpointy', go: 'WSZYSTKIE SYSTEMY GO',
       smooth: 'GŁADKO', root: 'KORZEŃ', carve: 'CARVE', cliff: 'USKOK', gap: 'PRZERWA',
-      alt: 'Opis tekstowy: jednoprzyciskowa gra zręcznościowa. Rower zjazdowy lub narty freeride zjeżdżają w dół stoku. Skacz nad przeszkodami i zbieraj pięć checkpointów eventowych: akredytacje, harmonogram, catering, łączność i na żywo. Gra jest opcjonalna, nic na stronie nie zależy od wyniku.',
       lbl: 'The Line: gra zjazdowa. Rider na rowerze lub nartach zjeżdża po stoku; skacz Spacją lub dotykiem.',
       live0: 'Start', live1: 'Wypadek. Wynik: ',
       focus: 'Kliknij grę lub zaznacz ją klawiszem Tab, by grać.', fh: 'Kliknij, by grać', grade: 'Trasa', g0: 'ZIELONA', g1: 'NIEBIESKA', g2: 'CZERWONA', g3: 'CZARNA'
@@ -36,7 +35,6 @@
       calm: 'Calm mode: slower pace, no screen shake.', crash: 'Wipeout', again: 'Click or press Space to ride again.',
       nb: 'New best!', set: 'Checkpoints', go: 'ALL SYSTEMS GO',
       smooth: 'SMOOTH', root: 'ROOT', carve: 'CARVE', cliff: 'CLIFF DROP', gap: 'GAP',
-      alt: 'Text description: a one-button arcade game. A downhill mountain bike or a freeride skier descends a slope. Jump obstacles and collect five event checkpoints: accreditation, run-of-show, catering, crew comms and live. The game is optional; nothing on this page depends on your score.',
       lbl: 'The Line: downhill game. A rider on a bike or skis descends a slope; jump with Space or tap.',
       live0: 'Started', live1: 'Wipeout. Score: ',
       focus: 'Click the game or focus it with Tab to play.', fh: 'Click to focus', grade: 'Trail', g0: 'GREEN', g1: 'BLUE', g2: 'RED', g3: 'BLACK'
@@ -83,7 +81,6 @@
     var live = el('div', 'tl-sr', root); live.setAttribute('aria-live', 'polite');
     var chipsBox = el('ul', 'tl-chips', root); var chips = [];
     for (var ci = 0; ci < 5; ci++) chips.push(el('li', 'tl-chip', chipsBox));
-    var altP = el('p', 'tl-alt', root);
     var ctx = canvas.getContext('2d');
 
     /* ---------- state ---------- */
@@ -119,7 +116,7 @@
       card.setAttribute('lang', L);
       bMtb.textContent = tr('mtb'); bSki.textContent = tr('ski');
       modeGrp.setAttribute('aria-label', tr('mode'));
-      bPause.textContent = tr('pause'); altP.textContent = tr('alt'); fHint.textContent = tr('fh');
+      bPause.textContent = tr('pause'); fHint.textContent = tr('fh');
       canvas.setAttribute('aria-label', tr('lbl')); stage.setAttribute('aria-label', tr('lbl'));
       for (var k = 0; k < 5; k++) chips[k].textContent = CPS[k][L];
       chipsBox.setAttribute('aria-label', tr('set'));
@@ -464,13 +461,13 @@
       var shx = shake ? (Math.random() - 0.5) * shake : 0, shy = shake ? (Math.random() - 0.5) * shake : 0, k = dpr;
       var c = ctx, q, w;
       c.setTransform(k, 0, 0, k, 0, 0);
-      c.fillStyle = SNOW; c.fillRect(0, 0, W, H);
+      c.fillStyle = SKY; c.fillRect(0, 0, W, H);
       // sun
-      c.fillStyle = ORANGE; c.beginPath(); c.arc(W * 0.62, H * 0.24, Math.max(14, H * 0.065), 0, 6.283); c.fill();
+      c.fillStyle = '#E9D2A8'; c.beginPath(); c.arc(W * 0.62, H * 0.24, Math.max(14, H * 0.065), 0, 6.283); c.fill();
       // mountains (parallax)
       var dev = ccy - ccx * 0.3, L = [[0.07, 0.62, 0.04, 90, 520, 130], [0.15, 0.7, 0.055, 70, 340, 90], [0.28, 0.78, 0.08, 55, 230, 60]];
       for (q = 0; q < 3; q++) {
-        var ly = L[q]; c.fillStyle = 'rgba(14,19,23,' + ly[2] + ')'; c.beginPath(); c.moveTo(0, H);
+        var ly = L[q]; c.fillStyle = HILLS[q]; c.beginPath(); c.moveTo(0, H);
         for (var sx = 0; sx <= W + 12; sx += 12) {
           var wx = sx / sc + ccx * ly[0];
           c.lineTo(sx, H * ly[1] * 0.78 + (-ly[3] * ridge(wx, q * 1.7, ly[4], ly[5]) + dev * ly[0]) * sc * 0.9 + H * 0.12);
@@ -482,13 +479,14 @@
       var x0 = ccx, x1 = ccx + vw, i0 = Math.floor(x0 / STEP) - 1, i1 = Math.floor(x1 / STEP) + 2, bot = ccy + VIEW_H + 80;
       var lw = 1 / sc;
       // decor firs
-      c.fillStyle = 'rgba(14,19,23,0.13)';
+      c.fillStyle = FIR; c.globalAlpha = 0.5;
       for (var cell = Math.floor(x0 / 74) - 1; cell < x1 / 74 + 1; cell++) {
         if (hash(cell) > 0.4) continue;
         var tx = cell * 74 + hash(cell + 9) * 50, tg = gy(tx); if (tg == null) continue;
         var th = 20 + hash(cell + 3) * 16;
         c.beginPath(); c.moveTo(tx, tg + 4); c.lineTo(tx - th * 0.28, tg + 4); c.lineTo(tx - th * 0.1, tg - th * 0.45); c.lineTo(tx - th * 0.22, tg - th * 0.45); c.lineTo(tx, tg - th); c.lineTo(tx + th * 0.22, tg - th * 0.45); c.lineTo(tx + th * 0.1, tg - th * 0.45); c.lineTo(tx + th * 0.28, tg + 4); c.closePath(); c.fill();
       }
+      c.globalAlpha = 1;
       // terrain runs
       var run = false, runStart = 0, runs = [];
       for (q = i0; q <= i1; q++) {
@@ -501,7 +499,7 @@
         var ra = runs[w][0], rb = runs[w][1];
         c.beginPath(); c.moveTo(ra * STEP, hs[ra - idx0]);
         for (q = ra + 1; q <= rb; q++) c.lineTo(q * STEP, hs[q - idx0]);
-        c.lineTo(rb * STEP, bot); c.lineTo(ra * STEP, bot); c.closePath(); c.fillStyle = WHITE; c.fill();
+        c.lineTo(rb * STEP, bot); c.lineTo(ra * STEP, bot); c.closePath(); c.fillStyle = mode === 'ski' ? WHITE : CLAYLT; c.fill();
         c.lineJoin = 'round';
         for (var kk = 1; kk <= 9; kk++) {
           var off = 9 + kk * 12 + kk * kk * 0.8;

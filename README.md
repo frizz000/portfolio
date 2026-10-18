@@ -1,6 +1,6 @@
 # piotrjalocha.dev - Portfolio
 
-Personal portfolio of Piotr Jalocha (event marketing at Red Bull, computer science engineer). The site is one downhill run drawn as a trail map: START, then stations S1 Field (Red Bull events as a timing board), S2 Shipped (projects as graded trails), S3 AI Workflow (illustrative build log), S4 The Line (optional mini-game), S5 Base Camp (about), FINISH (contact).
+Personal portfolio of Piotr Jalocha (event marketing at Red Bull, computer science engineer). The site is one downhill run drawn as a trail map: START, then stations S1 Field (Red Bull events as a timing board), S2 Projects (#projects, expandable cards), S3 The Line (optional mini-game), S4 About (#about), FINISH (contact).
 
 ## Stack
 
@@ -15,9 +15,9 @@ Personal portfolio of Piotr Jalocha (event marketing at Red Bull, computer scien
 index.html        page, PL/EN copy side by side (.pl / .en)
 css/style.css     design system and layout
 css/game.css      The Line styles
-js/main.js        language, generated contour field, route + elevation rail, trail expanders, form
+js/main.js        language, generated contour field, route + elevation rail, trail expanders, photo slots, form
 js/game.js        The Line, exposes window.TheLine.mount(el)
-img/              optional photos: field.jpg, rider.jpg (slots stay hidden until the files exist)
+img/              photos by Greg Falski (@gregfalski): dirt-jump.jpg (hero), forest-trail.jpg (Field), fisheye-whip.jpg and forest-jump.jpg (About). Files must be listed in `<html data-photos>`; slots stay hidden until the file loads
 ```
 
 ## Notes
